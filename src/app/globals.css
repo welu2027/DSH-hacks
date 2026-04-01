@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;800;900&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Shadcn/UI colors - Dark Theme */
+  --color-background: #0a0a0a;
+  --color-foreground: #ffffff;
+
+  --color-card: #1a1a1a;
+  --color-card-foreground: #ffffff;
+
+  --color-popover: #0a0a0a;
+  --color-popover-foreground: #ffffff;
+
+  --color-primary: #ffffff;
+  --color-primary-foreground: #0a0a0a;
+
+  --color-secondary: #2a2a2a;
+  --color-secondary-foreground: #ffffff;
+
+  --color-muted: #2a2a2a;
+  --color-muted-foreground: #a0a0a0;
+
+  --color-accent: #2a2a2a;
+  --color-accent-foreground: #ffffff;
+
+  --color-destructive: #ff4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: #333333;
+  --color-input: #333333;
+  --color-ring: #ffffff;
+
+  --color-chart-1: #ff4444; /* Fintech Red */
+  --color-chart-2: #0066ff; /* Interactive Media Blue */
+  --color-chart-3: #ffc700; /* Education Yellow */
+  --color-chart-4: #00c853; /* Sustainability Green */
+  --color-chart-5: #ff4db8; /* Healthcare Pink */
+
+  --color-sidebar: #1a1a1a;
+  --color-sidebar-foreground: #f0f0f0;
+  --color-sidebar-primary: #3b82f6;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #292929;
+  --color-sidebar-accent-foreground: #f0f0f0;
+  --color-sidebar-border: #292929;
+  --color-sidebar-ring: #3b82f6;
+
+  /* Custom Design System Colors */
+  --color-background-primary: #000000;
+  --color-background-secondary: #1a1a1a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-accent-red: #ff4444;
+  --color-accent-blue: #0066ff;
+  --color-accent-yellow: #ffc700;
+  --color-accent-green: #00c853;
+  --color-accent-pink: #ff4db8;
+  --color-button-primary: #000000;
+  --color-button-primary-foreground: #ffffff;
+  --color-button-secondary: #ffffff;
+  --color-button-secondary-foreground: #000000;
+  --color-button-secondary-border: #000000;
+  --color-button-purple: #8b5cf6;
+  --color-button-purple-foreground: #ffffff;
+  --color-countdown-background: #d0d0d0;
+  --color-countdown-foreground: #0a0a0a;
+  --color-sponsor-card-background: #2a2a2a;
+  --color-faq-border: #333333;
+  --color-hero-background: #ffffff;
+  --color-hero-foreground: #0a0a0a;
+
+  /* Typography */
+  --font-sans: "Lato", sans-serif;
+  --font-display: "Lato", sans-serif;
+  --font-body: "Lato", sans-serif;
+
+  /* Shadcn/UI Radii */
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+
+  /* Shadcn/UI Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+}
+
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: var(--color-border);
+  }
+}
+
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --popover: var(--color-popover);
+    --popover-foreground: var(--color-popover-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --chart-1: var(--color-chart-1);
+    --chart-2: var(--color-chart-2);
+    --chart-3: var(--color-chart-3);
+    --chart-4: var(--color-chart-4);
+    --chart-5: var(--color-chart-5);
+    --radius: var(--radius-lg);
+    --sidebar-background: var(--color-sidebar);
+    --sidebar-foreground: var(--color-sidebar-foreground);
+    --sidebar-primary: var(--color-sidebar-primary);
+    --sidebar-primary-foreground: var(--color-sidebar-primary-foreground);
+    --sidebar-accent: var(--color-sidebar-accent);
+    --sidebar-accent-foreground: var(--color-sidebar-accent-foreground);
+    --sidebar-border: var(--color-sidebar-border);
+    --sidebar-ring: var(--color-sidebar-ring);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    line-height: 1.1;
+  }
+
+  h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
+  h2 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; text-transform: uppercase; }
+  h3 { font-size: 1.75rem; font-weight: 600; line-height: 1.3; }
+  p  { font-size: 1.125rem; font-weight: 400; line-height: 1.6; color: var(--color-text-primary); }
+  a  { color: var(--color-text-primary); text-decoration: none; }
+  a:hover { text-decoration: none; }
+
+  .text-body-large  { font-size: 1.25rem; font-weight: 400; line-height: 1.6; }
+  .text-body-default { font-size: 1.125rem; font-weight: 400; line-height: 1.6; }
+  .text-body-small  { font-size: 1rem; font-weight: 400; line-height: 1.5; }
+  .text-label { font-size: 0.875rem; font-weight: 600; line-height: 1.4; letter-spacing: 0.03em; text-transform: uppercase; }
+
+  .container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .container { padding-left: 48px; padding-right: 48px; }
+  }
+
+  @media (min-width: 1024px) {
+    h1 { font-size: 6rem; }
+    h2 { font-size: 3rem; }
+    h3 { font-size: 2rem; }
+  }
+}
+
+@layer utilities {
+  body { font-family: var(--font-body); }
+}
+
+/* Hide Next.js error overlay portal */
+nextjs-portal { display: none !important; }
