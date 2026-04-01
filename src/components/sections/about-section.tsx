@@ -36,7 +36,7 @@ const StatCard = ({
   const formattedValue = value.includes("+") ? `${displayValue}+` : displayValue.toString();
 
   return (
-    <div className="bg-[#282828] rounded-lg p-8 text-center">
+    <div className="bg-[#0f1e38] rounded-lg p-8 text-center">
       <div className="text-4xl sm:text-5xl font-bold mb-4">{formattedValue}</div>
       <div className="text-xl font-semibold mb-2">{title}</div>
       <div className="text-sm opacity-80 leading-relaxed">{description}</div>
@@ -58,11 +58,11 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="bg-[#0d0d0d] text-white py-16 sm:py-24">
+    <section id="about" className="bg-[#03091a] text-white py-16 sm:py-24">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="overflow-hidden">
           <div className="flex items-center gap-6">
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#8007F7] text-4xl font-bold text-white sm:h-24 sm:w-24 sm:text-5xl">1</div>
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#0ea5e9] text-4xl font-bold text-white sm:h-24 sm:w-24 sm:text-5xl">1</div>
             <h2 className="text-5xl font-light tracking-tight sm:text-7xl">About</h2>
           </div>
         </motion.div>
@@ -70,9 +70,9 @@ const AboutSection = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.2 }} className="mt-10 max-w-6xl">
           <p className="mb-6 text-xl leading-relaxed sm:text-2xl">
             DSH Hacks V1 is a global student competition open to students aged 13+, hosted collaboratively by three youth-led organizations:{" "}
-            <span className="text-[#B976FC] font-semibold">DeltaForge Hacks</span>,{" "}
-            <span className="text-[#B976FC] font-semibold">NextHorizon</span>, and{" "}
-            <span className="text-[#B976FC] font-semibold">STEMise</span>.
+            <span className="text-[#38bdf8] font-semibold">DeltaForge Hacks</span>,{" "}
+            <span className="text-[#38bdf8] font-semibold">NextHorizon</span>, and{" "}
+            <span className="text-[#38bdf8] font-semibold">STEMise</span>.
           </p>
           <p className="text-lg sm:text-xl text-white/80 leading-relaxed mb-4">
             Theme: <span className="text-white font-semibold">AI × STEM Education</span>

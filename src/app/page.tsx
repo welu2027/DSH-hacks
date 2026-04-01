@@ -9,7 +9,7 @@ import FooterSection from "@/components/sections/footer-section";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#0d0d0d]">
+    <div className="min-h-screen bg-[#03091a]">
       <HeroSection />
       <AboutSection />
       <InfoCarousel />

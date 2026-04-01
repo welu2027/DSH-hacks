@@ -59,11 +59,11 @@ const InfoCarousel = () => {
   const prev = () => setIndex((prev) => prev <= 0 ? infoCards.length - visibleCards : prev - 1);
 
   return (
-    <section id="info" className="bg-[#0d0d0d] text-white py-16 sm:py-24 relative overflow-hidden">
+    <section id="info" className="bg-[#03091a] text-white py-16 sm:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-6">
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#8007F7] text-4xl font-bold text-white sm:h-24 sm:w-24 sm:text-5xl">2</div>
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#0ea5e9] text-4xl font-bold text-white sm:h-24 sm:w-24 sm:text-5xl">2</div>
             <h2 className="text-5xl font-light tracking-tight sm:text-7xl">INFO</h2>
           </div>
           <div className="flex gap-3">
@@ -75,13 +75,13 @@ const InfoCarousel = () => {
           <motion.div className="flex" animate={{ x: -index * cardWidth }} transition={{ type: "spring", stiffness: 90, damping: 20 }}>
             {infoCards.map((card) => (
               <div key={card.title} style={{ minWidth: cardWidth }} className="p-4 sm:p-6">
-                <div className="bg-[#1a1a1a] p-8 rounded-2xl shadow-lg border border-white/10 h-full flex flex-col justify-between">
+                <div className="bg-[#0b1628] p-8 rounded-2xl shadow-lg border border-white/10 h-full flex flex-col justify-between">
                   <div>
                     <h3 className="text-2xl font-semibold mb-4">{card.title}</h3>
                     <p className="text-base text-gray-300 whitespace-pre-line leading-relaxed">{card.content}</p>
                   </div>
                   {card.link && (
-                    <a href={card.link} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-[#B976FC] hover:underline font-semibold">
+                    <a href={card.link} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-[#38bdf8] hover:underline font-semibold">
                       {card.linkLabel || "Learn more"}
                     </a>
                   )}

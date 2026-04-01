@@ -56,7 +56,7 @@ const CountdownTimer = () => {
         {timeUnits.map(({ value, label }) => (
           <div key={label} className="flex flex-col items-center">
             <div className="relative text-white rounded-lg p-3 sm:p-4 min-w-[60px] sm:min-w-[70px] text-center overflow-hidden">
-              <div className="absolute inset-0 bg-[#8007F7] rounded-lg"></div>
+              <div className="absolute inset-0 bg-[#0ea5e9] rounded-lg"></div>
               <div className="relative z-10">
                 <div className="text-2xl sm:text-3xl font-thin leading-none text-white">
                   {label !== "Days" ? String(value).padStart(2, "0") : value}
@@ -92,7 +92,7 @@ const Navbar = () => {
           <div className="relative flex items-center justify-between py-4 h-16">
             <a href="#" className="flex items-center gap-3">
               <span className="text-xl font-bold text-white tracking-tight">
-                DSH <span className="text-[#8007F7]">Hacks</span>
+                DSH <span className="text-[#0ea5e9]">Hacks</span>
               </span>
             </a>
 
@@ -132,7 +132,7 @@ const Navbar = () => {
         <div className="flex justify-end p-6">
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="w-10 h-10 rounded-full bg-purple-800 flex items-center justify-center hover:bg-purple-700 transition-colors"
+            className="w-10 h-10 rounded-full bg-sky-800 flex items-center justify-center hover:bg-sky-700 transition-colors"
             aria-label="Close menu"
           >
             <X className="w-5 h-5 text-white" />
@@ -157,9 +157,9 @@ const Navbar = () => {
 
 export default function HeroSection() {
   return (
-    <div className="antialiased bg-[#0d0d0d] min-h-screen">
+    <div className="antialiased bg-[#03091a] min-h-screen">
       <Navbar />
-      <main className="min-h-[70vh] bg-[#0d0d0d]">
+      <main className="min-h-[70vh] bg-[#03091a]">
         <section id="hero" className="min-h-screen relative overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -190,10 +190,10 @@ export default function HeroSection() {
                     <h1 className="text-[48px] sm:text-[64px] lg:text-[80px] xl:text-[96px] font-light tracking-tight text-white leading-none">
                       DSH HACKS V1
                     </h1>
-                    <div className="absolute -bottom-3 left-0 w-full h-1 bg-[#8007F7] opacity-75"></div>
+                    <div className="absolute -bottom-3 left-0 w-full h-1 bg-[#0ea5e9] opacity-75"></div>
                   </div>
 
-                  <p className="text-[#B976FC] text-2xl font-semibold mb-3 mt-6">
+                  <p className="text-[#38bdf8] text-2xl font-semibold mb-3 mt-6">
                     AI × STEM Education
                   </p>
                   <p className="text-white/90 text-xl mb-8">
@@ -205,7 +205,7 @@ export default function HeroSection() {
                       href="https://dsh-hacks-v1.devpost.com/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-[#8007F7] text-white px-10 py-4 rounded-md text-lg font-medium hover:bg-[#5a04b0] transition-colors inline-flex items-center gap-2 shadow-lg hover:shadow-purple-500/50"
+                      className="bg-[#0ea5e9] text-white px-10 py-4 rounded-md text-lg font-medium hover:bg-[#0369a1] transition-colors inline-flex items-center gap-2 shadow-lg hover:shadow-sky-500/50"
                     >
                       Register on Devpost
                       <ArrowRight className="w-5 h-5" />
@@ -214,7 +214,7 @@ export default function HeroSection() {
                       href="#"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="border-2 border-[#8007F7] text-white px-10 py-4 rounded-md text-lg font-medium hover:bg-[#5a04b0] hover:border-[#5a04b0] hover:text-white transition-all inline-flex items-center gap-2"
+                      className="border-2 border-[#0ea5e9] text-white px-10 py-4 rounded-md text-lg font-medium hover:bg-[#0369a1] hover:border-[#0369a1] hover:text-white transition-all inline-flex items-center gap-2"
                     >
                       Join Discord
                       <ExternalLink className="w-4 h-4" />
@@ -236,10 +236,10 @@ export default function HeroSection() {
         </section>
       </main>
       <Aurora
-        colorStops={["#a900f8", "#4b0cdd", "#af02ff"]}
-        blend={0.5}
-        amplitude={2.0}
-        speed={0.5}
+        colorStops={["#00e5ff", "#0066cc", "#0ea5e9"]}
+        blend={0.4}
+        amplitude={1.8}
+        speed={0.4}
         className="absolute top-0 left-0 w-full h-full z-50 pointer-events-none"
       />
     </div>

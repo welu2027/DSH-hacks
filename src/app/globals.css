@@ -1,88 +1,85 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Shadcn/UI colors - Dark Theme */
-  --color-background: #0a0a0a;
-  --color-foreground: #ffffff;
+  /* Midnight Electric — Dark Theme */
+  --color-background: #03091a;
+  --color-foreground: #e0f2fe;
 
-  --color-card: #1a1a1a;
-  --color-card-foreground: #ffffff;
+  --color-card: #0b1628;
+  --color-card-foreground: #e0f2fe;
 
-  --color-popover: #0a0a0a;
-  --color-popover-foreground: #ffffff;
+  --color-popover: #03091a;
+  --color-popover-foreground: #e0f2fe;
 
-  --color-primary: #ffffff;
-  --color-primary-foreground: #0a0a0a;
+  --color-primary: #0ea5e9;
+  --color-primary-foreground: #03091a;
 
-  --color-secondary: #2a2a2a;
-  --color-secondary-foreground: #ffffff;
+  --color-secondary: #0d1a30;
+  --color-secondary-foreground: #e0f2fe;
 
-  --color-muted: #2a2a2a;
-  --color-muted-foreground: #a0a0a0;
+  --color-muted: #0d1a30;
+  --color-muted-foreground: #64748b;
 
-  --color-accent: #2a2a2a;
-  --color-accent-foreground: #ffffff;
+  --color-accent: #0d1a30;
+  --color-accent-foreground: #e0f2fe;
 
-  --color-destructive: #ff4444;
+  --color-destructive: #ef4444;
   --color-destructive-foreground: #ffffff;
 
-  --color-border: #333333;
-  --color-input: #333333;
-  --color-ring: #ffffff;
+  --color-border: #1e3a5f;
+  --color-input: #1e3a5f;
+  --color-ring: #0ea5e9;
 
-  --color-chart-1: #ff4444; /* Fintech Red */
-  --color-chart-2: #0066ff; /* Interactive Media Blue */
-  --color-chart-3: #ffc700; /* Education Yellow */
-  --color-chart-4: #00c853; /* Sustainability Green */
-  --color-chart-5: #ff4db8; /* Healthcare Pink */
+  --color-chart-1: #0ea5e9;
+  --color-chart-2: #6366f1;
+  --color-chart-3: #22d3ee;
+  --color-chart-4: #38bdf8;
+  --color-chart-5: #818cf8;
 
-  --color-sidebar: #1a1a1a;
-  --color-sidebar-foreground: #f0f0f0;
-  --color-sidebar-primary: #3b82f6;
-  --color-sidebar-primary-foreground: #ffffff;
-  --color-sidebar-accent: #292929;
-  --color-sidebar-accent-foreground: #f0f0f0;
-  --color-sidebar-border: #292929;
-  --color-sidebar-ring: #3b82f6;
+  --color-sidebar: #0b1628;
+  --color-sidebar-foreground: #e0f2fe;
+  --color-sidebar-primary: #0ea5e9;
+  --color-sidebar-primary-foreground: #03091a;
+  --color-sidebar-accent: #0d1a30;
+  --color-sidebar-accent-foreground: #e0f2fe;
+  --color-sidebar-border: #1e3a5f;
+  --color-sidebar-ring: #0ea5e9;
 
-  /* Custom Design System Colors */
-  --color-background-primary: #000000;
-  --color-background-secondary: #1a1a1a;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
-  --color-accent-red: #ff4444;
-  --color-accent-blue: #0066ff;
-  --color-accent-yellow: #ffc700;
-  --color-accent-green: #00c853;
-  --color-accent-pink: #ff4db8;
-  --color-button-primary: #000000;
-  --color-button-primary-foreground: #ffffff;
-  --color-button-secondary: #ffffff;
-  --color-button-secondary-foreground: #000000;
-  --color-button-secondary-border: #000000;
-  --color-button-purple: #8b5cf6;
-  --color-button-purple-foreground: #ffffff;
-  --color-countdown-background: #d0d0d0;
-  --color-countdown-foreground: #0a0a0a;
-  --color-sponsor-card-background: #2a2a2a;
-  --color-faq-border: #333333;
-  --color-hero-background: #ffffff;
-  --color-hero-foreground: #0a0a0a;
+  /* Midnight Electric Design System */
+  --color-background-primary: #03091a;
+  --color-background-secondary: #0b1628;
+  --color-text-primary: #e0f2fe;
+  --color-text-secondary: #64748b;
+  --color-accent-electric: #00e5ff;
+  --color-accent-cyan: #22d3ee;
+  --color-accent-blue: #0ea5e9;
+  --color-accent-indigo: #6366f1;
+  --color-accent-glow: #38bdf8;
+  --color-button-primary: #0ea5e9;
+  --color-button-primary-foreground: #03091a;
+  --color-button-electric: #0ea5e9;
+  --color-button-electric-foreground: #ffffff;
+  --color-countdown-background: #0d1a30;
+  --color-countdown-foreground: #e0f2fe;
+  --color-sponsor-card-background: #0b1628;
+  --color-faq-border: #1e3a5f;
+  --color-hero-background: #03091a;
+  --color-hero-foreground: #e0f2fe;
 
   /* Typography */
-  --font-sans: "Lato", sans-serif;
-  --font-display: "Lato", sans-serif;
-  --font-body: "Lato", sans-serif;
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
 
-  /* Shadcn/UI Radii */
+  /* Radii */
   --radius-lg: 0.75rem;
   --radius-md: calc(0.75rem - 2px);
   --radius-sm: calc(0.75rem - 4px);
 
-  /* Shadcn/UI Animations */
+  /* Animations */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -154,17 +151,17 @@
     line-height: 1.1;
   }
 
-  h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
-  h2 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; text-transform: uppercase; }
-  h3 { font-size: 1.75rem; font-weight: 600; line-height: 1.3; }
+  h1 { font-size: 4rem; font-weight: 700; letter-spacing: -0.02em; text-transform: uppercase; }
+  h2 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+  h3 { font-size: 1.75rem; font-weight: 500; line-height: 1.3; }
   p  { font-size: 1.125rem; font-weight: 400; line-height: 1.6; color: var(--color-text-primary); }
   a  { color: var(--color-text-primary); text-decoration: none; }
   a:hover { text-decoration: none; }
 
-  .text-body-large  { font-size: 1.25rem; font-weight: 400; line-height: 1.6; }
+  .text-body-large   { font-size: 1.25rem; font-weight: 400; line-height: 1.6; }
   .text-body-default { font-size: 1.125rem; font-weight: 400; line-height: 1.6; }
-  .text-body-small  { font-size: 1rem; font-weight: 400; line-height: 1.5; }
-  .text-label { font-size: 0.875rem; font-weight: 600; line-height: 1.4; letter-spacing: 0.03em; text-transform: uppercase; }
+  .text-body-small   { font-size: 1rem; font-weight: 400; line-height: 1.5; }
+  .text-label { font-size: 0.875rem; font-weight: 600; line-height: 1.4; letter-spacing: 0.05em; text-transform: uppercase; }
 
   .container {
     max-width: 1400px;

@@ -34,11 +34,11 @@ const faqData: { id: string; question: string; answer: React.ReactNode }[] = [
 
 const FaqSection = () => {
   return (
-    <section id="faq" className="bg-[#0d0d0d] text-white py-16 sm:py-24">
+    <section id="faq" className="bg-[#03091a] text-white py-16 sm:py-24">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="overflow-hidden">
           <div className="flex items-center gap-6">
-            <div className="flex h-20 w-20 shrink-0 sm:h-24 sm:w-24 items-center justify-center rounded-full text-4xl sm:text-5xl font-bold bg-[#8007F7] text-white">6</div>
+            <div className="flex h-20 w-20 shrink-0 sm:h-24 sm:w-24 items-center justify-center rounded-full text-4xl sm:text-5xl font-bold bg-[#0ea5e9] text-white">6</div>
             <h2 className="text-5xl sm:text-7xl font-light tracking-tight">FAQ</h2>
           </div>
         </motion.div>
