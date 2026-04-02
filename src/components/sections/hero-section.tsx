@@ -50,7 +50,7 @@ const CountdownTimer = () => {
   return (
     <div className="flex flex-col items-center gap-4 w-full">
       <h3 className="text-lg font-light text-white/80 mb-1">
-        Submission Deadline — June 2, 2026
+        Submission Deadline – June 2, 2026
       </h3>
       <div className="flex gap-3 sm:gap-4 justify-center">
         {timeUnits.map(({ value, label }) => (
@@ -197,7 +197,7 @@ export default function HeroSection() {
                     AI × STEM Education
                   </p>
                   <p className="text-white/90 text-xl mb-8">
-                    March 1 – May 1, 2026 &nbsp;|&nbsp; Online &nbsp;|&nbsp; Ages 13+
+                    Submission Deadline – June 2, 2026 &nbsp;|&nbsp; Online &nbsp;|&nbsp; Ages 13+
                   </p>
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -211,7 +211,7 @@ export default function HeroSection() {
                       <ArrowRight className="w-5 h-5" />
                     </a>
                     <a
-                      href="#"
+                      href="https://discord.gg/3HgSzbYPx5"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-2 border-[#0ea5e9] text-white px-10 py-4 rounded-md text-lg font-medium hover:bg-[#0369a1] hover:border-[#0369a1] hover:text-white transition-all inline-flex items-center gap-2"

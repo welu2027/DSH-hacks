@@ -3,31 +3,17 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-interface Sponsor {
-  name: string;
-  tier: "diamond" | "gold" | "silver" | "bronze";
-}
-
-const sponsors: Sponsor[] = [
-  { name: "Hudson River Trading", tier: "diamond" },
-  { name: "CodeCrafters",         tier: "gold" },
-  { name: "Featherless AI",       tier: "gold" },
-  { name: "Ideavo",               tier: "silver" },
-  { name: "LLM.API",              tier: "silver" },
-  { name: "relay.app",            tier: "silver" },
-  { name: "InterviewBuddy",       tier: "bronze" },
-  { name: "Interview Cake",       tier: "bronze" },
-  { name: "Aniko",                tier: "bronze" },
+const sponsors = [
+  "Hudson River Trading",
+  "CodeCrafters",
+  "Featherless AI",
+  "Ideavo",
+  "LLM.API",
+  "relay.app",
+  "InterviewBuddy",
+  "Interview Cake",
+  "Aniko",
 ];
-
-const tierConfig = {
-  diamond: { label: "Diamond",  cols: "grid-cols-1",                textSize: "text-2xl font-bold",   py: "py-10" },
-  gold:    { label: "Gold",     cols: "grid-cols-2",                textSize: "text-xl font-semibold", py: "py-8"  },
-  silver:  { label: "Silver",   cols: "grid-cols-3",                textSize: "text-lg font-medium",   py: "py-7"  },
-  bronze:  { label: "Bronze",   cols: "grid-cols-2 sm:grid-cols-3", textSize: "text-base font-medium", py: "py-6"  },
-};
-
-const tierOrder: Array<keyof typeof tierConfig> = ["diamond", "gold", "silver", "bronze"];
 
 const SponsorsSection = () => {
   return (
@@ -48,28 +34,18 @@ const SponsorsSection = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-col gap-6">
-          {tierOrder.map((tier) => {
-            const filtered = sponsors.filter((s) => s.tier === tier);
-            if (!filtered.length) return null;
-            const cfg = tierConfig[tier];
-            return (
-              <motion.div key={tier} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5 }}>
-                <p className="text-xs uppercase tracking-widest text-white/40 mb-3 font-semibold">{cfg.label}</p>
-                <div className={`grid ${cfg.cols} gap-4`}>
-                  {filtered.map((s) => (
-                    <div
-                      key={s.name}
-                      className={`flex items-center justify-center rounded-2xl bg-white/10 border border-white/10 hover:border-[#0ea5e9]/50 hover:bg-white/15 transition-all ${cfg.py} px-6`}
-                    >
-                      <span className={`text-white ${cfg.textSize} tracking-tight`}>{s.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5 }}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {sponsors.map((name) => (
+              <div
+                key={name}
+                className="flex items-center justify-center rounded-2xl bg-white/10 border border-white/10 hover:border-[#0ea5e9]/50 hover:bg-white/15 transition-all py-8 px-6"
+              >
+                <span className="text-white text-lg font-medium tracking-tight">{name}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

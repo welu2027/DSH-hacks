@@ -5,7 +5,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "DSH Hacks V1",
   description:
-    "DSH Hacks V1 — a global student hackathon focused on AI x STEM Education, hosted by DeltaForge Hacks, NextHorizon, and STEMise.",
+    "DSH Hacks V1 – a global student hackathon focused on AI x STEM Education, hosted by DeltaForge Hacks, NextHorizon, and STEMise.",
   icons: {
     icon: "/favicon.ico",
   },

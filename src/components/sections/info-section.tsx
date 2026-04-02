@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const infoCards = [
   {
     title: "Schedule",
-    content: "Hackathon Start: March 1st, 2026 at 12:00 AM CST\nHackathon End: May 1st, 2026 at 11:45 PM CST\nSubmission Deadline: June 2nd, 2026 at 12:45 AM EDT\n\nWorkshop and event schedules will be posted in our Discord servers — DeltaForge Hacks & STEMise!\n\nMake sure to join both Discord servers to stay up to date on all announcements and live sessions.",
+    content: "Submission Deadline: June 2, 2026\n\nWorkshop and event schedules will be posted in the DSH Hacks Discord!\n\nMake sure to join the Discord server to stay up to date on all announcements and live sessions.",
   },
   {
     title: "Theme",
@@ -21,11 +21,11 @@ const infoCards = [
   },
   {
     title: "Prizes",
-    content: "🥇 1st Place — $100 Cash + CodeCrafters 2yr VIP ($720) + Featherless AI Credits ($300) + HRT Merch\n\n🥈 2nd Place — $75 Cash + CodeCrafters 1yr VIP ($360) + Featherless AI Credits ($150) + HRT Merch\n\n🥉 3rd Place — $50 Cash + CodeCrafters 6mo VIP ($180) + Featherless AI Credits ($75) + HRT Merch\n\n🎖️ Participation Prize — Ideavo Pro Plan (50% off) + Participation Certificate + Devpost Achievements",
+    content: "🥇 1st Place – $100 Cash + CodeCrafters 2yr VIP ($720) + Featherless AI Credits ($300) + HRT Merch\n\n🥈 2nd Place – $75 Cash + CodeCrafters 1yr VIP ($360) + Featherless AI Credits ($150) + HRT Merch\n\n🥉 3rd Place – $50 Cash + CodeCrafters 6mo VIP ($180) + Featherless AI Credits ($75) + HRT Merch\n\n🎖️ Participation Prize – Ideavo Pro Plan (50% off) + Participation Certificate + Devpost Achievements",
   },
   {
     title: "Judging Criteria",
-    content: "Projects are judged on four components:\n\n1. Idea (30 pts) — Did the proposal address the theme? Was the idea innovative? How much potential impact could it have?\n\n2. Implementation (30 pts) — Does the solution work? How technically challenging was the implementation?\n\n3. Design (20 pts) — Did the team put thought into UX? How well designed is the interface?\n\n4. Presentation (20 pts) — Does the presentation clearly define and address the problem statement?",
+    content: "Projects are judged on four components:\n\n1. Idea (30 pts) – Did the proposal address the theme? Was the idea innovative? How much potential impact could it have?\n\n2. Implementation (30 pts) – Does the solution work? How technically challenging was the implementation?\n\n3. Design (20 pts) – Did the team put thought into UX? How well designed is the interface?\n\n4. Presentation (20 pts) – Does the presentation clearly define and address the problem statement?",
   },
   {
     title: "Submission Requirements",

@@ -22,10 +22,10 @@ const FooterSection = () => {
               </a>
             </p>
             <div className="flex gap-4 text-white/80">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition"><FaLinkedin size={22} /></a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition"><FaInstagram size={22} /></a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition"><FaTwitter size={22} /></a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition"><FaDiscord size={22} /></a>
+              <a href="https://www.linkedin.com/posts/stemise_stemise-highschool-hackathon-activity-7444950300852973572-mtY-?utm_source=share&utm_medium=member_desktop&rcm=ACoAAF8a_J8BBFD-8QjBjyPkx4PzxZKaZ80DEi8" target="_blank" rel="noopener noreferrer" className="hover:text-white transition"><FaLinkedin size={22} /></a>
+              <a href="#" onClick={(e) => { e.preventDefault(); alert("Coming soon!"); }} className="hover:text-white transition cursor-pointer"><FaInstagram size={22} /></a>
+              <a href="#" onClick={(e) => { e.preventDefault(); alert("Coming soon!"); }} className="hover:text-white transition cursor-pointer"><FaTwitter size={22} /></a>
+              <a href="https://discord.gg/3HgSzbYPx5" target="_blank" rel="noopener noreferrer" className="hover:text-white transition"><FaDiscord size={22} /></a>
             </div>
           </motion.div>
 
@@ -42,8 +42,7 @@ const FooterSection = () => {
             <div>
               <h3 className="text-base font-semibold mb-3 text-white/90">Community</h3>
               <ul className="space-y-2 text-sm text-white/70">
-                <li><a href="#" className="hover:text-[#38bdf8] transition-colors">DeltaForge Discord</a></li>
-                <li><a href="#" className="hover:text-[#38bdf8] transition-colors">STEMise Discord</a></li>
+                <li><a href="https://discord.gg/3HgSzbYPx5" target="_blank" rel="noopener noreferrer" className="hover:text-[#38bdf8] transition-colors">DSH Hacks Discord</a></li>
                 <li><a href="https://dsh-hacks-v1.devpost.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#38bdf8] transition-colors">Project Gallery</a></li>
                 <li><a href="#faq" className="hover:text-[#38bdf8] transition-colors">FAQ</a></li>
               </ul>

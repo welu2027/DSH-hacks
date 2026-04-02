@@ -48,13 +48,8 @@ const RegisterNow = () => {
                   </a>
                 </li>
                 <li>• Join the{" "}
-                  <a href="#" className="underline-offset-4 hover:underline font-semibold text-[#38bdf8]" target="_blank" rel="noopener noreferrer">
-                    DeltaForge Hacks Discord
-                  </a>
-                </li>
-                <li>• Join the{" "}
-                  <a href="#" className="underline-offset-4 hover:underline font-semibold text-[#38bdf8]" target="_blank" rel="noopener noreferrer">
-                    STEMise Discord
+                  <a href="https://discord.gg/3HgSzbYPx5" className="underline-offset-4 hover:underline font-semibold text-[#38bdf8]" target="_blank" rel="noopener noreferrer">
+                    DSH Hacks Discord
                   </a>
                 </li>
               </ul>
