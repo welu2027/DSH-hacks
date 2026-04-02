@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "DSH Hacks V1 – a global student hackathon focused on AI x STEM Education, hosted by DeltaForge Hacks, NextHorizon, and STEMise.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.png",
   },
 };
 

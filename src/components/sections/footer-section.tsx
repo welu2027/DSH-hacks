@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaInstagram, FaDiscord, FaLinkedin, FaTwitter } from "react-icons/fa";
+import Image from "next/image";
 
 const FooterSection = () => {
   return (
@@ -10,7 +11,8 @@ const FooterSection = () => {
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="flex flex-col items-center lg:items-start">
-            <div className="mb-3">
+            <div className="mb-3 flex items-center gap-3">
+              <Image src="/logo-transparent.png" alt="DSH Hacks" width={36} height={36} className="object-contain" />
               <span className="text-2xl font-bold tracking-tight">
                 DSH <span className="text-[#0ea5e9]">Hacks</span>
               </span>

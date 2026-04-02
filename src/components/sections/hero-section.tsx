@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, ExternalLink, ChevronRight, X } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Aurora from "@/components/sections/aurora";
 
 interface TimeLeft {
@@ -91,6 +92,7 @@ const Navbar = () => {
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-8">
           <div className="relative flex items-center justify-between py-4 h-16">
             <a href="#" className="flex items-center gap-3">
+              <Image src="/logo-transparent.png" alt="DSH Hacks" width={40} height={40} className="object-contain" />
               <span className="text-xl font-bold text-white tracking-tight">
                 DSH <span className="text-[#0ea5e9]">Hacks</span>
               </span>
