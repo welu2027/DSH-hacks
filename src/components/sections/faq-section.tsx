@@ -25,7 +25,7 @@ const faqData: { id: string; question: string; answer: React.ReactNode }[] = [
   { id: "faq-9",  question: "How will projects be judged?",
     answer: "Projects are judged on Idea (30 pts), Implementation (30 pts), Design (20 pts), and Presentation (20 pts)." },
   { id: "faq-10", question: "Who is hosting DSH Hacks V1?",
-    answer: "DSH Hacks V1 is hosted collaboratively by three youth-led organizations: DeltaForge Hacks, NextHorizon, and STEMise." },
+    answer: "DSH Hacks V1 is hosted collaboratively by three youth-led organizations: DeltaForge Hacks, NXTHorizon, and STEMise." },
   { id: "faq-11", question: "Where can I get updates and find teammates?",
     answer: "Join the DSH Hacks Discord. All announcements, workshop schedules, and community discussions will be posted there." },
   { id: "faq-12", question: "I have another question.",

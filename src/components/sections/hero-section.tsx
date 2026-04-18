@@ -81,7 +81,7 @@ const Navbar = () => {
     { href: "#about", label: "About" },
     { href: "#info", label: "Info" },
     { href: "#sponsors", label: "Sponsors" },
-    { href: "#judges", label: "Judges" },
+    { href: "#judges", label: "Professionals" },
     { href: "#register", label: "Register" },
     { href: "#faq", label: "FAQ" },
   ];
@@ -92,7 +92,7 @@ const Navbar = () => {
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-8">
           <div className="relative flex items-center justify-between py-4 h-16">
             <a href="#" className="flex items-center gap-3">
-              <Image src="/logo-transparent.png" alt="DSH Hacks" width={40} height={40} className="object-contain" />
+              <Image src="/dsh-hacks-logo.png" alt="DSH Hacks" width={40} height={40} className="object-contain" />
               <span className="text-xl font-bold text-white tracking-tight">
                 DSH <span className="text-[#0ea5e9]">Hacks</span>
               </span>
@@ -184,7 +184,7 @@ export default function HeroSection() {
                     className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-white/10 hover:bg-white/20 text-white/80 hover:text-white rounded-full font-normal text-sm transition-all duration-200 border border-white/20"
                   >
                     <ChevronRight className="w-3 h-3" />
-                    Hosted by DeltaForge Hacks, NextHorizon & STEMise
+                    Hosted by DeltaForge Hacks, NXTHorizon & STEMise
                     <ChevronRight className="w-3 h-3" />
                   </a>
 

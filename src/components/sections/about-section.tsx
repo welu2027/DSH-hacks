@@ -4,9 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const statsData = [
-  { value: "209+", title: "PARTICIPANTS", description: "" },
-  { value: "18+",  title: "JUDGES",       description: "" },
-  { value: "9+",   title: "SPONSORS",     description: "" },
+  { value: "330+", title: "PARTICIPANTS", description: "" },
+  { value: "23",   title: "JUDGES",       description: "" },
+  { value: "10+",  title: "SPONSORS",     description: "" },
+  { value: "$5K+", title: "PRIZE POOL",   description: "" },
 ];
 
 const StatCard = ({
@@ -33,7 +34,9 @@ const StatCard = ({
     requestAnimationFrame(animate);
   }, [isVisible, value]);
 
-  const formattedValue = value.includes("+") ? `${displayValue}+` : displayValue.toString();
+  const prefix = value.match(/^[^0-9]*/)?.[0] ?? "";
+  const suffix = value.match(/[^0-9]+$/)?.[0] ?? "";
+  const formattedValue = `${prefix}${displayValue}${suffix}`;
 
   return (
     <div className="bg-[#0f1e38] rounded-lg p-8 text-center">
@@ -71,7 +74,7 @@ const AboutSection = () => {
           <p className="mb-6 text-xl leading-relaxed sm:text-2xl">
             DSH Hacks V1 is a global student competition open to students aged 13+, hosted collaboratively by three youth-led organizations:{" "}
             <span className="text-[#38bdf8] font-semibold">DeltaForge Hacks</span>,{" "}
-            <span className="text-[#38bdf8] font-semibold">NextHorizon</span>, and{" "}
+            <span className="text-[#38bdf8] font-semibold">NXTHorizon</span>, and{" "}
             <span className="text-[#38bdf8] font-semibold">STEMise</span>.
           </p>
           <p className="text-lg sm:text-xl text-white/80 leading-relaxed mb-4">
@@ -82,7 +85,7 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        <div ref={sectionRef} className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div ref={sectionRef} className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4">
           {statsData.map((stat, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: index * 0.1 }}>
               <StatCard {...stat} isVisible={isVisible} />

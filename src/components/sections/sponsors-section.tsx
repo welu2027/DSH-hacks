@@ -2,17 +2,20 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const sponsors = [
-  "Hudson River Trading",
-  "CodeCrafters",
-  "Featherless AI",
-  "Ideavo",
-  "LLM.API",
-  "relay.app",
-  "InterviewBuddy",
-  "Interview Cake",
-  "Aniko",
+  { name: "Hudson River Trading", logo: "/hrt-logo.png",          href: "https://www.hudsonrivertrading.com/" },
+  { name: "CodeCrafters",         logo: "/codecrafters-logo.png", href: "https://codecrafters.io/" },
+  { name: "Featherless AI",       logo: "/featherless-logo.png",  href: "https://featherless.ai/" },
+  { name: "Ideavo",               logo: "/ideavo-logo.png",       href: "https://ideavo.ai/" },
+  { name: "LLM.API",              logo: "/llmapi-logo.png",       href: "#" },
+  { name: "relay.app",            logo: "/relay-logo.png",        href: "https://relay.app/" },
+  { name: "InterviewBuddy",       logo: "/interviewbuddy-logo.png", href: "https://interviewbuddy.net/" },
+  { name: "Interview Cake",       logo: "/interviewcake-logo.png",  href: "https://www.interviewcake.com/" },
+  { name: "Aniko",                logo: "/aniko-logo.png",        href: "https://www.aniko.ai/" },
+  { name: "Crackd",               logo: "/crackd-logo.png",       href: "https://www.crackd.one/" },
+  { name: "AoPS",                 logo: "/aops-logo.png",         href: "https://artofproblemsolving.com/" },
 ];
 
 const SponsorsSection = () => {
@@ -36,13 +39,16 @@ const SponsorsSection = () => {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5 }}>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {sponsors.map((name) => (
-              <div
+            {sponsors.map(({ name, logo, href }) => (
+              <a
                 key={name}
+                href={href}
+                target={href !== "#" ? "_blank" : undefined}
+                rel={href !== "#" ? "noopener noreferrer" : undefined}
                 className="flex items-center justify-center rounded-2xl bg-white/10 border border-white/10 hover:border-[#0ea5e9]/50 hover:bg-white/15 transition-all py-8 px-6"
               >
-                <span className="text-white text-lg font-medium tracking-tight">{name}</span>
-              </div>
+                <Image src={logo} alt={name} width={160} height={60} className="object-contain max-h-[60px] w-auto" />
+              </a>
             ))}
           </div>
         </motion.div>
