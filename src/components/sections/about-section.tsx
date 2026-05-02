@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const statsData = [
-  { value: "330+", title: "PARTICIPANTS", description: "" },
-  { value: "23",   title: "JUDGES",       description: "" },
+  { value: "500+", title: "PARTICIPANTS", description: "" },
+  { value: "50+",  title: "JUDGES",       description: "" },
   { value: "10+",  title: "SPONSORS",     description: "" },
   { value: "$5K+", title: "PRIZE POOL",   description: "" },
 ];
