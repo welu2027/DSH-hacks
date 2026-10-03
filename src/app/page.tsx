@@ -1,48 +1,39 @@
-import FrontispieceSection from "@/components/sections/frontispiece-section";
-import HeroSection from "@/components/sections/hero-section";
-import CountdownSection from "@/components/sections/countdown-section";
-import AboutSection from "@/components/sections/about-section";
-import V1Section from "@/components/sections/v1-section";
-import ScheduleSection from "@/components/sections/schedule-section";
-import PrizesSection from "@/components/sections/prizes-section";
-import SponsorsSection from "@/components/sections/sponsors-section";
-import JudgesSection from "@/components/sections/judges-section";
-import WorkshopsSection from "@/components/sections/workshops-section";
-import RegisterSection from "@/components/sections/team-section";
-import FaqSection from "@/components/sections/faq-section";
-import FooterSection from "@/components/sections/footer-section";
-import { SpringingLine } from "@/components/sections/design-system";
+import PlatesProvider from "@/components/plates/PlatesProvider";
+import Marquee from "@/components/plates/Marquee";
+import Nav from "@/components/sections/Nav";
+import Hero from "@/components/sections/Hero";
+import Index from "@/components/sections/Index";
+import About from "@/components/sections/About";
+import Plates from "@/components/sections/Plates";
+import Schedule from "@/components/sections/Schedule";
+import Prizes from "@/components/sections/Prizes";
+import People from "@/components/sections/People";
+import Ledger from "@/components/sections/Ledger";
+import Faq from "@/components/sections/Faq";
+import Register from "@/components/sections/Register";
+import Footer from "@/components/sections/Footer";
 
-/* Fully light. Every section runs the light ground; the accent blue
-   (--rubric) carries accent words, eyebrows, labels, and links. */
+/* One continuous world: no dividers or background changes between sections.
+   The trace and field (mounted in the root layout) read the data-beat /
+   data-node / data-swing markers these sections carry. */
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-ink">
-      <FrontispieceSection />
-      {/* no divider — Beat 1/Beat 2 are one continuous space */}
-      <HeroSection />
-      <SpringingLine ground="dark" />
-      <CountdownSection />
-      <SpringingLine ground="dark" />
-      <AboutSection />
-      <SpringingLine ground="dark" />
-      <V1Section />
-      <SpringingLine ground="dark" />
-      <ScheduleSection />
-      <SpringingLine ground="dark" />
-      <PrizesSection />
-      <SpringingLine ground="dark" />
-      <SponsorsSection />
-      <SpringingLine ground="dark" />
-      <JudgesSection />
-      <SpringingLine ground="dark" />
-      <WorkshopsSection />
-      <SpringingLine ground="dark" />
-      <RegisterSection />
-      <SpringingLine ground="dark" />
-      <FaqSection />
-      <SpringingLine ground="dark" />
-      <FooterSection />
-    </div>
+    <PlatesProvider>
+      <Nav />
+      <main>
+        <Marquee />
+        <Hero />
+        <Index />
+        <About />
+        <Plates />
+        <Schedule />
+        <Prizes />
+        <People />
+        <Ledger />
+        <Faq />
+        <Register />
+      </main>
+      <Footer />
+    </PlatesProvider>
   );
 }

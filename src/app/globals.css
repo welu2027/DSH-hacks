@@ -1,521 +1,423 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@custom-variant dark (&:is(.dark *));
 
-@theme {
-  /* f.inc-inspired palette, light theme: restrained off-white + near-black,
-     one confident electric-blue accent used sparingly (CTAs, links, tags —
-     never a background fill). Token names are unchanged from the prior dark
-     palette so every component below keeps working untouched; only the
-     values move. The whole site runs on the light ground now — there is no
-     dark-relief section, so ink-soft/paper-alt below are effectively idle. */
-  --color-ink: #fafaf8;           /* PRIMARY PAGE GROUND — warm off-white, not flat white */
-  --color-ink-alt: #ffffff;       /* card / surface ground — one step up from the page */
-  --color-paper: #17171a;         /* PRIMARY TYPE COLOR — near-black, never pure #000 */
-  --color-paper-dim: #5c5c61;     /* secondary/muted text, captions, metadata */
-  --color-paper-alt: #f1f1ee;     /* idle: kept only for any future alt-surface need */
-  --color-ink-soft: #57575f;      /* idle: secondary text if a dark section ever returns */
-  --color-rubric: #3d4fe0;        /* the one electric-blue accent — fill only (CTA) */
-  --color-rubric-deep: #2f3cb0;   /* rubric hover state */
-  /* On a dark ground rubric itself fails AA as text, so rubric-light carries
-     a paler tint for text/line-art there. On a light ground that reasoning
-     reverses — rubric already holds AA as text, so this just equals it
-     rather than keeping a pale tint that would wash out. */
-  --color-rubric-light: var(--color-rubric);
-  --color-rule: rgba(0, 0, 0, 0.08);   /* low-opacity black divider, not a solid gray line */
-  --color-rule-dark: rgba(0, 0, 0, 0.08);
-  --color-rule-light: rgba(0, 0, 0, 0.08);  /* idle: kept distinct only for a future dark section */
-  --color-rule-inverse: var(--color-rule-light); /* legacy alias */
-  --color-line-dark: #c7c7cd;     /* line-art graphics — a light gray hairline reads at low opacity against the light ground */
+/* DSH Hacks V2: AI × Healthcare as a medical instrument reading.
+   One permanent dark theme. Tokens are the only colors on the page. */
+:root {
+  --black: #000000;
+  --film: #070B16;
+  --cobalt: #3557FF;
+  --signal: #A9B8FF;
+  --paper: #F3F5FA;
+  --mute: #8A92A6;
+  --rule: rgba(243, 245, 250, .14);
+  --body: #C9CEDB;
 
-  /* SF-vibe pass (dsh-hacks-sf-vibes-prompt.md, §5): one warm accent, held in
-     reserve for a single flourish per page (the countdown digits) — never a
-     second theme alongside black/blue/white. Deepened slightly from the dark
-     theme's value so it still holds AA on a light ground. */
-  --color-amber: #a84e2b;
+  --serif: var(--font-instrument-serif), Georgia, serif;
+  --mono: var(--font-geist-mono), ui-monospace, monospace;
+  --doto: var(--font-doto), var(--font-geist-mono), monospace;
 
-  /* Legacy aliases — every component still written against the previous
-     fresco-pigment names resolves through here, so this one file is the
-     entire color swap (§12 step 2: "change nothing else"). Per-section
-     rebuilds replace these with the direct new names as they land. */
-  --color-plaster: var(--color-paper);
-  --color-plaster-shade: var(--color-paper-alt);
-  --color-umber: var(--color-ink);
-  --color-umber-soft: var(--color-ink-soft);
-  --color-lapis: var(--color-rubric);
-  --color-lapis-deep: var(--color-rubric-deep);
-  /* Ochre and sienna have no equivalent in a two-ink system — both fold to
-     ink-soft (a quiet neutral) rather than to rubric, which must stay rare.
-     Numerals/keys/node-markers read as muted until a section is rebuilt to
-     spend one of its two rubric slots on them deliberately (e.g. Schedule's
-     helix node markers, or specimen-key hover). */
-  --color-ochre: var(--color-ink-soft);
-  --color-sienna: var(--color-ink-soft);
-
-  --color-ink-muted: var(--color-ink-soft);
-  --color-brand: var(--color-rubric);
-  --color-brand-deep: var(--color-rubric-deep);
-  --color-brand-ink: var(--color-rubric);
-
-  /* shadcn/radix primitives kept for the accordion + any future ui/ components */
-  --color-background: var(--color-ink);
-  --color-foreground: var(--color-paper);
-  --color-card: var(--color-ink-alt);
-  --color-card-foreground: var(--color-paper);
-  --color-popover: var(--color-ink-alt);
-  --color-popover-foreground: var(--color-paper);
-  --color-primary: var(--color-rubric);
-  --color-primary-foreground: var(--color-paper);
-  --color-secondary: var(--color-ink-alt);
-  --color-secondary-foreground: var(--color-paper);
-  --color-muted: var(--color-ink-alt);
-  --color-muted-foreground: var(--color-paper-dim);
-  --color-accent: var(--color-ink-alt);
-  --color-accent-foreground: var(--color-paper);
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #ffffff;
-  --color-border: var(--color-rule);
-  --color-input: var(--color-rule);
-  --color-ring: var(--color-rubric-light);
-
-  /* Typography families (f.inc revamp). Instrument Serif is the big editorial
-     display headline face; Instrument Sans is the grotesk for body, nav, and
-     UI copy — these are the literal families f.inc's own production CSS
-     ships, not approximations. Mono: IBM Plex Mono, numerals and metadata
-     only, never body, never headings. */
-  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
-  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
-  --font-body: var(--font-instrument-sans), "Helvetica Neue", Arial, sans-serif;
-  --font-mono: var(--font-plex-mono), "SF Mono", Menlo, monospace;
-
-  --radius-lg: 0.5rem;
-  --radius-md: calc(0.5rem - 2px);
-  --radius-sm: calc(0.5rem - 4px);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
-  }
-  @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
-  }
+  --nav-h: 64px;
+  color-scheme: dark;
 }
 
-@layer base {
-  *, ::after, ::before, ::backdrop, ::file-selector-button {
-    border-color: var(--color-rule);
-  }
+html {
+  background: var(--black);
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + env(safe-area-inset-top) + 12px);
+}
+body {
+  position: relative;
+  margin: 0;
+  background: var(--black);
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--cobalt); color: var(--paper); }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; }
+
+/* ---------- background stock ---------- */
+.stock-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; transform: translateZ(0);
+  background-image:
+    linear-gradient(rgba(53, 87, 255, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 87, 255, .07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: linear-gradient(#000 0%, transparent 85%);
+  mask-image: linear-gradient(#000 0%, transparent 85%);
+}
+.stock-grain {
+  position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .09; transform: translateZ(0);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
+/* ---------- world layers ---------- */
+.field {
+  position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100vh;
+  image-rendering: pixelated; pointer-events: none; opacity: 0; transform: translateZ(0);
+}
+.trace { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; overflow: visible; }
+.trace .ghost { fill: none; stroke: rgba(243, 245, 250, .16); stroke-width: 1; stroke-dasharray: 2 6; }
+.trace .live { fill: none; stroke: var(--signal); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.trace .node { fill: var(--black); stroke: rgba(243, 245, 250, .35); stroke-width: 1; transition: fill .25s, stroke .25s; }
+.trace .node.on { fill: var(--signal); stroke: var(--signal); }
+.reticle {
+  position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; overflow: visible;
+  color: var(--paper); will-change: transform;
+}
+.reticle .pulse { transform-box: fill-box; transform-origin: center; animation: pulse 1.2s ease-out infinite; }
+.reticle.fast .pulse { animation: pulse-fast .3s ease-out 3; }
+@keyframes pulse {
+  0% { transform: scale(.6); opacity: .9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes pulse-fast {
+  0% { transform: scale(.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+main, .site-footer { position: relative; z-index: 2; }
+.no-field .prizes { background: var(--cobalt); }
 
-@layer base {
-  :root {
-    --radius: var(--radius-lg);
+/* ---------- layout ---------- */
+.wrap { max-width: 1320px; margin: 0 auto; padding-left: clamp(18px, 4vw, 48px); padding-right: clamp(18px, 4vw, 48px); }
+.section { padding: clamp(72px, 10vw, 136px) 0; }
 
-    /* Type scale — the ~1:8 jump between --type-eyebrow and --type-mega is the
-       system's defining trait. Preserve it; don't flatten it in a section. */
-    --type-mega: clamp(4rem, 12vw, 11rem);      /* hero only */
-    --type-display: clamp(2.5rem, 6vw, 5rem);   /* section headings, stat numerals */
-    --type-title: clamp(1.5rem, 2.5vw, 2.25rem); /* card / row titles */
-    --type-eyebrow: 1rem;                        /* eyebrows, small labels */
-    --type-quote: clamp(1.25rem, 2vw, 1.75rem);  /* pull quotes */
-    --type-body: 1.0625rem;                      /* paragraphs */
-    --type-meta: 0.8125rem;                      /* metadata, nav, buttons, labels */
+/* ---------- type ---------- */
+.serif { font-family: var(--serif); font-weight: 400; }
+.h1 {
+  font-family: var(--serif); font-weight: 400; color: var(--paper);
+  font-size: clamp(48px, 8.6vw, 124px); line-height: .92; letter-spacing: -.025em; margin: 0;
+}
+.h1 em, .accent { font-style: italic; color: var(--signal); }
+.lead { font-family: var(--serif); font-size: clamp(20px, 2vw, 25px); line-height: 1.35; color: var(--paper); margin: 0; }
+.label { font-size: 12px; color: var(--mute); letter-spacing: .01em; }
+.mute { color: var(--mute); }
+.doto { font-family: var(--doto); font-weight: 700; }
 
-    /* Auxiliary filter tokens (not Tailwind color utilities, just raw CSS
-       vars) for the handful of raster/line-art images whose filter is baked
-       in as an inline style rather than a utility class — see
-       hero/frontispiece/v1/footer/sponsors. Single permanent values now that
-       the site has one theme; kept as named tokens rather than inlined. */
-    --invert-on-dark: 0;
-    --shadow-nav: rgba(0, 0, 0, 0.12);
+.sec-head { display: grid; grid-template-columns: 120px 1fr; align-items: baseline; margin-bottom: clamp(36px, 5vw, 64px); }
+.sec-no { font-size: 12px; color: var(--mute); }
+.sec-title {
+  font-family: var(--serif); font-weight: 400; color: var(--paper); margin: 0;
+  font-size: clamp(40px, 6vw, 80px); line-height: .95; letter-spacing: -.02em;
+}
+.sec-title .ghost-dup { color: transparent; -webkit-text-stroke: 1px rgba(243, 245, 250, .35); margin-left: .25em; }
+.sub { color: var(--mute); max-width: 52ch; margin: 0 0 24px; }
 
-    /* Inline SVG grain — fine film noise, referenced by .grain-overlay.
-       Legacy from the previous redesign; kept where already wired in. */
-    --grain-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 44px; padding: 0 20px; border-radius: 999px; font-family: var(--mono); font-size: 12.5px;
+  border: 1px solid var(--rule); color: var(--paper); background: transparent; cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s; white-space: nowrap;
+}
+.btn:hover { border-color: var(--paper); }
+.btn.solid { background: var(--paper); color: var(--black); border-color: var(--paper); }
+.btn.solid:hover { background: var(--signal); border-color: var(--signal); }
+.btn.sm { height: 34px; padding: 0 14px; font-size: 12px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.link { color: var(--signal); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 4px; }
+.link:hover { text-decoration-color: var(--signal); }
 
-    /* Plaster texture — broad mottling and tonal variation, not uniform
-       photographic grain. Low baseFrequency for big soft blotches, referenced
-       by .plaster-texture-overlay. This is the fresco-atlas plate treatment. */
-    --plaster-texture-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+/* ---------- nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top);
+  background: rgba(0, 0, 0, .72); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.nav-in { height: var(--nav-h); display: flex; align-items: center; gap: 28px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 23px; color: var(--paper); line-height: 1; }
+.brand canvas { width: 30px; height: 30px; border-radius: 50%; image-rendering: pixelated; background: var(--film); }
+.nav-links { display: flex; gap: 22px; margin-left: auto; font-size: 12.5px; }
+.nav-links a { color: var(--mute); transition: color .2s; }
+.nav-links a:hover { color: var(--paper); }
 
-    /* Coffers — the barrel vault's receding grid of sunken squares, per
-       Part 4. patternTransform skews the tile itself (background-image
-       can't take a CSS transform and tile correctly), suggesting recession
-       without needing a wrapper element. Hex is --color-ochre's literal
-       value: a data-URI SVG is an isolated document and can't read the
-       page's CSS custom properties. */
-    --coffer-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cdefs%3E%3Cpattern id='c' width='84' height='84' patternUnits='userSpaceOnUse' patternTransform='skewX(-10)'%3E%3Crect x='6' y='6' width='72' height='72' fill='none' stroke='%23D6D6DC' stroke-width='1' opacity='0.7'/%3E%3Crect x='20' y='20' width='44' height='44' fill='none' stroke='%23D6D6DC' stroke-width='1' opacity='0.45'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23c)'/%3E%3C/svg%3E");
-  }
+/* ---------- marquee ---------- */
+.marquee { position: relative; z-index: 2; overflow: hidden; padding: 14px 0; }
+.marquee-track { display: flex; gap: 2px; width: max-content; animation: marquee 90s linear infinite; will-change: transform; }
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+.marquee-set { display: flex; gap: 2px; }
+.marquee .plate-btn { width: 106px; }
+@keyframes marquee { to { transform: translateX(-50%); } }
 
-  html { scroll-behavior: smooth; }
+/* ---------- hero ---------- */
+.hero { padding: clamp(56px, 8vw, 104px) 0 clamp(72px, 10vw, 136px); }
+.hero-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: end; }
+.hero-kicker { font-size: 12px; color: var(--mute); margin: 0 0 28px; }
+.hero .lead { margin: 28px 0 32px; max-width: 34ch; }
+.board { background: var(--film); border: 1px solid var(--rule); }
+.board dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; }
+.board dl > div { padding: 16px 18px; border-bottom: 1px solid var(--rule); }
+.board dl > div:nth-child(odd) { border-right: 1px solid var(--rule); }
+.board dt { font-size: 11.5px; color: var(--mute); }
+.board dd { margin: 4px 0 0; color: var(--paper); font-size: 13.5px; }
+.board-clock { padding: 18px; }
+.countdown { display: flex; gap: 18px; margin-top: 8px; }
+.countdown .n { font-family: var(--doto); font-weight: 700; font-size: clamp(34px, 4vw, 52px); line-height: 1; color: var(--paper); font-variant-numeric: tabular-nums; }
+.countdown .u { font-size: 11.5px; color: var(--mute); margin-top: 6px; }
 
-  /* Clears the fixed nav when jumping to a section via anchor link or
-     scrollIntoView — without this the heading renders right under the header. */
-  section[id] { scroll-margin-top: 88px; }
+/* ---------- index strip ---------- */
+.index { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); position: relative; z-index: 2; }
+.index ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); }
+.index li + li { border-left: 1px solid var(--rule); }
+.index a { display: flex; flex-direction: column; gap: 6px; padding: 18px 16px 20px; transition: background .2s; height: 100%; }
+.index a:hover { background: rgba(53, 87, 255, .08); }
+.index .num { font-size: 11.5px; color: var(--mute); }
+.index .t { font-family: var(--serif); font-size: 24px; color: var(--paper); line-height: 1; }
+.index .c { font-family: var(--serif); font-style: italic; color: var(--mute); font-size: 15px; }
 
-  ::selection {
-    background-color: var(--color-rubric);
-    color: var(--color-paper);
-  }
+/* ---------- about ---------- */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); }
+.quote { margin: 0; background: var(--film); border-left: 2px solid var(--cobalt); padding: 22px 24px; }
+.quote p { font-family: var(--serif); font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15; color: var(--paper); margin: 0; }
+.quote footer { margin-top: 10px; font-size: 12px; color: var(--mute); }
+.prose p { margin: 0 0 16px; max-width: 60ch; }
+.record { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); margin-top: clamp(48px, 6vw, 80px); }
+.record > div { padding: 22px 0 6px; border-bottom: 1px solid var(--rule); }
+.record > div:not(:nth-child(3n+1)) { padding-left: 22px; border-left: 1px solid var(--rule); }
+.record .big { font-family: var(--serif); font-size: clamp(40px, 5vw, 68px); line-height: 1; color: var(--paper); }
+.record .label { display: block; margin: 8px 0 14px; }
 
-  body {
-    font-family: var(--font-body);
-    background-color: var(--color-ink);
-    color: var(--color-paper);
-    line-height: 1.6;
-  }
+/* ---------- plates ---------- */
+.plate-btn { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; color: inherit; font: inherit; }
+.plate-frame { position: relative; aspect-ratio: 4 / 5; background: var(--film); overflow: hidden; }
+.plate-frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+.plate-frame .dev { opacity: 0; transition: opacity .35s; }
+.plate-btn:hover .dev, .plate-btn:focus-visible .dev { opacity: 1; }
+.plate-tag { position: absolute; top: 8px; left: 8px; z-index: 1; font-size: 10.5px; background: var(--black); color: var(--signal); padding: 2px 7px; }
+.plate-cap { padding: 12px 12px 16px; }
+.plate-cap .t { font-family: var(--serif); font-size: 19px; line-height: 1.1; color: var(--paper); }
+.plate-cap .m { font-size: 11.5px; color: var(--mute); margin-top: 6px; }
 
-  /* f.inc's own headline CSS runs text-transform:none, weight <=600, and
-     -0.02 to -0.04em tracking on its Instrument Serif h1/h2 — dramatic scale
-     does the work, not forced caps or synthetic bold on a face that has none. */
-  h1, h2 {
-    font-family: var(--font-display);
-    color: var(--color-paper);
-    line-height: 1;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-  }
-  h3, h4, h5, h6 {
-    font-family: var(--font-body);
-    color: var(--color-paper);
-    line-height: 1.1;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
+.plates-intro { max-width: 62ch; margin: 0 0 36px 120px; }
+.gal-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 14px; }
+.chip { height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--rule); background: transparent; color: var(--mute); font: 12px var(--mono); cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.chip:hover { color: var(--paper); }
+.chip[aria-pressed="true"] { background: var(--paper); color: var(--black); border-color: var(--paper); }
+.chip .k { opacity: .6; margin-left: 6px; }
+.gal-tools { display: flex; gap: 10px; align-items: center; margin-left: auto; }
+.search { height: 32px; width: 220px; background: var(--film); border: 1px solid var(--rule); border-radius: 999px; color: var(--paper); font: 12px var(--mono); padding: 0 14px; }
+.search::placeholder { color: var(--mute); }
+.status { font-size: 12px; color: var(--mute); margin: 8px 0 14px; }
+.wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 2px; background: var(--rule); border: 2px solid transparent; outline: 1px solid var(--rule); }
+.wall > li { background: var(--black); list-style: none; }
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.list .plate-btn { display: grid; grid-template-columns: 52px 64px 1.1fr 2fr 150px; gap: 18px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.list .plate-btn:hover { background: rgba(53, 87, 255, .06); }
+.list .plate-frame { width: 64px; }
+.list .no { font-size: 12px; color: var(--mute); padding-left: 6px; }
+.list .t { font-family: var(--serif); font-size: 21px; color: var(--paper); line-height: 1.1; }
+.list .d { font-size: 12.5px; color: var(--mute); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.list .tr { font-size: 12px; color: var(--mute); }
+.empty { padding: 48px 0; color: var(--mute); }
+.btn.more { display: flex; width: 100%; margin-top: 12px; }
+.gal-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 28px; }
+.gal-foot p { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--paper); margin: 0; }
 
-  h1 { font-size: 4rem; }
-  h2 { font-size: 2.5rem; }
-  h3 { font-size: 1.5rem; }
-  p  { font-size: 1.0625rem; font-weight: 400; line-height: 1.65; color: var(--color-paper); }
-  a  { color: inherit; text-decoration: none; }
+/* ---------- lightbox ---------- */
+.lightbox { margin: auto; padding: 0; border: 1px solid var(--rule); background: var(--black); color: var(--body); max-width: min(1040px, calc(100vw - 32px)); width: 100%; max-height: calc(100dvh - 32px); }
+.lightbox::backdrop { background: rgba(0, 0, 0, .78); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.lb-grid { display: grid; grid-template-columns: 320px 1fr; gap: 40px; padding: 32px; }
+.lb-plate { position: relative; width: 320px; height: 400px; background: var(--film); }
+.lb-plate canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; transition: opacity .35s; }
+.lb-fig { font-family: var(--serif); font-style: italic; color: var(--mute); font-size: 15px; margin-top: 12px; }
+.lb-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--mute); }
+.lb-title { font-family: var(--serif); font-size: clamp(34px, 4.6vw, 56px); line-height: 1; color: var(--paper); margin: 18px 0 14px; }
+.lb-tag { font-family: var(--serif); font-size: 21px; line-height: 1.3; color: var(--paper); margin: 0 0 24px; }
+.spec { margin: 0 0 24px; border-top: 1px solid var(--rule); }
+.spec > div { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 13px; }
+.spec dt { color: var(--mute); }
+.spec dd { margin: 0; color: var(--paper); }
 
-  /* Hero legacy classes — kept verbatim so the approved hero renders unchanged.
-     New sections use the .type-* system below instead. */
-  .font-serif-eyebrow {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-  }
-  .text-label {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
+/* ---------- schedule / ledger ---------- */
+.steps { list-style: none; margin: 0 0 0 120px; padding: 0; border-top: 1px solid var(--rule); }
+.steps li { display: grid; grid-template-columns: 90px 260px 1fr; gap: 24px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--rule); }
+.steps .k { font-family: var(--doto); font-weight: 700; font-size: 30px; color: var(--cobalt); line-height: 1; }
+.steps h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.05; color: var(--paper); margin: 0; }
+.steps .hot h3 { color: var(--signal); }
+.steps p { margin: 0; max-width: 58ch; }
 
-  .container {
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 24px;
-    padding-right: 24px;
-  }
+.ledger { list-style: none; margin: 0 0 0 120px; padding: 0; border-top: 1px solid var(--rule); }
+.ledger li { display: grid; grid-template-columns: 140px 60px 1fr; gap: 24px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.ledger .date { font-size: 12.5px; color: var(--mute); font-variant-numeric: tabular-nums; }
+.ledger .v { font-size: 12px; color: var(--mute); }
+.ledger p { margin: 0; font-family: var(--serif); font-size: 22px; line-height: 1.25; color: var(--paper); }
+.ledger .next .date, .ledger .next p { color: var(--signal); }
 
-  @media (min-width: 768px) {
-    .container { padding-left: 48px; padding-right: 48px; }
-  }
+/* ---------- prizes ---------- */
+.prizes { color: var(--paper); }
+.prizes .sec-no { color: var(--paper); opacity: .8; }
+.pool { font-family: var(--serif); font-size: clamp(84px, 17vw, 248px); line-height: .85; letter-spacing: -.035em; color: var(--paper); margin: 0; }
+.pool-sub { font-family: var(--serif); font-size: clamp(20px, 2vw, 25px); line-height: 1.35; max-width: 36ch; margin: 24px 0 0; color: var(--paper); }
+.criteria { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(243, 245, 250, .35); margin-top: clamp(56px, 7vw, 96px); }
+.criteria > div { padding: 22px 22px 6px 0; }
+.criteria > div + div { padding-left: 22px; border-left: 1px solid rgba(243, 245, 250, .35); }
+.criteria h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 8px; color: var(--paper); }
+.criteria p { margin: 0; color: var(--paper); opacity: .88; font-size: 13.5px; }
 
-  @media (min-width: 1024px) {
-    h1 { font-size: 6rem; }
-    h2 { font-size: 3rem; }
-    h3 { font-size: 1.75rem; }
-  }
+/* ---------- people ---------- */
+.people-h { font-family: var(--serif); font-weight: 400; font-size: 34px; color: var(--paper); margin: 0 0 10px; line-height: 1; }
+.logo-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.logo-list a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 12px; color: var(--mute); }
+.logo-list a:hover { color: var(--paper); }
+.logo { filter: brightness(0) invert(1); opacity: .7; transition: opacity .2s; object-fit: contain; }
+a:hover .logo, .logo-grid > div:hover .logo { opacity: 1; }
+.logo-list .logo { height: 22px; width: auto; max-width: 150px; }
+.logo-group + .logo-group { margin-top: 28px; }
+.logo-group > .label { margin: 0 0 8px; }
+.logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+.logo-grid > div { display: flex; align-items: center; justify-content: center; height: 88px; padding: 18px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.logo-grid .logo { max-height: 34px; max-width: 82%; width: auto; }
+.logo-grid .logo.sq { max-height: 56px; }
+.talks { list-style: none; margin: 0 0 28px; padding: 0; border-top: 1px solid var(--rule); }
+.talks a { display: grid; grid-template-columns: 1fr 260px 60px; gap: 20px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.talks a:hover .w { color: var(--paper); }
+.talks .t { font-family: var(--serif); font-size: 23px; line-height: 1.15; color: var(--paper); }
+.talks .s { font-size: 12.5px; color: var(--mute); }
+.talks .w { font-size: 12px; color: var(--signal); text-align: right; }
 
-  /* Visible focus ring — --rubric-light on the dark grounds (primary), no
-     transition. The three light relief sections carry bg-paper / bg-paper-alt
-     on the section element, so scope a --rubric ring inside them. */
-  a:focus-visible,
-  button:focus-visible,
-  [role="button"]:focus-visible,
-  input:focus-visible,
-  summary:focus-visible {
-    outline: 2px solid var(--color-rubric-light);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-  [class*="bg-paper"] a:focus-visible,
-  [class*="bg-paper"] button:focus-visible,
-  [class*="bg-paper"] [role="button"]:focus-visible,
-  [class*="bg-paper"] input:focus-visible,
-  [class*="bg-paper"] summary:focus-visible {
-    outline-color: var(--color-rubric);
-  }
+/* ---------- judges roll ---------- */
+/* full-bleed band of pills, rows drifting in alternating directions */
+.roll { margin: 8px calc(50% - 50vw) 0; }
+.roll-rows {
+  display: grid; gap: 10px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.roll-row { overflow: hidden; }
+.roll-track { display: flex; width: max-content; animation: roll var(--dur, 120s) linear infinite; will-change: transform; }
+.roll-row.rev .roll-track { animation-direction: reverse; }
+.roll-row:hover .roll-track { animation-play-state: paused; }
+.roll-track ul { display: flex; gap: 10px; margin: 0; padding: 0 10px 0 0; list-style: none; }
+@keyframes roll { to { transform: translateX(-50%); } }
+.pill {
+  display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 20px 0 6px;
+  border: 1px solid var(--rule); border-radius: 999px; background: rgba(7, 11, 22, .82);
+  transition: border-color .2s, background .2s;
+}
+.pill:hover { border-color: var(--signal); background: var(--film); }
+.av { position: relative; flex: none; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: var(--film); }
+.av canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+.av .dev { opacity: 0; transition: opacity .3s; }
+.pill:hover .av .dev { opacity: 1; }
+.pt { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+.pn { font-family: var(--serif); font-size: 19px; color: var(--paper); white-space: nowrap; }
+.pr { font-size: 11.5px; color: var(--mute); white-space: nowrap; max-width: 300px; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; }
+.roll-filters { justify-content: center; margin-top: 22px; padding: 0 16px; }
+
+/* ---------- faq ---------- */
+.faq { margin-left: 120px; border-top: 1px solid var(--rule); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary { list-style: none; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 20px 0; cursor: pointer; font-family: var(--serif); font-size: clamp(21px, 2vw, 26px); color: var(--paper); line-height: 1.2; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .pm { font-family: var(--mono); font-size: 14px; color: var(--mute); }
+.faq summary .pm::before { content: "+"; }
+.faq details[open] .pm::before { content: "–"; }
+.faq details p { margin: 0 0 22px; max-width: 64ch; }
+
+/* ---------- register ---------- */
+.reg-h { font-family: var(--serif); font-weight: 400; font-size: clamp(52px, 9vw, 140px); line-height: .92; letter-spacing: -.025em; color: var(--paper); margin: 0 0 28px; }
+.reg-body { max-width: 52ch; margin: 0 0 32px; }
+
+/* ---------- footer ---------- */
+.site-footer { padding: 64px 0 calc(28px + env(safe-area-inset-bottom)); }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding-bottom: 48px; border-bottom: 1px solid var(--rule); }
+.foot-grid h3 { font-size: 12px; color: var(--mute); font-weight: 400; margin: 0 0 14px; }
+.foot-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.foot-grid ul a:hover { color: var(--paper); }
+.foot-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 20px; font-size: 12px; color: var(--mute); }
+.foot-bar .term { margin-left: auto; }
+
+/* ---------- terminal ---------- */
+.term { position: relative; font-size: 12.5px; }
+.term-panel {
+  position: absolute; right: 0; bottom: calc(100% + 10px); width: min(460px, calc(100vw - 36px));
+  background: var(--film); border: 1px solid var(--rule); padding: 12px 14px; color: var(--body);
+  transform-origin: bottom; animation: term-up .18s ease-out;
+}
+.term-panel p { margin: 0; white-space: pre-wrap; word-break: break-word; }
+.term-panel .cmd { color: var(--paper); }
+.term-panel .hint { color: var(--mute); }
+@keyframes term-up { from { transform: scaleY(.6); opacity: 0; } }
+.term-line { display: flex; align-items: center; gap: 8px; color: var(--mute); cursor: text; }
+.term-line input { background: transparent; border: 0; outline: none; color: var(--paper); font: inherit; width: 16ch; caret-color: var(--cobalt); padding: 0; }
+.term-line input:focus-visible { outline: none; }
+.term-line:focus-within { outline: 2px solid var(--cobalt); outline-offset: 4px; }
+.cursor { color: var(--cobalt); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Konami: dither every serif heading ---------- */
+.konami :is(.h1, .sec-title, .reg-h, .pool, .lb-title, .people-h) {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'><rect width='2' height='2' fill='%23A9B8FF'/><rect x='2' y='2' width='2' height='2' fill='%233557FF'/><rect x='2' width='1' height='1' fill='%23F3F5FA'/></svg>");
+  background-size: 4px 4px;
+  image-rendering: pixelated;
+  -webkit-background-clip: text; background-clip: text;
+}
+.konami .h1 em { color: transparent; }
+
+/* ---------- utilities ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .nav-links { display: none; }
+  .nav-in > .btn { margin-left: auto; }
+  .hero-grid, .two-col, .lb-grid { grid-template-columns: 1fr; }
+  .lb-plate { width: min(320px, 100%); height: auto; aspect-ratio: 4 / 5; }
+  .index ol { grid-template-columns: repeat(3, 1fr); }
+  .index li:nth-child(4) { border-left: 0; }
+  .index li:nth-child(n+4) { border-top: 1px solid var(--rule); }
+  .criteria { grid-template-columns: 1fr 1fr; }
+  .criteria > div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .steps li { grid-template-columns: 60px 1fr; }
+  .steps p { grid-column: 2; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .talks a { grid-template-columns: 1fr 60px; }
+  .talks .s { grid-column: 1; grid-row: 2; }
+  .talks .w { grid-row: 1 / 3; grid-column: 2; align-self: center; }
+}
+@media (max-width: 720px) {
+  .sec-head { grid-template-columns: 1fr; gap: 10px; }
+  .plates-intro, .steps, .ledger, .faq { margin-left: 0; }
+  .wall { grid-template-columns: repeat(2, 1fr); }
+  .list .plate-btn { grid-template-columns: 64px 1fr; gap: 4px 14px; }
+  .list .plate-frame { grid-row: 1 / 4; }
+  .list .no, .list .d { display: none; }
+  .list .t, .list .tr { grid-column: 2; }
+  .index ol { grid-template-columns: 1fr 1fr; }
+  .index li { border-left: 0 !important; border-top: 1px solid var(--rule); }
+  .index li:nth-child(even) { border-left: 1px solid var(--rule) !important; }
+  .index li:nth-child(-n+2) { border-top: 0; }
+  .record { grid-template-columns: 1fr 1fr; }
+  .record > div:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }
+  .record > div:nth-child(even) { padding-left: 18px; border-left: 1px solid var(--rule); }
+  .criteria { grid-template-columns: 1fr; }
+  .criteria > div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(243, 245, 250, .35); }
+  .ledger li { grid-template-columns: 1fr auto; gap: 6px 16px; }
+  .ledger p { grid-column: 1 / -1; }
+  .logo-grid { grid-template-columns: 1fr 1fr; }
+  .gal-tools { margin-left: 0; width: 100%; }
+  .search { flex: 1; width: auto; }
+  .gal-foot { flex-direction: column; align-items: flex-start; }
+  .lb-grid { padding: 20px; gap: 24px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .foot-bar .term { margin-left: 0; }
+  .countdown { gap: 12px; }
+  .pill { height: 52px; gap: 10px; padding-right: 16px; }
+  .av { width: 40px; height: 40px; }
+  .pn { font-size: 17px; }
+  .pr { max-width: 200px; }
 }
 
-/* The formal type system — one class per role, used sitewide (hero excluded).
-   Tailwind v4's `@import "tailwindcss"` only declares theme/base/utilities
-   layers (no `components`), so these live in `utilities` alongside the rest
-   of the hand-authored CSS below — a separate `@layer components` block gets
-   silently dropped since nothing declares that layer. */
-@layer utilities {
-  .type-mega {
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    font-size: var(--type-mega);
-  }
-  .type-display {
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    font-size: var(--type-display);
-  }
-  .type-title {
-    font-family: var(--font-body);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    font-size: var(--type-title);
-  }
-  .type-eyebrow {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    line-height: 1.4;
-    font-size: var(--type-eyebrow);
-  }
-  .type-quote {
-    font-family: var(--font-serif);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.45;
-    font-size: var(--type-quote);
-  }
-  .type-body {
-    font-family: var(--font-body);
-    font-weight: 400;
-    line-height: 1.6;
-    font-size: var(--type-body);
-  }
-  .type-meta {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    line-height: 1.4;
-    font-size: var(--type-meta);
-  }
-  .type-numeral {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    font-size: clamp(1.5rem, 2.6vw, 1.875rem);
-    color: var(--color-paper-dim); /* dark-ground default; light sections override with text-ink-soft */
-  }
-
-  .grain-overlay {
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain-svg);
-    mix-blend-mode: multiply;
-    opacity: 0.05;
-    pointer-events: none;
-  }
-
-  .plaster-texture-overlay {
-    position: absolute;
-    inset: 0;
-    background-image: var(--plaster-texture-svg);
-    mix-blend-mode: multiply;
-    opacity: 0.14;
-    pointer-events: none;
-  }
-
-  /* SF-vibe pass §6: a very faint grain on card surfaces (sponsor tiles,
-     workshop tiles) so they read as sitting in a physical room rather than
-     flat UI fills. A ::after keeps every card call-site a one-class change —
-     no extra DOM node, no re-plumbed `relative` wrapper. */
-  .card-texture {
-    position: relative;
-  }
-  .card-texture::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background-image: var(--grain-svg);
-    mix-blend-mode: overlay;
-    opacity: 0.05;
-    pointer-events: none;
-  }
-
-  /* SF-vibe pass §1: soft, directional, blue-gray fog behind the hero type —
-     fixed atmospheric tone rather than a design token, since it's a mood
-     wash, not a semantic color. Sized past its own box (inset:-15%) so the
-     blur doesn't cut a visible hard edge. */
-  .fog-veil {
-    position: absolute;
-    inset: -15%;
-    background:
-      radial-gradient(ellipse 55% 45% at 28% 18%, rgba(124, 147, 255, 0.16), transparent 62%),
-      radial-gradient(ellipse 65% 55% at 78% 75%, rgba(90, 110, 200, 0.12), transparent 68%);
-    filter: blur(48px);
-    pointer-events: none;
-  }
-
-  /* Coffered-vault background for --plaster-shade sections. Density is low
-     enough that body text laid directly over it stays fully legible. */
-  .coffer-texture {
-    background-image: var(--coffer-svg);
-    background-repeat: repeat;
-  }
-
-  /* Effect 8 (part 2): secondary/outline buttons fill via a left-to-right
-     wipe on hover, not a color fade. One shared class, applied on top of
-     each button's existing border/text/padding classes. */
-  .btn-wipe {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  /* Default (dark grounds): --paper outline + type, hover wipes --paper in
-     with --ink type. Under a light relief section it inverts. */
-  .btn-wipe::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: var(--color-paper);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
-  }
-  .btn-wipe:hover {
-    color: var(--color-ink);
-    border-color: var(--color-paper);
-  }
-  .btn-wipe:hover::before {
-    transform: scaleX(1);
-  }
-  [class*="bg-paper"] .btn-wipe::before {
-    background-color: var(--color-ink);
-  }
-  [class*="bg-paper"] .btn-wipe:hover {
-    color: var(--color-paper);
-    border-color: var(--color-ink);
-  }
-
-  @keyframes bob {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(1.5deg); }
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.9; }
-    50% { opacity: 0.25; }
-  }
-  .animate-bob { animation: bob 6s ease-in-out infinite; }
-  .animate-bob-slow { animation: bob 9s ease-in-out infinite; }
-  .animate-twinkle { animation: twinkle 3.5s ease-in-out infinite; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-bob, .animate-bob-slow, .animate-twinkle {
-      animation: none !important;
-    }
-  }
-
-  .ribbon-nav a tspan { fill: var(--color-ink); }
-  .ribbon-nav a:hover tspan { fill: var(--color-brand); }
-
-  /* Blue-ground sections (about-swap-and-blue-sections-prompt.md) — Prizes,
-     Sponsors, Workshops, Register, FAQ, Footer swap from the page's
-     off-white ground to a solid fill of the site's one blue accent, text
-     inverted to white. Implemented as a scoped custom-property override
-     rather than a parallel set of "-on-blue" utility classes: every
-     component already reads color through --color-ink/--color-paper/etc,
-     so redefining those on the section root recolors its whole subtree —
-     headings, body copy, dividers, line-art strokes, focus rings, even the
-     .btn-wipe hover fill — with no per-element edits. --color-ink-alt is
-     deliberately left untouched (still #fff), so a card/tile that needs to
-     stay a white chip on top of this (sponsor logos) works unmodified;
-     anything inside such a tile that needs its own dark text (Workshops'
-     video-card title) re-shadows --color-paper back to the site default
-     locally, right at that element. rgba(255,255,255,0.85) for the dim
-     token is tuned to clear 4.5:1 against the blue at body-copy sizes. */
-  .blue-ground {
-    --color-ink: var(--color-rubric);
-    --color-paper: #ffffff;
-    --color-paper-dim: rgba(255, 255, 255, 0.85);
-    --color-rubric-light: #ffffff;
-    --color-rule: rgba(255, 255, 255, 0.22);
-    --color-rule-dark: rgba(255, 255, 255, 0.22);
-    --color-rule-light: rgba(255, 255, 255, 0.22);
-    --color-line-dark: rgba(255, 255, 255, 0.4);
-  }
-
-  /* Same scoped-override technique as .blue-ground above, for the one
-     section (Frontispiece) that sits directly on the busiest, highest-
-     contrast particle photo on the site and asked for its type pushed all
-     the way to true black rather than the site's standard near-black
-     --color-paper (#17171a) — every component already reads color through
-     that token, so redefining it here recolors the whole subtree with no
-     per-element edits. */
-  .ink-max {
-    --color-paper: #000000;
-  }
-
-  /* Cohesive SF-scene pass: fog wisps (FogLines, graphics.tsx) drift very
-     slowly and loop — "clouds drifting" rendered as sparse linework instead
-     of a filled shape. Kept to a few px so it stays atmospheric, not a
-     dramatic pan; disabled outright under reduced motion rather than eased
-     down, matching every other looping animation on the site. */
-  @keyframes fog-drift {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(18px); }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .fog-drift { animation: fog-drift 48s ease-in-out infinite; }
-  }
-
-  /* Logo marquee (Judges section) — a continuously-scrolling row of
-     affiliation wordmarks, the "rotating" companies treatment. The track
-     renders its item list twice back to back; animating exactly -50% of
-     its own width loops seamlessly from the duplicate straight back into
-     the original with no visible seam or snap. Paused on hover so a name
-     can actually be read/clicked. Reduced-motion gets a static, non-
-     duplicated row instead (see judges-section.tsx), matching every other
-     looping animation on the site. */
-  @keyframes marquee {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(-50%, 0, 0); }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .marquee-track {
-      animation: marquee 22s linear infinite;
-      /* translate3d above already promotes this to its own compositor
-         layer; will-change reserves that layer up front instead of on the
-         animation's first frame, and backface-visibility avoids a Safari/
-         Chrome flicker some translate3d layers show on promotion. Without
-         these the 40-logo track (20 companies x 2 for the seamless loop)
-         was visibly janky — each frame was repainting the row instead of
-         just moving an already-composited layer. */
-      will-change: transform;
-      backface-visibility: hidden;
-    }
-    .marquee-track:hover {
-      animation-play-state: paused;
-    }
-  }
-  .marquee-mask {
-    /* Isolates the masked strip into its own paint/layout scope so the
-       moving layer beneath it doesn't force the browser to recompute
-       painting for content outside this box on every animation frame. */
-    contain: paint;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track { animation: none; }
+  .roll-track { animation: none; }
+  .roll-row { overflow-x: auto; }
+  .reticle .pulse, .cursor { animation: none; }
+  .plate-frame .dev, .lb-plate canvas, .trace .node, .term-panel { transition: none; animation: none; }
 }
-
-/* Hide Next.js error overlay portal */
-nextjs-portal { display: none !important; }

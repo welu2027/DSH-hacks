@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
-import { Instrument_Serif, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Instrument_Serif, Geist_Mono, Doto } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-
-/* f.inc-inspired type system (revamp brief): a big editorial display serif for
-   headlines, a clean grotesk for body/nav/UI, mono for numerals and metadata
-   only. These are the exact families f.inc's own production CSS ships
-   (confirmed from their live site), not stand-ins. */
+import Field from "@/components/world/Field";
+import Trace from "@/components/world/Trace";
+import Konami from "@/components/world/Konami";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -16,16 +14,18 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const instrumentSans = Instrument_Sans({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-instrument-sans",
+  weight: ["400", "500"],
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
+/* Countdown digits and schedule step numbers only. */
+const doto = Doto({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
+  weight: ["700"],
+  variable: "--font-doto",
   display: "swap",
 });
 
@@ -38,14 +38,21 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#000000",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrumentSerif.variable} ${instrumentSans.variable} ${plexMono.variable}`}>
-      <body className="antialiased font-body">
+    <html lang="en" className={`${instrumentSerif.variable} ${geistMono.variable} ${doto.variable}`}>
+      <body>
         <Script
           src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"
           strategy="afterInteractive"
@@ -56,7 +63,13 @@ export default function RootLayout({
           data-debug="true"
           data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
         />
+        {/* Background stock + the continuous world, mounted once. */}
+        <div className="stock-grid" aria-hidden="true" />
+        <Field />
+        <Trace />
+        <Konami />
         {children}
+        <div className="stock-grain" aria-hidden="true" />
       </body>
     </html>
   );
