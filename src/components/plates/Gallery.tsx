@@ -70,7 +70,7 @@ export default function Gallery() {
       ) : view === "wall" ? (
         <ul className="wall" style={{ margin: 0, padding: 0 }}>
           {shown.slice(0, limit).map((p, i) => (
-            <li key={p.no}>
+            <li key={p.no} style={{ "--k": i % 36 } as React.CSSProperties}>
               <Plate project={p} onOpen={() => open(shown, i)} />
             </li>
           ))}

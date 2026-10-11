@@ -67,7 +67,7 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
               <canvas ref={dith} width={320} height={400} style={{ opacity: original ? 0 : 1 }} />
               <canvas ref={dev} width={320} height={400} style={{ opacity: original ? 1 : 0 }} />
             </div>
-            <figcaption className="lb-fig">Fig. {p.no}. {p.t}, from its Devpost submission.</figcaption>
+            <figcaption className="lb-fig"><span className="k">Pl. {plateNo(p.no)} —</span> {p.t}, from its Devpost submission.</figcaption>
           </figure>
           <div>
             <div className="lb-top">

@@ -38,6 +38,7 @@ export default function Footer() {
           <Terminal />
         </div>
       </div>
+      <p className="foot-mark" aria-hidden="true">DSH Hacks</p>
     </footer>
   );
 }

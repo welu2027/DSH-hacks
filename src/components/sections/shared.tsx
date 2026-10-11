@@ -12,16 +12,18 @@ export const LINKS = {
 
 export const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-/* "No. 0X" in the left column, serif title with a ghost outline after it.
-   The title is a beat on the trace. */
-export function SectionHead({ no, title }: { no: string; title: string }) {
+/* Sheet label row (No. 0X ── NAME ──── meta) over the big serif title. The
+   title is a beat on the trace. */
+export function SectionHead({ no, title, name = title, meta }: { no: string; title: string; name?: string; meta?: string }) {
   return (
     <div className="sec-head">
-      <span className="sec-no">No. {no}</span>
-      <h2 className="sec-title" data-beat="">
-        {title}
-        <span className="ghost-dup" aria-hidden="true">{title}</span>
-      </h2>
+      <div className="sheet-label">
+        <span>No. {no}</span>
+        <i className="draw-x" />
+        <span>{name}</span>
+        {meta && <><i className="draw-x" /><span>{meta}</span></>}
+      </div>
+      <h2 className="sec-title" data-beat="">{title}</h2>
     </div>
   );
 }

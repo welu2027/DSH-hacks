@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ditherImage } from "@/components/plates/dither";
 import { LINKS, ext } from "./shared";
 
@@ -16,27 +16,38 @@ function BrandMark() {
       const ctx = c.getContext("2d", { willReadFrequently: true });
       if (!ctx) return;
       ctx.drawImage(im, 0, 0, c.width, c.height);
-      ctx.putImageData(ditherImage(ctx.getImageData(0, 0, c.width, c.height), [7, 11, 22], true), 0, 0);
+      ctx.putImageData(ditherImage(ctx.getImageData(0, 0, c.width, c.height), [5, 7, 11], true), 0, 0);
     };
     im.src = "/dsh-logo-circle.png";
   }, []);
   return <canvas ref={ref} width={60} height={60} aria-hidden="true" />;
 }
 
+const LINKS_NAV: [string, string][] = [["about", "About"], ["projects", "Projects"], ["schedule", "Schedule"], ["prizes", "Prizes"], ["faq", "FAQ"]];
+
 export default function Nav() {
+  // the section in the middle band of the viewport gets the tick
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    document.querySelectorAll("main section[id]").forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <header className="nav">
       <div className="wrap nav-in">
-        <a href="#hero" className="brand" aria-label="DSH Hacks, back to top">
+        <a href="#hero" className="brand" aria-label="DSH Hacks V2, back to top">
           <BrandMark />
-          DSH Hacks
+          DSH Hacks<span className="v2" aria-hidden="true">V2</span>
         </a>
         <nav className="nav-links" aria-label="Sections">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#schedule">Schedule</a>
-          <a href="#prizes">Prizes</a>
-          <a href="#faq">FAQ</a>
+          {LINKS_NAV.map(([id, t]) => (
+            <a key={id} href={`#${id}`} aria-current={active === id ? "true" : undefined}>{t}</a>
+          ))}
         </nav>
         <a className="btn solid sm" href={LINKS.devpost} {...ext}>Register</a>
       </div>

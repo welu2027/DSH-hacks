@@ -1,13 +1,14 @@
 /* Atkinson dither to two inks. Darken first (gamma 1.9) so plates read as
-   mostly film with cobalt highlights, then diffuse 6/8 of the error. */
+   mostly film with blue highlights, then diffuse 6/8 of the error. */
 export type RGB = [number, number, number];
-export const COBALT: RGB = [53, 87, 255];
-export const FILM: RGB = [7, 11, 22];
-export const PAPER: RGB = [243, 245, 250];
+export const COBALT: RGB = [47, 107, 255]; // --blue-500
+export const INK: RGB = [141, 176, 255]; // --blue-300, the dither ink
+export const FILM: RGB = [5, 7, 11]; // --ink-950
+export const PAPER: RGB = [242, 244, 248];
 
 /* Dither a luminance buffer (0-255, mutated) into `out`. off=null leaves dark
    pixels transparent. */
-export function ditherLum(L: Float32Array, w: number, h: number, out: Uint8ClampedArray, off: RGB | null, on: RGB = COBALT) {
+export function ditherLum(L: Float32Array, w: number, h: number, out: Uint8ClampedArray, off: RGB | null, on: RGB = INK) {
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       const i = y * w + x;

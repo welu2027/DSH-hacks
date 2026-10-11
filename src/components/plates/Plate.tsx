@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import type { Project } from "./projects";
 import { getPlate } from "./source";
 
-export const plateNo = (no: number) => String(no).padStart(2, "0");
+export const plateNo = (no: number) => String(no).padStart(3, "0");
 export const plateLabel = (p: Project) => `Project ${plateNo(p.no)}, ${p.t}. Open.`;
 
 /* Copy a cached source canvas into a mounted one. */
@@ -48,6 +48,7 @@ export function PlateFrame({ project, w = 128, h = 160 }: { project: Project; w?
 
   return (
     <div ref={frame} className="plate-frame">
+      <span className="plate-no" aria-hidden="true">Pl. {plateNo(project.no)}</span>
       {project.featured && <span className="plate-tag">Featured</span>}
       <canvas ref={dith} width={w} height={h} />
       <canvas ref={dev} className="dev" width={w} height={h} />
@@ -62,7 +63,7 @@ export default function Plate({ project, onOpen, caption = true }: { project: Pr
       {caption && (
         <div className="plate-cap" aria-hidden="true">
           <div className="t">{project.t}</div>
-          <div className="m">No. {plateNo(project.no)} / {project.track}</div>
+          <div className="m">Pl. {plateNo(project.no)} · {project.track}</div>
         </div>
       )}
     </button>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export const DEADLINE = new Date("2026-11-07T23:45:00-08:00").getTime();
+export const DEADLINE = new Date("2026-11-14T23:45:00-08:00").getTime();
 
 export function remaining(now = Date.now()) {
   const ms = Math.max(0, DEADLINE - now);
@@ -36,7 +36,8 @@ export default function Countdown() {
     <div className="countdown" role="timer" aria-live="off">
       {units.map(([k, label]) => (
         <div key={k}>
-          <div className="n">{r ? pad(r[k]) : "--"}</div>
+          {/* keyed on the value so each change replays the tick */}
+          <div className="n" key={r ? r[k] : "--"}>{r ? pad(r[k]) : "--"}</div>
           <div className="u">{label}</div>
         </div>
       ))}

@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { TitleBlock } from "@/components/blueprint/parts";
 import { LINKS, SectionHead, ext } from "./shared";
 import JudgesRoll from "./JudgesRoll";
 
@@ -70,9 +71,9 @@ const domain = (href: string) => new URL(href).hostname.replace(/^www\./, "");
 
 export default function People() {
   return (
-    <section id="people" className="section" data-swing="">
+    <section id="people" className="section sheet" data-swing="">
       <div className="wrap">
-        <SectionHead no="05" title="People" />
+        <SectionHead no="05" title="People" meta="sponsors, judges" />
         <div className="two-col">
           <div id="sponsors">
             <h3 className="people-h">Sponsors</h3>
@@ -120,18 +121,20 @@ export default function People() {
           <h3 className="people-h">Workshops</h3>
           <p className="sub">Recorded talks on AI, product thinking, data, and more.</p>
           <ul className="talks">
-            {TALKS.map((t) => (
+            {TALKS.map((t, i) => (
               <li key={t.id}>
                 <a href={`https://www.youtube.com/watch?v=${t.id}`} {...ext}>
+                  <span className="ws">WS-{String(i + 1).padStart(2, "0")}</span>
                   <span className="t">{t.topic}</span>
                   <span className="s">{t.speaker}</span>
-                  <span className="w">Watch</span>
+                  <span className="w">Watch ↗</span>
                 </a>
               </li>
             ))}
           </ul>
           <a className="btn" href={LINKS.youtube} {...ext}>Subscribe on YouTube</a>
         </div>
+        <TitleBlock no={5} title="People" />
       </div>
     </section>
   );
