@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460">
+  <defs>
+    <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E6E8FC"/>
+    </linearGradient>
+    <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A9ADF6"/>
+      <stop offset="1" stop-color="#E6E8FC" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="hedge" cx="35%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#E6E8FC"/>
+      <stop offset="1" stop-color="#6C72EF"/>
+    </radialGradient>
+    <g id="helix">
+      <path d="M0 0V-150" stroke="#0C1046" stroke-width="1.5"/>
+      <path d="M0 -10c-16-10-16-20 0-30s16-20 0-30-16-20 0-30 16-20 0-30" fill="none" stroke="#0A14E4" stroke-width="2"/>
+      <path d="M0 -10c16-10 16-20 0-30s-16-20 0-30 16-20 0-30-16-20 0-30" fill="none" stroke="#6C72EF" stroke-width="2"/>
+      <ellipse cx="-12" cy="-25" rx="9" ry="4.5" fill="#A9ADF6" stroke="#0C1046" stroke-width="1"/>
+      <ellipse cx="12" cy="-55" rx="9" ry="4.5" fill="#CED0FA" stroke="#0C1046" stroke-width="1"/>
+      <ellipse cx="-12" cy="-85" rx="9" ry="4.5" fill="#A9ADF6" stroke="#0C1046" stroke-width="1"/>
+      <ellipse cx="12" cy="-115" rx="9" ry="4.5" fill="#CED0FA" stroke="#0C1046" stroke-width="1"/>
+      <circle cx="0" cy="-156" r="8" fill="#FFFFFF" stroke="#0A14E4" stroke-width="2"/>
+      <circle cx="-2.5" cy="-158.5" r="2.5" fill="#CED0FA"/>
+    </g>
+    <g id="pot">
+      <path d="M-16 0h32l-4 22h-24z" fill="#FFFFFF" stroke="#0C1046" stroke-width="1.25"/>
+    </g>
+  </defs>
+
+  <!-- island underside -->
+  <path d="M40 392h1120c-40 30-140 48-260 56-60 10-160 12-300 12s-240-2-300-12c-120-8-220-26-260-56z" fill="url(#rock)"/>
+  <path d="M120 410c140 22 300 30 480 30s340-8 480-30" fill="none" stroke="#6C72EF" stroke-opacity=".4"/>
+
+  <!-- terraces -->
+  <rect x="30" y="368" width="1140" height="26" rx="13" fill="url(#deck)" stroke="#0C1046" stroke-width="1.25"/>
+  <rect x="90" y="344" width="1020" height="26" rx="13" fill="url(#deck)" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M110 382h980" stroke="#A9ADF6" stroke-dasharray="2 10" stroke-linecap="round" stroke-width="2"/>
+
+  <!-- left bed -->
+  <path d="M40 368c0-28 18-46 40-46 14 0 26 8 32 20 6-8 14-12 24-12 18 0 30 14 30 38z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+  <use href="#helix" x="70" y="330"/>
+  <use href="#helix" x="140" y="336" transform="translate(140 336) scale(.7) translate(-140 -336)"/>
+  <!-- pergola -->
+  <path d="M190 344v-110a40 40 0 0 1 80 0v110" fill="none" stroke="#0C1046" stroke-width="1.5"/>
+  <path d="M200 344v-108a30 30 0 0 1 60 0v108" fill="none" stroke="#A9ADF6" stroke-width="5"/>
+  <circle cx="230" cy="214" r="5" fill="#FFFFFF" stroke="#0A14E4" stroke-width="1.5"/>
+  <path d="M214 344c0-14 7-22 16-22s16 8 16 22z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+
+  <!-- right bed -->
+  <path d="M1034 368c0-24 14-40 34-40 12 0 22 6 28 16 6-10 16-16 28-16 22 0 36 18 36 40z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+  <use href="#helix" x="1130" y="330"/>
+  <use href="#helix" transform="translate(1060 336) scale(.62)"/>
+  <!-- small domed kiosk -->
+  <path d="M930 344v-56h80v56z" fill="url(#deck)" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M922 290a48 40 0 0 1 96 0z" fill="#CED0FA" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M942 278a28 26 0 0 1 22-22" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M952 344v-30a18 18 0 0 1 36 0v30z" fill="#FFFFFF" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M970 318v-12M964 312h12" stroke="#0A14E4" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- low hedges along the upper terrace, between the plaque columns -->
+  <path d="M300 344c0-12 8-20 18-20s18 8 18 20z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M520 344c0-10 7-16 15-16s15 6 15 16z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M650 344c0-10 7-16 15-16s15 6 15 16z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M864 344c0-12 8-20 18-20s18 8 18 20z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+  <use href="#pot" x="420" y="344" transform="translate(0 -22)"/>
+  <use href="#pot" x="780" y="344" transform="translate(0 -22)"/>
+  <g transform="translate(420 322) scale(.42)"><use href="#helix"/></g>
+  <g transform="translate(780 322) scale(.42)"><use href="#helix"/></g>
+</svg>

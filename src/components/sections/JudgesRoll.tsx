@@ -1,44 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { getPortrait } from "@/components/plates/source";
-import { blit } from "@/components/plates/Plate";
+import { useMemo, useState } from "react";
 import { JUDGES, type Judge } from "./judges";
 
 /* Judges as rows of pills drifting in alternating directions (after the
-   Hackathons @ Berkeley team band on calhacks.io). Portraits are dithered;
-   hovering a pill pauses its row and develops the photo. */
+   Hackathons @ Berkeley team band on calhacks.io). Hovering pauses a row. */
 type Filter = "All" | "V2" | "V1";
 const ROWS = 3;
 const SECONDS_PER_PILL = 6;
 
-function Avatar({ src, live }: { src: string | null; live: boolean }) {
-  const dith = useRef<HTMLCanvasElement>(null);
-  const dev = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    if (!src || !live) return;
-    let on = true;
-    getPortrait(src, 48).then((p) => {
-      if (!on) return;
-      blit(dith.current, p.dith, false);
-      blit(dev.current, p.dev, true);
-    });
-    return () => {
-      on = false;
-    };
-  }, [src, live]);
-  return (
-    <span className="av" aria-hidden="true">
-      <canvas ref={dith} width={48} height={48} />
-      <canvas ref={dev} className="dev" width={48} height={48} />
-    </span>
-  );
-}
+/* eslint-disable-next-line @next/next/no-img-element */
+const Avatar = ({ src }: { src: string | null }) =>
+  src ? <img className="av" src={src} alt="" loading="lazy" /> : <span className="av" aria-hidden="true" />;
 
-function Pill({ j, live }: { j: Judge; live: boolean }) {
+function Pill({ j }: { j: Judge }) {
   return (
-    <li className="pill">
-      <Avatar src={j.img} live={live} />
+    <li className="jpill">
+      <Avatar src={j.img} />
       <span className="pt">
         <span className="pn">{j.name}</span>
         {j.title && <span className="pr">{j.title}</span>}
@@ -49,23 +27,6 @@ function Pill({ j, live }: { j: Judge; live: boolean }) {
 
 export default function JudgesRoll() {
   const [filter, setFilter] = useState<Filter>("V2");
-  const [live, setLive] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
-
-  // draw portraits only once the band is near the viewport
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-    const io = new IntersectionObserver((es) => {
-      if (es.some((e) => e.isIntersecting)) {
-        setLive(true);
-        io.disconnect();
-      }
-    }, { rootMargin: "400px" });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   const counts = useMemo(() => {
     const unique = new Set(JUDGES.map((j) => j.name)).size;
     return { All: unique, V2: JUDGES.filter((j) => j.v === "V2").length, V1: JUDGES.filter((j) => j.v === "V1").length };
@@ -85,7 +46,7 @@ export default function JudgesRoll() {
   }, [filter]);
 
   return (
-    <div className="roll" ref={root}>
+    <div className="roll">
       <div className="roll-rows">
         {rows.map((row, r) => (
           <div
@@ -94,9 +55,9 @@ export default function JudgesRoll() {
             style={{ "--dur": `${Math.max(30, row.length * SECONDS_PER_PILL)}s` } as React.CSSProperties}
           >
             <div className="roll-track">
-              <ul>{row.map((j) => <Pill key={j.name} j={j} live={live} />)}</ul>
+              <ul>{row.map((j) => <Pill key={j.name} j={j} />)}</ul>
               {/* second copy closes the loop; hidden from assistive tech */}
-              <ul aria-hidden="true">{row.map((j) => <Pill key={j.name} j={j} live={live} />)}</ul>
+              <ul aria-hidden="true">{row.map((j) => <Pill key={j.name} j={j} />)}</ul>
             </div>
           </div>
         ))}

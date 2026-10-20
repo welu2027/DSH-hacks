@@ -1,31 +1,20 @@
-import { TitleBlock } from "@/components/blueprint/parts";
-import Scene from "@/components/scene/Scene";
+import DitherField from "@/components/art/DitherField";
 import { LINKS, ext } from "./shared";
 
 export default function Register() {
   return (
-    <section id="register" className="section sheet cyan" data-swing="">
-      <div className="wrap">
-        <div className="reg-grid">
-          <div>
-            <h2 className="reg-h" data-beat="">Your project goes here <em>next.</em></h2>
-            <p className="reg-body">
-              Register on Devpost, find a team in the Discord, and submit by November 14. Compete for
-              prizes or just come for the workshops; either way you&apos;re in.
-            </p>
-            <div className="btn-row">
-              <a className="btn solid" href={LINKS.devpost} {...ext}>Register now</a>
-              <a className="btn" href={LINKS.discord} {...ext}>Join the Discord</a>
-            </div>
-          </div>
-          {/* the next plate on the wall, still blank */}
-          <div className="empty-plate" aria-hidden="true">
-            <div className="ep-frame"><Scene kind="sapling" tone="cyan" labels={false} label="" /></div>
-            <div className="dim"><span>4 : 5</span></div>
-            <p className="ep-call">Your project · Pl. 284</p>
-          </div>
+    <section id="register" className="section register" aria-labelledby="reg-h">
+      <div className="art" aria-hidden="true"><DitherField className="reg-scan" seed={9} w={200} h={90} /></div>
+      <div className="wrap reg-in">
+        <h2 id="reg-h" className="reg-h rv">Your project goes here <em>next.</em></h2>
+        <p className="reg-body rv">
+          Register on Devpost, find a team in the Discord, and submit by November 14. Compete for
+          prizes or just come for the workshops; either way you&apos;re in.
+        </p>
+        <div className="btn-row center rv">
+          <a className="btn solid lg" href={LINKS.devpost} {...ext}>Register now</a>
+          <a className="btn lg" href={LINKS.discord} {...ext}>Join the Discord</a>
         </div>
-        <TitleBlock no={7} title="Register" />
       </div>
     </section>
   );

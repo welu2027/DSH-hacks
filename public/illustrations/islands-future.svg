@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CED0FA"/>
+      <stop offset="1" stop-color="#E6E8FC" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- V3: nearest, a tower and a dome, still unclear -->
+  <g opacity=".85">
+    <path d="M20 250h220c-12 22-40 34-70 40-14 16-30 22-40 22s-26-6-40-22c-30-6-58-18-70-40z" fill="url(#rock)"/>
+    <rect x="16" y="240" width="228" height="14" rx="7" fill="#F3F3FE" stroke="#6C72EF" stroke-opacity=".6"/>
+    <path d="M70 240v-90a24 24 0 0 1 48 0v90z" fill="#E6E8FC" stroke="#6C72EF" stroke-opacity=".6"/>
+    <path d="M94 126V96" stroke="#6C72EF" stroke-opacity=".6"/>
+    <circle cx="94" cy="92" r="4" fill="#F3F3FE" stroke="#6C72EF" stroke-opacity=".6"/>
+    <path d="M130 240v-34h80v34z" fill="#E6E8FC" stroke="#6C72EF" stroke-opacity=".6"/>
+    <path d="M128 206a42 36 0 0 1 84 0z" fill="#CED0FA" stroke="#6C72EF" stroke-opacity=".6"/>
+  </g>
+  <!-- V4: further, smaller -->
+  <g opacity=".55" transform="translate(300 60) scale(.62)">
+    <path d="M20 250h220c-12 22-40 34-70 40-14 16-30 22-40 22s-26-6-40-22c-30-6-58-18-70-40z" fill="url(#rock)"/>
+    <rect x="16" y="240" width="228" height="14" rx="7" fill="#F3F3FE" stroke="#A9ADF6"/>
+    <path d="M60 240v-60h50v60zM120 240v-110a28 28 0 0 1 56 0v110zM186 240v-40h34v40z" fill="#E6E8FC" stroke="#A9ADF6"/>
+  </g>
+  <!-- and beyond -->
+  <g opacity=".35" transform="translate(500 30) scale(.4)">
+    <path d="M20 250h220c-12 22-40 34-70 40-14 16-30 22-40 22s-26-6-40-22c-30-6-58-18-70-40z" fill="url(#rock)"/>
+    <rect x="16" y="240" width="228" height="14" rx="7" fill="#F3F3FE" stroke="#A9ADF6"/>
+    <path d="M90 240v-80a40 40 0 0 1 80 0v80z" fill="#E6E8FC" stroke="#A9ADF6"/>
+  </g>
+</svg>

@@ -1,8 +1,11 @@
 import Countdown from "@/components/Countdown";
-import { Dim, FigCaption, TitleBlock } from "@/components/blueprint/parts";
+import { Piece } from "@/components/art/Art";
+import DitherField from "@/components/art/DitherField";
+import Vitals from "@/components/art/Vitals";
+import Note from "@/components/art/Note";
 import { LINKS, ext } from "./shared";
 
-const BOARD: [string, string][] = [
+const FACTS: [string, string][] = [
   ["Theme", "AI × Healthcare"],
   ["Format", "Online, global"],
   ["Who", "Students, ages 13+"],
@@ -11,51 +14,55 @@ const BOARD: [string, string][] = [
   ["Deadline", "Nov 14, 11:45pm PST"],
 ];
 
+const ECG = "M0 60H300l14-18 14 18h24l10-46 14 84 10-38h40l16-14 16 14H760l14-18 14 18h24l10-46 14 84 10-38h40l16-14 16 14H1440";
+
+/* Two columns: the pitch on the left, one composed scene on the right (a
+   cell over a live scan, the care robot on its island, two read-outs). */
 export default function Hero() {
   return (
-    <section id="hero" className="hero sheet">
+    <section id="hero" className="hero" aria-labelledby="hero-h">
       <div className="wrap">
         <div className="hero-grid">
-          <div>
-            <p className="hero-kicker">DeltaForge Hacks × NXT Horizon × STEMise present V2</p>
-            <h1 className="h1" data-beat="center">
-              Build AI that makes healthcare <em>reach further.</em>
+          <div className="hero-in">
+            <p className="eyebrow">DeltaForge Hacks × NXT Horizon × STEMise present V2</p>
+            <h1 id="hero-h" className="wordmark">
+              DSH <em>Hacks</em><sup className="badge">V2</sup>
             </h1>
-            <Dim label="AI × Healthcare" className="hero-dim" />
-            <p className="lead">
-              A free, online hackathon for students 13 and up, anywhere in the world. Pick a real
-              healthcare problem and ship something that helps.
-            </p>
-            <div className="btn-row">
-              <a className="btn solid" href={LINKS.devpost} {...ext}>Register on Devpost</a>
-              <a className="btn" href={LINKS.discord} {...ext}>Join the Discord</a>
-              <a className="btn" href={LINKS.flyer} {...ext}>Flyer (PDF)</a>
+            <p className="tagline">Build AI that makes healthcare <em>reach further.</em></p>
+            <p className="info">AI × Healthcare · Online, global · Students 13+ · Free</p>
+            <div className="hero-cta">
+              <a className="btn solid lg" href={LINKS.devpost} {...ext}>Register on Devpost</a>
+              <Note arrow="left" className="hero-note" tilt={-6}>it&apos;s free</Note>
             </div>
+            <div className="hero-links">
+              <a className="tlink" href={LINKS.discord} {...ext}>Join the Discord</a>
+              <a className="tlink" href={LINKS.flyer} {...ext}>Flyer (PDF)</a>
+            </div>
+            <Countdown />
           </div>
-          <figure className="hero-fig">
-            {/* the garden canvas draws the grove's elevation into this slot, then
-                swings it into 3D */}
-            <div className="world-slot" role="img" aria-label="A grove of lattice supertrees drawn as a blueprint elevation that turns into a 3D garden: roots for data, trunks for models, canopies for care." />
-            <FigCaption no={1} title="The grove: data at the roots, models in the trunk, care at the canopy" />
-          </figure>
+
+          <div className="hero-scene" aria-hidden="true">
+            <DitherField className="hero-scan" seed={3} />
+            <Piece src="cell" w={240} h={240} className="hero-cell" depth="fixed" float={9} />
+            <Piece src="hero-city" w={720} h={520} className="hero-city" depth="fixed" float={11} />
+            <Piece src="robot-helper" w={260} h={330} className="hero-robot" depth="fixed" float={7} />
+            <Vitals />
+          </div>
         </div>
 
-        <div className="hero-spec">
-          <dl className="spec-strip">
-            {BOARD.map(([k, v]) => (
-              <div key={k}>
-                <dt>{k}</dt>
-                <dd>{v}</dd>
-              </div>
-            ))}
-          </dl>
-          <div className="readout">
-            <Countdown />
-            <p className="label">T-minus to submission close · Nov 14 23:45 PST</p>
-          </div>
-        </div>
-        <TitleBlock no={0} title="Cover" />
+        <dl className="facts">
+          {FACTS.map(([k, v]) => (
+            <div key={k}>
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
+      <svg className="hero-ecg" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d={ECG} vectorEffect="non-scaling-stroke" />
+        <path className="run" d={ECG} pathLength={1000} vectorEffect="non-scaling-stroke" />
+      </svg>
     </section>
   );
 }

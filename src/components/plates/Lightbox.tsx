@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { Project } from "./projects";
-import { getPlate } from "./source";
-import { blit, plateNo } from "./Plate";
+import { PlateFrame, plateNo } from "./Plate";
 
 type Props = {
   view: { list: Project[]; index: number } | null;
@@ -13,9 +12,6 @@ type Props = {
 
 export default function Lightbox({ view, onIndex, onClose }: Props) {
   const dlg = useRef<HTMLDialogElement>(null);
-  const dith = useRef<HTMLCanvasElement>(null);
-  const dev = useRef<HTMLCanvasElement>(null);
-  const [original, setOriginal] = useState(false);
   const p = view ? view.list[view.index] : null;
 
   useEffect(() => {
@@ -24,20 +20,6 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
     if (view && !d.open) d.showModal();
     if (!view && d.open) d.close();
   }, [view]);
-
-  useEffect(() => {
-    if (!p) return;
-    setOriginal(false);
-    let live = true;
-    getPlate(p, 320, 400).then((src) => {
-      if (!live) return;
-      blit(dith.current, src.dith, false);
-      blit(dev.current, src.dev, src.real);
-    });
-    return () => {
-      live = false;
-    };
-  }, [p]);
 
   const step = (dir: number) => {
     if (!view) return;
@@ -48,7 +30,6 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
     else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
-    else if (e.key === " ") { e.preventDefault(); setOriginal((o) => !o); }
   };
 
   return (
@@ -63,11 +44,7 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
       {p && view && (
         <div className="lb-grid">
           <figure style={{ margin: 0 }}>
-            <div className="lb-plate">
-              <canvas ref={dith} width={320} height={400} style={{ opacity: original ? 0 : 1 }} />
-              <canvas ref={dev} width={320} height={400} style={{ opacity: original ? 1 : 0 }} />
-            </div>
-            <figcaption className="lb-fig"><span className="k">Pl. {plateNo(p.no)} —</span> {p.t}, from its Devpost submission.</figcaption>
+            <div className="lb-plate"><PlateFrame key={p.no} project={p} eager /></div>
           </figure>
           <div>
             <div className="lb-top">
@@ -83,9 +60,6 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
               <div><dt>Result</dt><dd>{p.winner ? "Winner" : "Submitted"}</dd></div>
             </dl>
             <div className="btn-row">
-              <button type="button" className="btn sm" onClick={() => setOriginal((o) => !o)}>
-                {original ? "Show dithered" : "Show original"}
-              </button>
               <button type="button" className="btn sm" onClick={() => step(-1)}>Prev</button>
               <button type="button" className="btn sm" onClick={() => step(1)}>Next</button>
               <a className="btn sm solid" href={p.url} target="_blank" rel="noopener noreferrer">View on Devpost</a>

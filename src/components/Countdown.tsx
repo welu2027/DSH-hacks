@@ -23,24 +23,30 @@ export function countdownString(now = Date.now()) {
 }
 
 export default function Countdown() {
-  const [r, setR] = useState<ReturnType<typeof remaining> | null>(null);
+  const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
-    setR(remaining());
-    const id = window.setInterval(() => setR(remaining()), 1000);
+    setNow(Date.now());
+    const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
+  if (now !== null && now >= DEADLINE) {
+    return <p className="cd-closed">Submissions closed — winners announced Nov 23</p>;
+  }
+  const r = now === null ? null : remaining(now);
   const units: [keyof ReturnType<typeof remaining>, string][] = [
-    ["days", "days"], ["hours", "hours"], ["minutes", "minutes"], ["seconds", "seconds"],
+    ["days", "Days"], ["hours", "Hours"], ["minutes", "Min"], ["seconds", "Sec"],
   ];
   return (
-    <div className="countdown" role="timer" aria-live="off">
-      {units.map(([k, label]) => (
-        <div key={k}>
-          {/* keyed on the value so each change replays the tick */}
-          <div className="n" key={r ? r[k] : "--"}>{r ? pad(r[k]) : "--"}</div>
-          <div className="u">{label}</div>
-        </div>
-      ))}
+    <div className="cd">
+      <div className="countdown" role="timer" aria-live="off">
+        {units.map(([k, label]) => (
+          <div key={k}>
+            <div className="n">{r ? pad(r[k]) : "--"}</div>
+            <div className="u">{label}</div>
+          </div>
+        ))}
+      </div>
+      <p className="cd-cap">until submissions close</p>
     </div>
   );
 }

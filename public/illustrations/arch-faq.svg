@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420">
+  <defs>
+    <linearGradient id="face" x1="0" x2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CED0FA"/>
+    </linearGradient>
+    <linearGradient id="arch" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F3F3FE"/>
+      <stop offset="1" stop-color="#A9ADF6"/>
+    </linearGradient>
+    <radialGradient id="hedge" cx="35%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#E6E8FC"/>
+      <stop offset="1" stop-color="#6C72EF"/>
+    </radialGradient>
+    <radialGradient id="inner" cx="50%" cy="70%" r="60%">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F3F3FE"/>
+    </radialGradient>
+  </defs>
+  <!-- the arch: outer ring minus the opening -->
+  <path d="M60 410V250a300 220 0 0 1 600 0v160h-88V258a212 150 0 0 0-424 0v152z" fill="url(#arch)" stroke="#0C1046" stroke-width="1.5"/>
+  <path d="M148 410V258a212 150 0 0 1 424 0v152" fill="url(#inner)" fill-opacity=".85"/>
+  <path d="M148 410V258a212 150 0 0 1 424 0v152" fill="none" stroke="#0C1046" stroke-width="1.5"/>
+  <!-- inner moulding + light -->
+  <path d="M104 410V254a256 186 0 0 1 512 0v156" fill="none" stroke="#6C72EF" stroke-opacity=".55" stroke-width="1.25" stroke-dasharray="1 9" stroke-linecap="round"/>
+  <path d="M74 300a286 206 0 0 1 120-190" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  <!-- keystone -->
+  <path d="M340 30h40l-6 44h-28z" fill="#FFFFFF" stroke="#0C1046" stroke-width="1.5"/>
+  <path d="M360 40v22M349 51h22" stroke="#0A14E4" stroke-width="3" stroke-linecap="round"/>
+  <!-- lamp -->
+  <path d="M360 108v34" stroke="#0C1046" stroke-width="1.25"/>
+  <circle cx="360" cy="150" r="9" fill="#FFFFFF" stroke="#0A14E4" stroke-width="2"/>
+  <!-- column capitals -->
+  <rect x="50" y="250" width="108" height="12" rx="6" fill="#FFFFFF" stroke="#0C1046" stroke-width="1.25"/>
+  <rect x="562" y="250" width="108" height="12" rx="6" fill="#FFFFFF" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M84 280v120M124 280v120M596 280v120M636 280v120" stroke="#A9ADF6" stroke-width="6" stroke-linecap="round"/>
+  <!-- hedges at the feet -->
+  <path d="M20 410c0-26 16-40 34-40s32 12 34 28c4-6 10-10 18-10 14 0 24 10 24 22z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+  <path d="M570 410c0-14 10-22 22-22 10 0 18 6 20 14 4-12 16-24 32-24 20 0 36 14 36 32z" fill="url(#hedge)" stroke="#0C1046" stroke-width="1.25"/>
+</svg>

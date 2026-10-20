@@ -12,18 +12,20 @@ export const LINKS = {
 
 export const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-/* Sheet label row (No. 0X ── NAME ──── meta) over the big serif title. The
-   title is a beat on the trace. */
-export function SectionHead({ no, title, name = title, meta }: { no: string; title: string; name?: string; meta?: string }) {
+/* Section heading. `align` varies the composition per section so the page
+   doesn't repeat one template: centered, left, right, or split (title left,
+   intro right). */
+type Align = "center" | "left" | "right" | "split";
+export function SectionHead({ id, eyebrow, children, sub, align = "center" }: {
+  id: string; eyebrow: string; children: React.ReactNode; sub?: React.ReactNode; align?: Align;
+}) {
   return (
-    <div className="sec-head">
-      <div className="sheet-label">
-        <span>No. {no}</span>
-        <i className="draw-x" />
-        <span>{name}</span>
-        {meta && <><i className="draw-x" /><span>{meta}</span></>}
+    <header className={`sec-head ${align}`}>
+      <div>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 id={id} className="sec-title">{children}</h2>
       </div>
-      <h2 className="sec-title" data-beat="">{title}</h2>
-    </div>
+      {sub && <p className="sec-sub">{sub}</p>}
+    </header>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { countdownString } from "./Countdown";
-import { emitBeat, emitOpenPlate } from "./world/events";
+import { emitOpenPlate } from "./world/events";
 import { projects } from "./plates/projects";
 
 /* The footer prompt is a real one-line shell. Nothing here collects data. */
@@ -29,7 +29,8 @@ function run(input: string): Line[] | "clear" | "exit" {
     case "deadline":
       return [{ kind: "out", text: countdownString() }];
     case "beat":
-      emitBeat();
+      document.documentElement.classList.add("beat");
+      setTimeout(() => document.documentElement.classList.remove("beat"), 1300);
       return [{ kind: "out", text: "♥" }];
     case "sudo":
       if (args[0] === "submit") return [{ kind: "out", text: "nice try. https://dsh-hacks-v2.devpost.com/" }];
