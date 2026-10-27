@@ -33,9 +33,10 @@ export default function Gallery() {
   const shown = useMemo(() => {
     const f = FILTERS.find((x) => x.id === filter)!;
     const needle = q.trim().toLowerCase();
-    return projects.filter(
-      (p) => f.test(p) && (!needle || `${p.t} ${p.d} ${p.by} ${p.track}`.toLowerCase().includes(needle)),
-    );
+    // projects without an image go last, so the first screenful is all pictures
+    return projects
+      .filter((p) => f.test(p) && (!needle || `${p.t} ${p.d} ${p.by} ${p.track}`.toLowerCase().includes(needle)))
+      .sort((a, b) => Number(!a.img) - Number(!b.img));
   }, [filter, q]);
 
   return (
