@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { IconPlus } from "@tabler/icons-react";
-import { Piece } from "@/components/art/Art";
 import { SectionHead } from "./shared";
 
 const A: Record<string, string> = {
@@ -47,18 +46,11 @@ function Item({ q, id }: { q: string; id: string }) {
 export default function Faq() {
   return (
     <section id="faq" className="section faq" aria-labelledby="faq-h">
-      <div className="art" aria-hidden="true">
-        <Piece src="device-monitor" w={280} h={320} className="faq-monitor hide-sm" depth="mid" float={9} />
-        <Piece src="sensor-patch" w={220} h={220} className="faq-patch hide-sm" depth="far" float={10} />
-      </div>
       <div className="wrap">
-        <div className="faq-gate">
-          <Piece src="arch-faq" w={720} h={420} className="faq-arch" depth="fixed" />
-          <SectionHead id="faq-h" eyebrow="FAQ">Questions, <em>answered</em></SectionHead>
-        </div>
+        <SectionHead id="faq-h" no="10" eyebrow="FAQ" meta={["12 questions", "4 groups"]}>Questions, <em>answered.</em></SectionHead>
         <div className="faq-groups">
           {GROUPS.map(([g, qs], gi) => (
-            <div key={g} className="card faq-group rv">
+            <div key={g} className="faq-group rv">
               <h3>{g}</h3>
               {qs.map((q, qi) => <Item key={q} q={q} id={`faq-${gi}-${qi}`} />)}
             </div>

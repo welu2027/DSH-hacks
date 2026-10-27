@@ -14,10 +14,7 @@ export function PlateFrame({ project, eager = false }: { project: Project; eager
       {project.img ? (
         <img src={project.img} alt="" loading={eager ? "eager" : "lazy"} decoding="async" />
       ) : (
-        <span className="plate-none">
-          <img src="/illustrations/cell.svg" alt="" width={64} height={64} />
-          <span>No image on Devpost</span>
-        </span>
+        <span className="plate-none">No image on Devpost</span>
       )}
     </div>
   );

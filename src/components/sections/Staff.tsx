@@ -1,21 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { Piece } from "@/components/art/Art";
-import { SectionHead, ext } from "./shared";
+import { ext } from "./shared";
 import { STAFF } from "./team";
 
 const initials = (name: string) => name.split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
 
 /* The organizing team, from team.ts. Empty list → placeholder slots. */
-export default function Staff() {
+export default function Team() {
   return (
-    <section id="staff" className="section staff" aria-labelledby="staff-h">
-      <div className="art" aria-hidden="true">
-        <Piece src="robot-helper" w={260} h={330} className="staff-robot" depth="mid" float={7} />
-      </div>
-      <div className="wrap">
-        <SectionHead id="staff-h" eyebrow="Staff" align="left" sub="The students behind DSH Hacks, from DeltaForge Hacks, NXT Horizon, and STEMise.">
-          Meet the <em>team</em>
-        </SectionHead>
+    <div id="team" className="team">
+      <h3 className="band-k">Meet the team</h3>
+      <p className="sec-note left">The students behind DSH Hacks, from DeltaForge Hacks, NXT Horizon, and STEMise.</p>
         {STAFF.length ? (
           <ul className="staff-grid">
             {STAFF.map((s) => {
@@ -47,7 +41,6 @@ export default function Staff() {
             ))}
           </ul>
         )}
-      </div>
-    </section>
+    </div>
   );
 }

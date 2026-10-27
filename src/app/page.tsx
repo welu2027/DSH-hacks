@@ -1,21 +1,22 @@
 import PlatesProvider from "@/components/plates/PlatesProvider";
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
-import Ticker from "@/components/sections/Ticker";
 import About from "@/components/sections/About";
+import Journey from "@/components/sections/Journey";
+import V2 from "@/components/sections/V2";
 import Plates from "@/components/sections/Plates";
 import Sponsors from "@/components/sections/Sponsors";
 import Prizes from "@/components/sections/Prizes";
 import Schedule from "@/components/sections/Schedule";
 import People from "@/components/sections/People";
-import Staff from "@/components/sections/Staff";
+import Workshops from "@/components/sections/Workshops";
 import Faq from "@/components/sections/Faq";
 import ComingSoon from "@/components/sections/ComingSoon";
 import Register from "@/components/sections/Register";
 import Footer from "@/components/sections/Footer";
 
-/* One continuous scene: sections are transparent over a single page-long
-   wash, and their art layers bleed across section edges. */
+/* One descent: summit (hero) → valley mist (sections) → valley floor
+   (final CTA and footer). */
 export default function HomePage() {
   return (
     <PlatesProvider>
@@ -23,14 +24,15 @@ export default function HomePage() {
         <Nav />
         <main>
           <Hero />
-          <Ticker />
           <About />
+          <Journey />
+          <V2 />
           <Plates />
-          <Sponsors />
           <Prizes />
           <Schedule />
+          <Workshops />
+          <Sponsors />
           <People />
-          <Staff />
           <Faq />
           <ComingSoon />
           <Register />

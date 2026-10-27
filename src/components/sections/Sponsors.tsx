@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { Burst, Piece, Ribbon } from "@/components/art/Art";
 import { SectionHead, ext } from "./shared";
 
 /* From the sponsor tiles on dsh-hacks-v2.devpost.com and
@@ -20,7 +19,7 @@ const V2: Sponsor[] = [
   { name: "Mobbin", logo: "mobbin", href: "https://mobbin.com/", dark: true },
   { name: "RISE Research", logo: "riseresearch", href: "https://riseglobaleducation.com/" },
 ];
-const V1: Sponsor[] = [
+export const V1_SPONSORS: Sponsor[] = [
   { name: "Hudson River Trading", logo: "hrt", href: "https://www.hudsonrivertrading.com/" },
   { name: "Ideavo", logo: "ideavo", href: "https://ideavo.ai/" },
   { name: "LLM.API", logo: "llmapi", href: "https://llmapi.ai/" },
@@ -33,7 +32,7 @@ const V1: Sponsor[] = [
   { name: "Iteration Machine", logo: "iterationmachine", href: "https://www.iterationmachine.com/" },
 ];
 
-function Plaques({ list, small }: { list: Sponsor[]; small?: boolean }) {
+export function Plaques({ list, small }: { list: Sponsor[]; small?: boolean }) {
   return (
     <ul className={small ? "plaques small" : "plaques"}>
       {list.map((s) => (
@@ -50,23 +49,11 @@ function Plaques({ list, small }: { list: Sponsor[]; small?: boolean }) {
 export default function Sponsors() {
   return (
     <section id="sponsors" className="section sponsors" aria-labelledby="sponsors-h">
-      <div className="art" aria-hidden="true">
-        <Ribbon kind="orbit" className="sponsors-ribbon" />
-        <Piece src="capsules" w={280} h={200} className="sponsors-pills hide-sm" depth="far" float={9} />
-      </div>
       <div className="wrap">
-        <SectionHead id="sponsors-h" eyebrow="Sponsors">Our <em>sponsors</em></SectionHead>
-        <div className="garden">
-          <Burst className="garden-burst" />
-          <Piece src="garden-sponsors" w={1200} h={460} className="garden-art" depth="near" />
-          <div className="garden-in">
-            <p className="garden-k">V2</p>
-            <Plaques list={V2} />
-            <p className="garden-k muted">V1 sponsors</p>
-            <Plaques list={V1} small />
-          </div>
-        </div>
-        <p className="sec-note">
+        <SectionHead id="sponsors-h" no="08" eyebrow="Sponsors" meta={["V2 · AI × Healthcare", "12 sponsors"]}>Backed by people who <em>build.</em></SectionHead>
+        <Plaques list={V2} />
+        <p className="sec-note">{/* TODO: Ryan review — add a sponsorship contact link if there is one */}
+          
           Interested in sponsoring? Reach us on Discord or message the hackathon manager on Devpost.
         </p>
       </div>

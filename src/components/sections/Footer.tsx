@@ -12,7 +12,7 @@ const SOCIAL = [
 
 export default function Footer() {
   return (
-    <footer className="site-footer" data-in="">
+    <footer className="site-footer">
       <div className="wrap">
         <div className="foot-grid">
           <div>
@@ -49,17 +49,10 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot-bar">
-          <span>© 2026 DSH Hacks · Online, global</span>
+          <span>© 2026 DSH Hacks · Online, global · ALT 0 M</span>
           <span className="made">Made with <span aria-label="love">♥</span> by students, for everyone, everywhere.</span>
           <Terminal />
         </div>
-      </div>
-      <div className="skyline" aria-hidden="true">
-        <svg className="plane" viewBox="0 0 48 32">
-          <path d="M2 16L46 2 30 30 22 19z" fill="#FFFFFF" stroke="#0C1046" strokeWidth="1.25" strokeLinejoin="round" />
-          <path d="M22 19L46 2 18 21z" fill="#CED0FA" stroke="#0C1046" strokeWidth="1.25" strokeLinejoin="round" />
-        </svg>
-        <img src="/illustrations/skyline-city.svg" width={1600} height={360} alt="" loading="lazy" />
       </div>
     </footer>
   );
