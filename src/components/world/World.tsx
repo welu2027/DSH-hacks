@@ -47,7 +47,7 @@ export default function World() {
     const LAMP = rgb("--lamp");
     const mix = (a: number[], b: number[], k: number) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
 
-    let W = 0, H = 0, dots: Dot[] = [], frame = 0, g = 0;
+    let W = 0, H = 0, dots: Dot[] = [], frame = 0, g = 0, push = 0, heroH = 1;
     const mouse = { x: -1e4, y: -1e4 };
 
     // layer images are max(100vw, SPAN × vh) wide, bottom-aligned, centred
@@ -72,6 +72,18 @@ export default function World() {
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       W = window.innerWidth;
       H = window.innerHeight;
+      // keep the hero copy clear: lower the range until its highest peak
+      // sits just under the copy, then let it rise as the hero scrolls away
+      const copy = document.querySelector(".hero-copy")?.getBoundingClientRect();
+      const hero = document.querySelector<HTMLElement>(".hero");
+      heroH = hero?.offsetHeight || H;
+      // the highest point of the range that's actually on screen
+      const { ih } = size();
+      const [v0, v1] = span();
+      const last = terrain.skyline.length - 1;
+      const top = Math.min(...terrain.skyline.slice(Math.max(0, Math.floor(v0 * last)), Math.min(last, Math.ceil(v1 * last)) + 1));
+      const peak = H - ih + top * ih + OFFSET * H;
+      push = copy ? Math.min(H * 0.5, Math.max(0, copy.bottom + window.scrollY + 28 - peak)) : 0;
       cv.width = W * dpr;
       cv.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -96,7 +108,8 @@ export default function World() {
       const dusk = ease(clamp((g - 0.55) / 0.4));
       el.style.setProperty("--dusk", dusk.toFixed(3));
       document.documentElement.style.setProperty("--g", g.toFixed(4));
-      const lift = (i: number) => (reduce ? OFFSET : OFFSET - g * RISE[i]) * H;
+      const away = reduce ? 0 : ease(clamp(window.scrollY / heroH));
+      const lift = (i: number) => (reduce ? OFFSET : OFFSET - g * RISE[i]) * H + push * (1 - away);
       layers.forEach((l, i) => { l.style.transform = `translate3d(0, ${lift(i).toFixed(1)}px, 0)`; });
       const townLift = lift(3);
 

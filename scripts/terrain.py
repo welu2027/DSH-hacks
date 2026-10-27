@@ -18,7 +18,9 @@ import os
 import numpy as np
 from PIL import Image, ImageFilter
 
-W, H = 2400, 1100           # output frame
+OUT_W, OUT_H = 2400, 1100   # output frame
+SS = 2                       # render at 2× and scale down: smooth ridgelines
+W, H = OUT_W * SS, OUT_H * SS
 HORIZON = 0.56 * H          # horizon row
 F = W * 0.95                # focal length in px
 CAM_H = 0.075               # camera height
@@ -32,18 +34,19 @@ BANDS = [(ZMIN, 0.2), (0.2, 0.42), (0.42, 0.8), (0.8, ZMAX)]
 rng = np.random.default_rng(SEED)
 
 
-def upsample(grid, n):
-    return np.asarray(Image.fromarray(grid.astype(np.float32), "F").resize((n, n), Image.BICUBIC))
+def upsample(grid, n, wide=1):
+    return np.asarray(Image.fromarray(grid.astype(np.float32), "F").resize((n * wide, n), Image.BICUBIC))
 
 
-def ridged(n, octaves=9, base=3):
-    """Ridged multifractal: sharp crests that get rougher where they're high."""
-    h = np.zeros((n, n), np.float32)
-    weight = np.ones((n, n), np.float32)
+def ridged(n, octaves=9, base=3, wide=1):
+    """Ridged multifractal: sharp crests that get rougher where they're high.
+    `wide` makes the map that many tiles across."""
+    h = np.zeros((n, n * wide), np.float32)
+    weight = np.ones((n, n * wide), np.float32)
     amp = 1.0
     for o in range(octaves):
-        g = rng.random((base * 2 ** o + 1,) * 2) * 2 - 1
-        r = 1 - np.abs(upsample(g, n))
+        g = rng.random((base * 2 ** o + 1, base * 2 ** o * wide + 1)) * 2 - 1
+        r = 1 - np.abs(upsample(g, n, wide))
         r = r * r * weight
         weight = np.clip(r * 2.0, 0, 1)
         h += r * amp
@@ -52,12 +55,12 @@ def ridged(n, octaves=9, base=3):
 
 
 def bilinear(a, x, z):
-    """Sample a (z rows, x cols) at fractional coords in 0..1 (x wraps)."""
-    n = a.shape[0]
-    fx = (x % 1.0) * (n - 1)
-    fz = np.clip(z, 0, 1) * (n - 1)
+    """Sample a (z rows, x cols) at fractional coords in 0..1."""
+    nz, nx = a.shape
+    fx = np.clip(x, 0, 1) * (nx - 1)
+    fz = np.clip(z, 0, 1) * (nz - 1)
     x0 = np.floor(fx).astype(int); z0 = np.floor(fz).astype(int)
-    x1 = np.minimum(x0 + 1, n - 1); z1 = np.minimum(z0 + 1, n - 1)
+    x1 = np.minimum(x0 + 1, nx - 1); z1 = np.minimum(z0 + 1, nz - 1)
     tx = fx - x0; tz = fz - z0
     return (a[z0, x0] * (1 - tx) * (1 - tz) + a[z0, x1] * tx * (1 - tz)
             + a[z1, x0] * (1 - tx) * tz + a[z1, x1] * tx * tz)
@@ -77,9 +80,9 @@ TOWN_LIT = hexrgb("#2A3592")
 
 # terrain: ridged peaks scaled by distance (low foothills near, a high
 # snowy range far), plus a gentle base so the valley floor isn't flat
-ridge = ridged(N)
+ridge = ridged(N, wide=2)
 # fine rock: high octaves only, added mostly on high ground
-rock = ridged(N, octaves=4, base=40)
+rock = ridged(N, octaves=4, base=40, wide=2)
 broad = upsample(rng.random((5, 5)), N)
 
 
@@ -97,14 +100,17 @@ def height(x, zz):
     zc = zz / ZMAX
     # a slow domain warp bends the ridges so they branch like eroded rock
     wx = (bilinear(broad, mirror(x * 0.8), zc) - 0.5) * 0.12
-    r = bilinear(ridge, mirror(x * 1.3 + wx), mirror(zc * 1.1 - wx))
+    # the ridge maps are two tiles wide, enough to span the whole view
+    # without folding back on themselves
+    u = (x * 1.3 + 0.5 + wx) / 2.3
+    r = bilinear(ridge, u, mirror(zc * 1.1 - wx))
     b = bilinear(broad, mirror(x * 0.6), zc)
     far = smooth(0.25, 1.4, zz)
     # foothills near the camera, rising to the high range at the back
     lift = 0.057 * (1 - smooth(0.1, 0.26, zz))
-    k = bilinear(rock, mirror(x * 1.3 + wx), mirror(zc * 1.1 - wx))
+    k = bilinear(rock, u, mirror(zc * 1.1 - wx))
     near = 1 - smooth(0.08, 0.3, zz)
-    return (r + 0.07 * k * r) * (0.03 * smooth(0.12, 0.35, zz) + 0.25 * far ** 1.2) + bilinear(ridge, mirror(x * 5), mirror(zc * 5)) * 0.007 * near + 0.02 * b * far + lift
+    return (r + 0.07 * k * r) * (0.03 * smooth(0.12, 0.35, zz) + 0.25 * far ** 1.2) + bilinear(ridge, mirror(x * 5) / 2, mirror(zc * 5)) * 0.007 * near + 0.02 * b * far + lift
 
 
 cols = np.arange(W)
@@ -161,18 +167,21 @@ for b in range(len(BANDS)):
     if b == 0:
         # the foreground is magnified; soften it so no texel streaks show, and
         # fade its lowest rows to solid ground so it meets the CSS below it
-        out = out.filter(ImageFilter.GaussianBlur(2))
+        out = out.filter(ImageFilter.GaussianBlur(2 * SS))
         px = np.asarray(out).astype(np.float32)
         t = smooth(0.82, 1.0, rows / H)[:, None, None]
         px[..., :3] = px[..., :3] + (TOWN_DARK * 255 - px[..., :3]) * t
         px[..., 3] = np.maximum(px[..., 3], 255 * (t[..., 0] >= 1))
         out = Image.fromarray(px.clip(0, 255).astype(np.uint8), "RGBA")
+    out = out.resize((OUT_W, OUT_H), Image.LANCZOS)
     out.save(
         f"public/terrain/layer-{len(BANDS) - 1 - b}.webp", quality=82, method=6)
 
 # crest of the town band, 240 samples across the frame, as fractions of H
 crest = cum[np.where(band_of == 0)[0][-1]]
 xs = np.linspace(0, W - 1, 240).astype(int)
-json.dump({"w": W, "h": H, "crest": [round(float(np.clip(crest[x], 0, H)) / H, 4) for x in xs]},
+# skyline of the whole range (its top edge), same sampling as the crest
+sky = cum[-1]
+json.dump({"w": OUT_W, "h": OUT_H, "skyline": [round(float(np.clip(sky[x], 0, H)) / H, 4) for x in xs], "crest": [round(float(np.clip(crest[x], 0, H)) / H, 4) for x in xs]},
           open("src/components/world/terrain.json", "w"))
 print("ok", [os.path.getsize(f"public/terrain/layer-{i}.webp") // 1024 for i in range(4)], "KB")
