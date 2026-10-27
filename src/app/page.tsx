@@ -1,4 +1,6 @@
 import PlatesProvider from "@/components/plates/PlatesProvider";
+import World from "@/components/world/World";
+import Rail from "@/components/world/Rail";
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -15,15 +17,20 @@ import ComingSoon from "@/components/sections/ComingSoon";
 import Register from "@/components/sections/Register";
 import Footer from "@/components/sections/Footer";
 
-/* One descent: summit (hero) → valley mist (sections) → valley floor
-   (final CTA and footer). */
+/* One descent through one world: the summit (hero), down through the cloud
+   layer (sections 01–11), out below it at dusk onto the valley floor (final
+   CTA), then the ground (footer). */
 export default function HomePage() {
   return (
     <PlatesProvider>
+      <World />
+      <Rail />
       <div className="page">
         <Nav />
         <main>
           <Hero />
+          {/* the cloud layer: a mist veil over the world while you read */}
+          <div className="clouds">
           <About />
           <Journey />
           <V2 />
@@ -35,6 +42,7 @@ export default function HomePage() {
           <People />
           <Faq />
           <ComingSoon />
+          </div>
           <Register />
         </main>
         <Footer />

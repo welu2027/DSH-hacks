@@ -21,7 +21,7 @@ export function SectionHead({ id, no, eyebrow, children, meta, sub, align = "lef
   return (
     <header className={`sec-head ${align}`}>
       <div>
-        <p className="eyebrow"><span>{no}</span> — {eyebrow}</p>
+        <p className="eyebrow"><span>{no}</span> — {eyebrow}<span className="alt"> · ALT {(2400 - Number(no) * 200).toLocaleString("en-US")} M</span></p>
         <h2 id={id} className="sec-title">{children}</h2>
         {meta && <p className="strip">{meta.join(" · ")}</p>}
       </div>

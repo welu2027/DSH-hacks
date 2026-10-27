@@ -1,4 +1,6 @@
 import { SectionHead } from "./shared";
+import Globe from "./Globe";
+import { REACH } from "./reach";
 
 const RECORD: [string, string][] = [
   ["1,291", "participants"],
@@ -47,6 +49,21 @@ export default function About() {
             </div>
           ))}
         </dl>
+
+        <div className="reach">
+          <Globe />
+          <div className="reach-copy rv">
+            <h3 className="reach-h">Built by students in <em>80+ countries.</em></h3>
+            <p className="strip">V1 · 1,291 participants · V2 · 749+ so far</p>
+            {REACH.length > 0 && (
+              <ol className="reach-list">
+                {[...REACH].sort((a, b) => b.participants - a.participants).slice(0, 8).map((p) => (
+                  <li key={p.country}><span>{p.country}</span><span>{p.participants.toLocaleString("en-US")}</span></li>
+                ))}
+              </ol>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -8,8 +8,9 @@
 ## Illustration: "Technology, brought down to earth"
 Everything is original, drawn in code for DSH Hacks in the blues of the DSH Hacks logo. Nothing is traced or copied from other sites; hack-nation.ai and cluely.com were mood references only.
 
-- Mountain ridgelines (`src/components/hero/ridges.ts`): summed sine waves baked into SVG paths. The same town ridge returns at the valley floor in the final CTA.
-- Particle field and valley lights (`src/components/hero/ParticleField.tsx`): drawn live on a canvas.
+- The landscape (`public/terrain/layer-*.webp`): rendered by `scripts/terrain.py` from a generated ridged-multifractal heightmap with perspective ray marching, low-sun shading, snow and aerial haze. No photographs.
+- The world behind the page (`src/components/world/World.tsx`): sky, the terrain layers, and the particles that settle as valley lights, drawn live.
+- The globe (`src/components/sections/Globe.tsx`): drawn with [cobe](https://github.com/shuding/cobe) (MIT).
 - Theme motifs (`src/components/art/Motif.tsx`): line drawings for V2 (pulse-to-network, cell graph, molecule) and V1 (atom, book-to-circuit, beaker, lightbulb graph).
 
 ## Content

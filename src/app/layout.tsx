@@ -3,8 +3,6 @@ import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import Reveal from "@/components/Reveal";
-import Parallax from "@/components/art/Parallax";
-import Altitude from "@/components/art/Altitude";
 import Konami from "@/components/world/Konami";
 
 const instrumentSerif = Instrument_Serif({
@@ -56,8 +54,6 @@ export default function RootLayout({
           data-debug="true"
           data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
         />
-        <Parallax />
-        <Altitude />
         <Konami />
         <Reveal />
         {children}

@@ -1,34 +1,11 @@
 import Countdown from "@/components/Countdown";
-import ParticleField from "@/components/hero/ParticleField";
-import { RIDGES, VB_H, VB_W } from "@/components/hero/ridges";
 import { LINKS, ext } from "./shared";
 
-/* The summit. A hazy sky full of drifting ideas over layered ridges; the
-   ridges parallax at different speeds as you scroll down, and some of the
-   ideas settle on the nearest ridge as lights. V2 shows up only as the
-   live-now card. */
+/* The summit: the first view of the world (components/world/World) that
+   sits behind the whole page. V2 shows up only as the live-now card. */
 export default function Hero() {
   return (
-    <section id="hero" className="hero" aria-labelledby="hero-h">
-      <div className="sky" aria-hidden="true" />
-      {RIDGES.map((r) => (
-        <svg
-          key={r.cls} className={`ridge ${r.cls}`} style={{ height: `calc(var(--rh) * ${r.h})` }} data-depth={r.depth || undefined}
-          viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="none" aria-hidden="true"
-        >
-          {/* aerial haze: solid at the crest, fading into mist at the base */}
-          <defs>
-            <linearGradient id={`haze-${r.cls}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0.25" className="top" />
-              <stop offset="1" className="base" />
-            </linearGradient>
-          </defs>
-          <path d={r.d} fill={`url(#haze-${r.cls})`} />
-        </svg>
-      ))}
-      <ParticleField />
-      <div className="mist" aria-hidden="true" />
-
+    <section id="hero" className="hero" data-stop="Summit" aria-labelledby="hero-h">
       <div className="wrap hero-in">
         <div className="hero-copy">
           <p className="eyebrow">DeltaForge Hacks × NXT Horizon × STEMise</p>
