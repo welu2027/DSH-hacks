@@ -12,7 +12,9 @@ import terrain from "./terrain.json";
    - day fades to dusk (--dusk);
    - drifting "ideas" in the sky settle on the town foothills as lights,
      a few at a time, and the ones left over turn to stars.
-   One rAF loop, paused in background tabs. Reduced motion: no drift and no
+   One rAF loop, running only while the sky is on screen (the hero and the
+   valley floor); under the cloud veil it redraws on scroll alone. Paused in
+   background tabs. Reduced motion: no drift and no
    parallax; lights are already landed. */
 
 const LAYERS = [0, 1, 2, 3];
@@ -21,6 +23,7 @@ const WIDEN = 1.3;                      // … and ≥ WIDEN × vw, so it can sl
 const OFFSET = 0.06;                    // layers start this far (× vh) below their rest
 const RISE = [0.08, 0.16, 0.26, 0.36];   // how far (× vh) each layer climbs by g = 1
 const LINK = 110;
+const BUCKETS = 6;
 const PUSH = 130;
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 const ease = (t: number) => t * t * (3 - 2 * t);
@@ -48,7 +51,8 @@ export default function World() {
     const LAMP = rgb("--lamp");
     const mix = (a: number[], b: number[], k: number) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
 
-    let W = 0, H = 0, dots: Dot[] = [], frame = 0, g = 0, push = 0, heroH = 1;
+    let W = 0, H = 0, dots: Dot[] = [], frame = 0, g = 0, push = 0, heroH = 1, maxScroll = 1, live = true;
+    let lastDusk = "", lastLift: string[] = [];
     const mouse = { x: -1e4, y: -1e4 };
 
     // layer images are max(100vw, SPAN × vh) wide, bottom-aligned, centred
@@ -61,12 +65,6 @@ export default function World() {
       return { iw, ih: (iw * terrain.h) / terrain.w, x0: shiftX };
     };
     const imgs = layers.map((l) => l.querySelector("img")!);
-    // where the town crest sits on screen, for a fraction u across the image
-    const crest = (u: number, lift: number) => {
-      const { iw, ih, x0 } = size();
-      const c = terrain.crest[Math.round(clamp(u) * (terrain.crest.length - 1))];
-      return { x: x0 + u * iw, y: H - ih + c * ih + lift };
-    };
     // the visible slice of the image, as fractions across it
     const span = () => {
       const { iw, x0 } = size();
@@ -74,7 +72,8 @@ export default function World() {
     };
 
     const setup = () => {
-      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      // particles are small and soft; 1.5× is plenty and halves the fill cost on retina
+      const dpr = Math.min(1.5, window.devicePixelRatio || 1);
       W = window.innerWidth;
       H = window.innerHeight;
       // keep the hero copy clear: lower the range until its highest peak
@@ -103,7 +102,9 @@ export default function World() {
       cv.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const [u0, u1] = span();
-      const n = Math.round(Math.min(180, Math.max(60, (W * H) / 7500)));
+      maxScroll = document.documentElement.scrollHeight - H;
+      lastLift = [];
+      const n = Math.round(Math.min(150, Math.max(50, (W * H) / 9000)));
       dots = Array.from({ length: n }, (_, i) => {
         const vx = (Math.random() - 0.5) * 0.3, vy = (Math.random() - 0.5) * 0.2;
         return {
@@ -118,15 +119,21 @@ export default function World() {
     };
 
     const draw = () => {
-      const max = document.documentElement.scrollHeight - H;
-      g = max > 0 ? clamp(window.scrollY / max) : 0;
+      const y = window.scrollY;
+      g = maxScroll > 0 ? clamp(y / maxScroll) : 0;
       const dusk = ease(clamp((g - 0.55) / 0.4));
-      el.style.setProperty("--dusk", dusk.toFixed(3));
-      document.documentElement.style.setProperty("--g", g.toFixed(4));
-      const away = reduce ? 0 : ease(clamp(window.scrollY / heroH));
+      // only touch the DOM when something changed
+      const duskS = dusk.toFixed(3);
+      if (duskS !== lastDusk) { el.style.setProperty("--dusk", duskS); lastDusk = duskS; }
+      const away = reduce ? 0 : ease(clamp(y / heroH));
       const lift = (i: number) => (reduce ? OFFSET : OFFSET - g * RISE[i]) * H + push * (1 - away);
-      layers.forEach((l, i) => { l.style.transform = `translate3d(0, ${lift(i).toFixed(1)}px, 0)`; });
+      layers.forEach((l, i) => {
+        const v = lift(i).toFixed(1);
+        if (v !== lastLift[i]) { l.style.transform = `translate3d(0, ${v}px, 0)`; lastLift[i] = v; }
+      });
       const townLift = lift(3);
+      const { iw, ih, x0 } = size();
+      const last = terrain.crest.length - 1;
 
       ctx.clearRect(0, 0, W, H);
       for (const o of dots) {
@@ -145,14 +152,22 @@ export default function World() {
           if (o.y < -10) o.y = H * 0.6; else if (o.y > H * 0.6) o.y = -10;
         }
         o.k = o.lamp ? (reduce ? 1 : ease(clamp((g - o.d) / 0.25))) : 0;
-        const t = crest(o.u, townLift);
-        o.px = o.x + (t.x - o.x) * o.k;
-        o.py = o.y + (t.y + o.off - o.y) * o.k;
+        if (o.k > 0) {
+          const tx = x0 + o.u * iw;
+          const ty = H - ih + terrain.crest[Math.round(clamp(o.u) * last)] * ih + townLift + o.off;
+          o.px = o.x + (tx - o.x) * o.k;
+          o.py = o.y + (ty - o.y) * o.k;
+        } else {
+          o.px = o.x;
+          o.py = o.y;
+        }
       }
       // links between sky dots fade out as dusk falls
+      // batched into a few strokes by strength rather than one per link
       const linkA = 0.35 * (1 - dusk);
       if (linkA > 0.01) {
         ctx.lineWidth = 1;
+        const paths = Array.from({ length: BUCKETS }, () => new Path2D());
         for (let i = 0; i < dots.length; i++) {
           const a = dots[i];
           if (a.k > 0.2) continue;
@@ -161,13 +176,15 @@ export default function World() {
             if (b.k > 0.2) continue;
             const dx = a.px - b.px, dy = a.py - b.py, d2 = dx * dx + dy * dy;
             if (d2 > LINK * LINK) continue;
-            ctx.strokeStyle = `rgba(${SKY[0].join(",")},${(1 - Math.sqrt(d2) / LINK) * linkA})`;
-            ctx.beginPath();
-            ctx.moveTo(a.px, a.py);
-            ctx.lineTo(b.px, b.py);
-            ctx.stroke();
+            const p = paths[Math.min(BUCKETS - 1, Math.floor((1 - Math.sqrt(d2) / LINK) * BUCKETS))];
+            p.moveTo(a.px, a.py);
+            p.lineTo(b.px, b.py);
           }
         }
+        paths.forEach((p, k) => {
+          ctx.strokeStyle = `rgba(${SKY[0].join(",")},${((k + 0.5) / BUCKETS) * linkA})`;
+          ctx.stroke(p);
+        });
       }
       dots.forEach((o, i) => {
         const c = mix(mix(SKY[i % 2], STAR, dusk), LAMP, o.k).join(",");
@@ -184,16 +201,30 @@ export default function World() {
       });
     };
 
+    let looping = false;
     const loop = () => {
       draw();
       frame = requestAnimationFrame(loop);
     };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; draw(); }); };
+    // outside the loop, scrolling still moves the layers: one draw per frame
+    const onScroll = () => { if (!looping && !frame) frame = requestAnimationFrame(() => { frame = 0; draw(); }); };
     const sync = () => {
       cancelAnimationFrame(frame);
       frame = 0;
-      if (!reduce && !document.hidden) frame = requestAnimationFrame(loop);
+      looping = !reduce && live && !document.hidden;
+      if (looping) frame = requestAnimationFrame(loop);
     };
+    // the sky only shows at the summit and on the valley floor
+    const seen = new Map<Element, boolean>();
+    const watch = new IntersectionObserver((es) => {
+      es.forEach((e) => seen.set(e.target, e.isIntersecting));
+      live = [...seen.values()].some(Boolean);
+      sync();
+    });
+    document.querySelectorAll(".hero, .register, .site-footer").forEach((n) => watch.observe(n));
+    // the page grows (e.g. "show more" projects): keep the scroll range fresh
+    const grow = new ResizeObserver(() => { maxScroll = document.documentElement.scrollHeight - H; });
+    grow.observe(document.body);
 
     setup();
     draw();
@@ -206,7 +237,7 @@ export default function World() {
     const onMove = (e: PointerEvent) => { mouse.x = e.clientX; mouse.y = e.clientY; };
     const onLeave = () => { mouse.x = mouse.y = -1e4; };
     window.addEventListener("resize", onResize);
-    if (reduce) window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     if (fine && !reduce) {
       window.addEventListener("pointermove", onMove, { passive: true });
       document.addEventListener("pointerleave", onLeave);
@@ -215,6 +246,8 @@ export default function World() {
     return () => {
       cancelAnimationFrame(frame);
       clearTimeout(t);
+      watch.disconnect();
+      grow.disconnect();
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("pointermove", onMove);

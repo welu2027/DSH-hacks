@@ -153,7 +153,7 @@ body { background: var(--blue-900); }
 
 /* ---------- nav ---------- */
 .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top); border-bottom: 1px solid transparent; transition: background .25s, border-color .25s; }
-.nav.scrolled { background: rgba(255, 255, 255, .86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-color: var(--line); }
+.nav.scrolled { background: rgba(255, 255, 255, .94); border-color: var(--line); }
 .nav-in { height: var(--nav-h); display: flex; align-items: center; gap: 22px; max-width: 1400px; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 24px; line-height: 1; white-space: nowrap; }
 .brand img { width: 34px; height: 34px; border-radius: 50%; }
@@ -179,7 +179,7 @@ body { background: var(--blue-900); }
 .hero-copy .strip, .hero-sub { text-shadow: 0 0 2px var(--paper), 0 0 16px var(--paper); }
 .hero-copy .strip { color: var(--ink); }
 .hero-sub { margin: 20px 0 0; max-width: 46ch; font-size: clamp(17px, 1.4vw, 19px); color: var(--ink); }
-.live { padding: 22px; border-radius: 20px; background: rgba(255, 255, 255, .74); border: 1px solid var(--line); box-shadow: var(--shadow); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.live { padding: 22px; border-radius: 20px; background: rgba(255, 255, 255, .9); border: 1px solid var(--line); box-shadow: var(--shadow); }
 .live-k { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 11.5px; font-weight: 600; color: var(--v2-ink); }
 .live-k i { width: 8px; height: 8px; border-radius: 50%; background: var(--v2-accent); animation: ping 2.2s ease-out infinite; }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(238, 106, 124, .5); } 80%, 100% { box-shadow: 0 0 0 10px rgba(238, 106, 124, 0); } }
@@ -326,6 +326,19 @@ a.plaque:hover::after, a.plaque:focus-visible::after { opacity: 0; }
 .place.gold { --m1: var(--gold-1); --m2: var(--gold-2); --mi: var(--gold-ink); order: 2; padding-top: 44px; padding-bottom: 34px; box-shadow: 0 20px 50px color-mix(in srgb, var(--gold-2) 22%, transparent); background: linear-gradient(color-mix(in srgb, var(--gold-1) 30%, var(--paper)), var(--paper) 45%); }
 .place.silver { --m1: var(--silver-1); --m2: var(--silver-2); --mi: var(--silver-ink); order: 1; }
 .place.bronze { --m1: var(--bronze-1); --m2: var(--bronze-2); --mi: var(--bronze-ink); order: 3; }
+/* special prizes: a holographic edge, a tag, a few sparkles, a shimmer on hover */
+.special { position: relative; overflow: hidden; border: 2px solid transparent; border-top-width: 2px; background: linear-gradient(var(--paper), var(--paper)) padding-box, linear-gradient(120deg, var(--lamp), var(--v2-accent), var(--blue-300), var(--v1-accent), var(--lamp)) border-box; background-size: 100% 100%, 300% 100%; animation: holo 8s linear infinite; }
+@keyframes holo { to { background-position: 0 0, 300% 0; } }
+.special::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%); transform: translateX(-100%); pointer-events: none; }
+.special:hover::after { transform: translateX(100%); transition: transform .9s var(--ease); }
+.special-tag { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 14px; padding: 5px 11px; border-radius: 999px; font: 600 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); background: linear-gradient(120deg, color-mix(in srgb, var(--lamp) 55%, var(--paper)), color-mix(in srgb, var(--v2-accent) 30%, var(--paper)), color-mix(in srgb, var(--blue-300) 45%, var(--paper))); }
+.sparkles { position: absolute; top: 14px; right: 16px; width: 70px; height: 50px; }
+.sparkles i { position: absolute; width: 12px; height: 12px; background: var(--lamp); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: sparkle 2.4s ease-in-out infinite; }
+.sparkles i:nth-child(1) { right: 0; top: 4px; }
+.sparkles i:nth-child(2) { right: 26px; top: 22px; width: 8px; height: 8px; background: var(--v2-accent); animation-delay: -.8s; }
+.sparkles i:nth-child(3) { right: 46px; top: 0; width: 10px; height: 10px; background: var(--blue-300); animation-delay: -1.6s; }
+@keyframes sparkle { 0%, 100% { transform: scale(.4) rotate(0); opacity: .3; } 50% { transform: scale(1) rotate(45deg); opacity: 1; } }
+
 .medal { float: right; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; font: 600 20px var(--mono); color: var(--mi); background: radial-gradient(circle at 32% 28%, var(--m1), var(--m2) 70%); box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--m1) 70%, transparent), 0 6px 16px color-mix(in srgb, var(--m2) 35%, transparent); }
 .place.gold .medal { width: 64px; height: 64px; font-size: 24px; }
 .place .card-k { color: var(--mi); }

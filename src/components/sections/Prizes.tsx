@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { IconSparkles } from "@tabler/icons-react";
 import { SectionHead } from "./shared";
 
 /* Prizes and criteria from dsh-hacks-v2.devpost.com. All prizes are non-cash
@@ -61,7 +62,9 @@ export default function Prizes() {
         <h3 className="band-k">Special prizes</h3>
         <div className="specials">
           {SPECIALS.map((s) => (
-            <article key={s.place} className="card prize-card rv">
+            <article key={s.place} className="card prize-card special rv">
+              <span className="special-tag"><IconSparkles size={14} stroke={1.75} aria-hidden="true" /> Special award</span>
+              <span className="sparkles" aria-hidden="true"><i /><i /><i /></span>
               <div className="presented">
                 <span className={s.dark ? "plaque dark" : "plaque"}><img src={`/sponsors/${s.logo}.png`} alt={s.by} loading="lazy" /></span>
                 <span>Presented by {s.by}</span>
