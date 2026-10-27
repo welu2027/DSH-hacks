@@ -12,18 +12,18 @@ export const LINKS = {
 
 export const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-/* Section heading. `align` varies the composition per section so the page
-   doesn't repeat one template: centered, left, right, or split (title left,
-   intro right). */
-type Align = "center" | "left" | "right" | "split";
-export function SectionHead({ id, eyebrow, children, sub, align = "center" }: {
-  id: string; eyebrow: string; children: React.ReactNode; sub?: React.ReactNode; align?: Align;
+/* Section heading: numbered mono eyebrow, a serif title with one italic
+   phrase, an optional mono fact strip (`·`-separated) and an intro. */
+type Align = "left" | "split";
+export function SectionHead({ id, no, eyebrow, children, meta, sub, align = "left" }: {
+  id: string; no: string; eyebrow: string; children: React.ReactNode; meta?: string[]; sub?: React.ReactNode; align?: Align;
 }) {
   return (
     <header className={`sec-head ${align}`}>
       <div>
-        <p className="eyebrow">{eyebrow}</p>
+        <p className="eyebrow"><span>{no}</span> — {eyebrow}</p>
         <h2 id={id} className="sec-title">{children}</h2>
+        {meta && <p className="strip">{meta.join(" · ")}</p>}
       </div>
       {sub && <p className="sec-sub">{sub}</p>}
     </header>

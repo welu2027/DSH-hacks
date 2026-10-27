@@ -6,8 +6,8 @@ import { IconMenu2, IconX } from "@tabler/icons-react";
 import { LINKS, ext } from "./shared";
 
 const LINKS_NAV: [string, string][] = [
-  ["about", "About"], ["projects", "Projects"], ["sponsors", "Sponsors"], ["prizes", "Prizes"],
-  ["schedule", "Schedule"], ["people", "People"], ["faq", "FAQ"], ["coming-soon", "Coming Soon"],
+  ["about", "About"], ["journey", "Journey"], ["v2", "V2"], ["projects", "Projects"], ["prizes", "Prizes"],
+  ["timeline", "Timeline"], ["workshops", "Workshops"], ["sponsors", "Sponsors"], ["people", "People"], ["faq", "FAQ"],
 ];
 
 export default function Nav() {
@@ -41,16 +41,16 @@ export default function Nav() {
   return (
     <header className={`nav${scrolled || open ? " scrolled" : ""}`}>
       <div className="wrap nav-in">
-        <a href="#hero" className="brand" aria-label="DSH Hacks V2, back to top">
+        <a href="#hero" className="brand" aria-label="DSH Hacks, back to top">
           <img src="/dsh-logo-circle.png" width={34} height={34} alt="" />
-          <span>DSH Hacks</span><span className="v2" aria-hidden="true">V2</span>
+          <span>DSH Hacks</span>
         </a>
         <nav className="nav-links" aria-label="Sections">
           {LINKS_NAV.map(([id, t]) => (
             <a key={id} href={`#${id}`} aria-current={active === id ? "true" : undefined}>{t}</a>
           ))}
         </nav>
-        <a className="btn solid sm nav-cta" href={LINKS.devpost} {...ext}>Register</a>
+        <a className="btn solid sm nav-cta" href={LINKS.devpost} {...ext}>Register for V2</a>
         <button
           type="button" className="nav-burger" aria-expanded={open} aria-controls="nav-sheet"
           aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}
@@ -63,7 +63,7 @@ export default function Nav() {
           {LINKS_NAV.map(([id, t]) => (
             <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{t}</a>
           ))}
-          <a className="btn solid" href={LINKS.devpost} {...ext}>Register on Devpost</a>
+          <a className="btn solid" href={LINKS.devpost} {...ext}>Register for V2</a>
         </nav>
       )}
     </header>

@@ -11,12 +11,12 @@ export type Rendition = {
 export const RENDITIONS: Rendition[] = [
   {
     version: "V1", theme: "AI × STEM Education", status: "completed",
-    stats: ["1,294 participants", "283 projects"],
+    stats: ["1,291 participants", "283 projects"],
     links: [{ label: "View projects ↗", href: "https://dsh-hacks-v1.devpost.com/project-gallery" }],
   },
   {
     version: "V2", theme: "AI × Healthcare", status: "live",
-    stats: ["$100,000+ in prizes", "Closes Nov 14"],
+    stats: ["749+ participants", "100 projects so far", "$100,000+ in prizes", "Closes Nov 14"],
     links: [{ label: "Register ↗", href: "https://dsh-hacks-v2.devpost.com/" }],
   },
   { version: "V3", theme: "TBA", status: "upcoming", stats: [], links: [] },

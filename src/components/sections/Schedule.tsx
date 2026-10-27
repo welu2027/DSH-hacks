@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Piece, Ribbon } from "@/components/art/Art";
 import { SectionHead } from "./shared";
 
 /* Dates from dsh-hacks-v2.devpost.com/details/dates. `from`/`to` mark when a
@@ -14,15 +13,6 @@ const STEPS: { when: string; t: string; d: string; from?: string; to?: string }[
   { when: "Nov 15–22 · Nov 23", t: "Judging and winners", d: "Judges score projects November 15–22 on idea, implementation, design, and presentation. Winners are announced on Devpost November 23.", from: "2026-11-14T23:45:00-08:00", to: "2026-11-24T00:00:00-08:00" },
 ];
 
-const HISTORY: { date: string; v: string; text: string }[] = [
-  { date: "Dec 31, 2025", v: "DSH", text: "DSH Hacks is founded." },
-  { date: "May 20, 2026", v: "V1", text: "The first DSH Hacks opens on AI × STEM education. 1,294 participants join." },
-  { date: "Jun 15, 2026", v: "V1", text: "283 projects submitted; 80+ judges from Microsoft, Apple, Amazon, Meta, PayPal and more." },
-  { date: "Jun 24, 2026", v: "V2", text: "Registration opens on AI × Healthcare, with $100,000+ in prizes." },
-  { date: "Nov 14, 2026", v: "V2", text: "Submissions close at 11:45pm PST." },
-  { date: "Nov 23, 2026", v: "V2", text: "Winners announced on Devpost after a week of judging." },
-];
-
 export default function Schedule() {
   // computed after mount: the site is a static export
   const [now, setNow] = useState<number | null>(null);
@@ -31,36 +21,19 @@ export default function Schedule() {
     now !== null && !!s.from && !!s.to && now >= Date.parse(s.from) && now < Date.parse(s.to);
 
   return (
-    <section id="schedule" className="section schedule" aria-labelledby="schedule-h">
-      <div className="art" aria-hidden="true">
-        <Ribbon kind="cascade" className="schedule-ribbon" />
-        <Piece src="island-dome" w={320} h={280} className="schedule-dome" float={8} />
-      </div>
-      <div className="wrap">
-        <div className="sched-grid">
-          <div className="sched-side">
-            <SectionHead id="schedule-h" eyebrow="Schedule" align="left">The <em>timeline</em></SectionHead>
-            <Piece src="robot-arm" w={340} h={340} className="schedule-arm" depth="fixed" float={9} />
-          </div>
+    <section id="timeline" className="section schedule" aria-labelledby="schedule-h">
+      <div className="wrap split-grid">
+        <SectionHead id="schedule-h" no="06" eyebrow="V2 timeline" meta={["Jun 24 → Nov 23", "All times Pacific"]}>
+          Five stages, <em>one deadline.</em>
+        </SectionHead>
         <ol className="timeline">
           {STEPS.map((s) => (
             <li key={s.t} className={isNow(s) ? "rv now" : "rv"}>
               <span className="when">{s.when}</span>
-              <div className="card">
+              <div className="step">
                 <h3>{s.t}{isNow(s) && <span className="pill on">Now</span>}</h3>
                 <p>{s.d}</p>
               </div>
-            </li>
-          ))}
-        </ol>
-        </div>
-        <h3 className="sub-h">History</h3>
-        <ol className="history">
-          {HISTORY.map((h) => (
-            <li key={h.text} className="rv">
-              <span className="when">{h.date}</span>
-              <span className="pill">{h.v}</span>
-              <p>{h.text}</p>
             </li>
           ))}
         </ol>

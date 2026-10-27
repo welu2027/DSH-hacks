@@ -34,14 +34,14 @@ export default function Reveal() {
 
     const seen = new Map<Element, number>();
     // pause every looping animation in a section while it is off screen
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section, .site-footer"));
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section, .site-footer"));
     const vis = new IntersectionObserver(
       (es) => es.forEach((e) => e.target.classList.toggle("is-off", !e.isIntersecting)),
       { rootMargin: "200px 0px" },
     );
     sections.forEach((s) => vis.observe(s));
 
-    document.querySelectorAll<HTMLElement>("main > section:not(.hero) .sec-head, .sub-h").forEach((el) => el.classList.add("rv"));
+    document.querySelectorAll<HTMLElement>("main section:not(.hero) .sec-head, .sub-h").forEach((el) => el.classList.add("rv"));
     const rise = Array.from(document.querySelectorAll<HTMLElement>(".rv")).filter((el) => {
       const p = el.parentElement!;
       const i = seen.get(p) ?? 0;
