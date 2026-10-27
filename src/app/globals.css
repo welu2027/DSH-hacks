@@ -76,8 +76,7 @@ body { background: var(--blue-900); }
 .sky.day { background: linear-gradient(var(--paper) 5%, var(--mist-1) 40%, var(--mist) 75%); opacity: calc(1 - var(--dusk, 0)); }
 .sky.dusk { background: linear-gradient(var(--night) 0%, var(--dusk-hi) 45%, var(--dusk-lo) 80%); opacity: var(--dusk, 0); }
 .layer { position: absolute; left: 0; top: 0; width: 100%; height: 100lvh; will-change: transform; }
-/* wide enough to fill the screen, never so tall the peaks crowd the copy */
-.layer img { position: absolute; left: 50%; bottom: 0; width: max(100vw, 150lvh); height: auto; transform: translateX(-50%); }
+.layer img { position: absolute; left: 0; bottom: 0; width: max(130vw, 150lvh); max-width: none; height: auto; } /* World sets width and left */
 /* the foothills carry on below the frame as solid ground */
 .layer.l3::after { content: ""; position: absolute; left: 0; right: 0; top: calc(100% - 2px); height: 120lvh; background: var(--blue-900); }
 /* at dusk the range goes dark, so light text reads over it */
@@ -96,7 +95,7 @@ body { background: var(--blue-900); }
 .split-grid > .sec-head { position: sticky; top: calc(var(--nav-h) + 40px); }
 
 /* ---------- type ---------- */
-.eyebrow, .strip, .band-k, .btn, .chip, .tlink, .nav-links, .when, .tag, .ws, .card-k, .crit-k, .dir-k, .pill, .status, .lb-top, .spec dt, .rend-v, .facts dt, .countdown .u, .cd-cap, .live-k, .live-t, .cue, .foot-grid h3, .faq-group h3, .plate-tag {
+.eyebrow, .strip, .band-k, .btn, .chip, .tlink, .nav-links, .when, .tag, .ws, .card-k, .crit-k, .dir-k, .pill, .status, .lb-top, .spec dt, .rend-v, .facts dt, .countdown .u, .cd-cap, .live-k, .live-t, .foot-grid h3, .faq-group h3, .plate-tag {
   font-family: var(--mono); text-transform: uppercase; letter-spacing: .1em;
 }
 .eyebrow { margin: 0 0 18px; font-size: 12.5px; font-weight: 500; color: var(--blue-600); }
@@ -172,21 +171,20 @@ body { background: var(--blue-900); }
   position: relative; min-height: max(640px, 100svh); margin-top: calc(-1 * (var(--nav-h) + env(safe-area-inset-top)));
   padding-top: calc(var(--nav-h) + env(safe-area-inset-top)); box-sizing: border-box; display: flex; flex-direction: column;
 }
-.hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: clamp(28px, 5vw, 72px); align-items: start; width: 100%; box-sizing: border-box; padding-top: clamp(32px, 8svh, 96px); padding-bottom: 120px; }
-.hero-in .live { margin-top: clamp(0px, 14svh, 180px); }
+.hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: clamp(28px, 5vw, 72px); align-items: start; width: 100%; box-sizing: border-box; padding-top: clamp(24px, 5svh, 64px); padding-bottom: 120px; }
+.hero-in .live { margin-top: clamp(0px, 8svh, 110px); }
 .hero-in > * { animation: rise .9s var(--ease) both; }
 .hero-in > .live { animation-delay: .2s; }
-.hero-h { font-family: var(--serif); font-size: clamp(56px, 9vw, 136px); line-height: .92; letter-spacing: -.03em; max-width: 11ch; }
+.hero-h { font-family: var(--serif); font-size: clamp(52px, 7.2vw, 108px); line-height: .92; letter-spacing: -.03em; max-width: 11ch; }
 .hero-copy .strip, .hero-sub { text-shadow: 0 0 2px var(--paper), 0 0 16px var(--paper); }
 .hero-copy .strip { color: var(--ink); }
-.hero-sub { margin: 24px 0 0; max-width: 46ch; font-size: clamp(17px, 1.4vw, 19px); color: var(--ink); }
+.hero-sub { margin: 20px 0 0; max-width: 46ch; font-size: clamp(17px, 1.4vw, 19px); color: var(--ink); }
 .live { padding: 22px; border-radius: 20px; background: rgba(255, 255, 255, .74); border: 1px solid var(--line); box-shadow: var(--shadow); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .live-k { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 11.5px; font-weight: 600; color: var(--v2-ink); }
 .live-k i { width: 8px; height: 8px; border-radius: 50%; background: var(--v2-accent); animation: ping 2.2s ease-out infinite; }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(238, 106, 124, .5); } 80%, 100% { box-shadow: 0 0 0 10px rgba(238, 106, 124, 0); } }
 .live-t { margin: 8px 0 16px; font-size: 11.5px; line-height: 1.6; color: var(--ink); }
 .live .btn-row { margin-top: 18px; }
-.cue { position: absolute; left: 50%; bottom: 14px; z-index: 2; transform: translateX(-50%); display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 11px; color: var(--paper); background: rgba(11, 16, 96, .5); white-space: nowrap; }
 
 /* countdown */
 .countdown { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }

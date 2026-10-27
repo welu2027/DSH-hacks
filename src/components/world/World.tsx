@@ -16,7 +16,8 @@ import terrain from "./terrain.json";
    parallax; lights are already landed. */
 
 const LAYERS = [0, 1, 2, 3];
-const SPAN = 1.5;                       // keep in sync with .layer img width
+const SPAN = 1.5;                       // landscape width ≥ SPAN × vh …
+const WIDEN = 1.3;                      // … and ≥ WIDEN × vw, so it can slide sideways
 const OFFSET = 0.06;                    // layers start this far (× vh) below their rest
 const RISE = [0.08, 0.16, 0.26, 0.36];   // how far (× vh) each layer climbs by g = 1
 const LINK = 110;
@@ -52,10 +53,14 @@ export default function World() {
 
     // layer images are max(100vw, SPAN × vh) wide, bottom-aligned, centred
     // (see .layer img in globals.css)
+    // the landscape is a little wider than the screen, so it can slide
+    // sideways; shiftX is chosen in setup
+    let shiftX = 0;
     const size = () => {
-      const iw = Math.max(W, SPAN * H);
-      return { iw, ih: (iw * terrain.h) / terrain.w, x0: (W - iw) / 2 };
+      const iw = Math.max(W * WIDEN, SPAN * H);
+      return { iw, ih: (iw * terrain.h) / terrain.w, x0: shiftX };
     };
+    const imgs = layers.map((l) => l.querySelector("img")!);
     // where the town crest sits on screen, for a fraction u across the image
     const crest = (u: number, lift: number) => {
       const { iw, ih, x0 } = size();
@@ -77,13 +82,23 @@ export default function World() {
       const copy = document.querySelector(".hero-copy")?.getBoundingClientRect();
       const hero = document.querySelector<HTMLElement>(".hero");
       heroH = hero?.offsetHeight || H;
-      // the highest point of the range that's actually on screen
-      const { ih } = size();
-      const [v0, v1] = span();
+      // slide the range so the lowest ground sits under the copy (the big
+      // peaks then rise beside it), and find the highest point under the copy
+      const { iw, ih } = size();
       const last = terrain.skyline.length - 1;
-      const top = Math.min(...terrain.skyline.slice(Math.max(0, Math.floor(v0 * last)), Math.min(last, Math.ceil(v1 * last)) + 1));
+      const under = (x0: number) => {
+        const v0 = copy ? (copy.left - x0) / iw : -x0 / iw;
+        const v1 = copy ? (copy.right - x0) / iw : (W - x0) / iw;
+        return Math.min(...terrain.skyline.slice(Math.max(0, Math.floor(v0 * last)), Math.min(last, Math.ceil(v1 * last)) + 1));
+      };
+      let top = -1;
+      for (let x0 = W - iw; x0 <= 0; x0 += 8) {
+        const t = under(x0);
+        if (t > top + 0.002) { top = t; shiftX = x0; }
+      }
+      imgs.forEach((im) => { im.style.width = `${iw}px`; im.style.left = `${shiftX}px`; });
       const peak = H - ih + top * ih + OFFSET * H;
-      push = copy ? Math.min(H * 0.5, Math.max(0, copy.bottom + window.scrollY + 28 - peak)) : 0;
+      push = copy ? Math.min(H * 0.5, Math.max(0, copy.bottom + window.scrollY + 14 - peak)) : 0;
       cv.width = W * dpr;
       cv.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

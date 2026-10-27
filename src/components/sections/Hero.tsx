@@ -27,7 +27,6 @@ export default function Hero() {
           </div>
         </aside>
       </div>
-      <a className="cue" href="#about">Scroll to descend ↓</a>
     </section>
   );
 }

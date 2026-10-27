@@ -4,7 +4,7 @@ import { REACH } from "./reach";
 
 const RECORD: [string, string][] = [
   // V1 + V2 from Devpost, 2026-10-27; V2 is still open
-  ["2,040", "registrations"],
+  ["2,040", "participants"],
   ["383", "projects submitted"],
   ["80+", "countries"],
   ["119", "professional judges"],
