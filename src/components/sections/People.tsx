@@ -8,7 +8,7 @@ import JudgesRoll from "./JudgesRoll";
 const DARK = new Set(["/judges/oxford.png"]);
 const JUDGES_FROM: [string, string][] = [
   ["Y Combinator", "/judges/ycombinator.png"], ["Goldman Sachs", "/judges/goldmansachs.png"],
-  ["University of Oxford", "/judges/oxford.png"], ["Columbia Business School", "/judges/columbia.png"],
+  ["University of Oxford", "/judges/oxford.png"], ["MIT", "/judges/mit.svg"], ["Columbia Business School", "/judges/columbia.png"],
   ["D. E. Shaw", "/judges/deshaw.png"],
   ["Microsoft", "/professionals/microsoft.png"], ["Apple", "/professionals/apple.png"], ["Amazon", "/professionals/amazon.png"], ["Meta", "/professionals/meta.png"],
   ["PayPal", "/professionals/paypal.png"], ["AWS", "/professionals/aws.png"], ["Visa", "/professionals/visa.png"], ["JPMorgan Chase", "/professionals/jpmorgan.png"],

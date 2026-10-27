@@ -1,4 +1,5 @@
-import { IconBrandYoutube } from "@tabler/icons-react";
+/* eslint-disable @next/next/no-img-element */
+import { IconBrandYoutube, IconPlayerPlayFilled } from "@tabler/icons-react";
 import { LINKS, SectionHead, ext } from "./shared";
 
 const TALKS = [
@@ -23,11 +24,16 @@ export default function Workshops() {
         <ol className="talks">
           {TALKS.map((t, i) => (
             <li key={t.id} className="rv">
-              <a className="talk" href={`https://www.youtube.com/watch?v=${t.id}`} {...ext}>
-                <span className="ws">WS-{String(i + 1).padStart(2, "0")}</span>
+              <a className={`talk tint-${i % 6}`} href={`https://www.youtube.com/watch?v=${t.id}`} {...ext}>
+                {/* thumbnail from YouTube (public/workshops), washed in this card's colour */}
+                <span className="thumb">
+                  <img src={`/workshops/${t.id}.jpg`} alt="" loading="lazy" width={480} height={360} />
+                  <span className="ws">WS-{String(i + 1).padStart(2, "0")}</span>
+                  <span className="play" aria-hidden="true"><IconPlayerPlayFilled size={22} /></span>
+                </span>
                 <span className="t">{t.topic}</span>
                 <span className="s">{t.speaker}</span>
-                <span className="w">Watch ↗</span>
+                <span className="w">Watch on YouTube ↗</span>
               </a>
             </li>
           ))}

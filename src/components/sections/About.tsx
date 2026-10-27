@@ -3,12 +3,13 @@ import Globe from "./Globe";
 import { REACH } from "./reach";
 
 const RECORD: [string, string][] = [
-  ["1,291", "participants"],
-  ["283", "projects submitted"],
+  // V1 + V2 from Devpost, 2026-10-27; V2 is still open
+  ["2,040", "registrations"],
+  ["383", "projects submitted"],
   ["80+", "countries"],
-  ["80+", "professional judges"],
-  ["$35K+", "prizes distributed"],
-  ["10+", "sponsors"],
+  ["119", "professional judges"],
+  ["$35K+", "V1 prizes awarded"],
+  ["22", "sponsors"],
 ];
 
 export default function About() {
@@ -40,7 +41,7 @@ export default function About() {
             </p>
           </div>
         </div>
-        <h3 className="band-k">V1 by the numbers</h3>
+        <h3 className="band-k">V1 + V2, by the numbers</h3>
         <dl className="band">
           {RECORD.map(([n, l]) => (
             <div key={l} className="rv">

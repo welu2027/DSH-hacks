@@ -6,7 +6,7 @@ import { IconMenu2, IconX } from "@tabler/icons-react";
 import { LINKS, ext } from "./shared";
 
 const LINKS_NAV: [string, string][] = [
-  ["about", "About"], ["journey", "Journey"], ["v2", "V2"], ["projects", "V1 Recap"], ["prizes", "Prizes"],
+  ["about", "About"], ["journey", "Journey"], ["v2", "V2"], ["projects", "Projects"], ["prizes", "Prizes"],
   ["timeline", "Timeline"], ["workshops", "Workshops"], ["sponsors", "Sponsors"], ["people", "People"], ["faq", "FAQ"],
 ];
 

@@ -12,4 +12,9 @@ export type Staff = {
 
 export const STAFF: Staff[] = [
   // { name: "Jane Doe", role: "Lead organizer", org: "STEMise", img: "/staff/jane-doe.jpg", href: "https://www.linkedin.com/in/..." },
+  { name: "Ryan Ahn", role: "Lead Competition Director", img: null },
+  { name: "Wenhao Lu", role: "Lead Competition Director", img: null },
+  { name: "Abhiram Jetty", role: "Lead Competition Director", img: null },
+  { name: "Karam Gill", role: "Lead Competition Director", img: null },
+  { name: "Adithya Balakumar", role: "Lead Competition Director", img: null },
 ];

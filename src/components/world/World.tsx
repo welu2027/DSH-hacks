@@ -18,7 +18,7 @@ import terrain from "./terrain.json";
 const LAYERS = [0, 1, 2, 3];
 const SPAN = 1.5;                       // keep in sync with .layer img width
 const OFFSET = 0.06;                    // layers start this far (× vh) below their rest
-const RISE = [0.08, 0.16, 0.3, 0.55];   // how far (× vh) each layer climbs by g = 1
+const RISE = [0.08, 0.16, 0.26, 0.36];   // how far (× vh) each layer climbs by g = 1
 const LINK = 110;
 const PUSH = 130;
 const clamp = (v: number) => Math.min(1, Math.max(0, v));

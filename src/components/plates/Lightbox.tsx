@@ -56,8 +56,8 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
             <dl className="spec">
               <div><dt>Track</dt><dd>{p.track}</dd></div>
               <div><dt>Built by</dt><dd>{p.by || "Unlisted"}</dd></div>
-              <div><dt>Event</dt><dd>DSH Hacks V1, AI × STEM education</dd></div>
-              <div><dt>Result</dt><dd>{p.winner ? "Winner" : "Submitted"}</dd></div>
+              <div><dt>Event</dt><dd>{p.v === "V2" ? "DSH Hacks V2, AI × Healthcare" : "DSH Hacks V1, AI × STEM education"}</dd></div>
+              <div><dt>Result</dt><dd>{p.winner ? "Winner" : p.v === "V2" ? "Submitted, judging Nov 15–22" : "Submitted"}</dd></div>
             </dl>
             <div className="btn-row">
               <button type="button" className="btn sm" onClick={() => step(-1)}>Prev</button>

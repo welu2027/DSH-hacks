@@ -16,7 +16,7 @@ export const RENDITIONS: Rendition[] = [
   },
   {
     version: "V2", theme: "AI × Healthcare", status: "live",
-    stats: ["749+ participants", "$100,000+ in prizes", "Closes Nov 14"],
+    stats: ["749+ participants", "100 projects so far", "$100,000+ in prizes", "Closes Nov 14"],
     links: [{ label: "Register ↗", href: "https://dsh-hacks-v2.devpost.com/" }],
   },
   { version: "V3", theme: "TBA", status: "upcoming", stats: [], links: [] },

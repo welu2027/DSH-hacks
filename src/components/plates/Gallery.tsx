@@ -5,9 +5,11 @@ import { projects, TRACKS, type Project } from "./projects";
 import Plate, { PlateFrame, plateLabel, plateNo } from "./Plate";
 import { useOpenPlate } from "./PlatesProvider";
 
-type Filter = "all" | "winners" | "featured" | (typeof TRACKS)[number];
+type Filter = "all" | "V2" | "V1" | "winners" | "featured" | (typeof TRACKS)[number];
 const FILTERS: { id: Filter; label: string; test: (p: Project) => boolean }[] = [
   { id: "all", label: "All", test: () => true },
+  { id: "V2", label: "V2 · Healthcare", test: (p) => p.v === "V2" },
+  { id: "V1", label: "V1 · STEM ed", test: (p) => p.v === "V1" },
   { id: "winners", label: "Winners", test: (p) => p.winner },
   { id: "featured", label: "Featured", test: (p) => p.featured },
   ...TRACKS.map((t) => ({ id: t as Filter, label: t, test: (p: Project) => p.track === t })),
@@ -15,7 +17,7 @@ const FILTERS: { id: Filter; label: string; test: (p: Project) => boolean }[] = 
 
 export default function Gallery() {
   const open = useOpenPlate();
-  const [filter, setFilter] = useState<Filter>("winners");
+  const [filter, setFilter] = useState<Filter>("all");
   const [q, setQ] = useState("");
   const [view, setView] = useState<"wall" | "list">("wall");
   // render in batches: 8 on phones, 36 on larger screens

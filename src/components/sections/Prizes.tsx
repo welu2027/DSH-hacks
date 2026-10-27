@@ -12,10 +12,10 @@ const pkg = (codecrafters: number, devswarm: number, aops: number): Item[] => [
   { name: "Devswarm Pro", v: devswarm },
   { name: "AoPS gift cards", v: aops },
 ];
-const PLACES: { place: string; items: Item[] }[] = [
-  { place: "1st place", items: pkg(720, 72, 50) },
-  { place: "2nd place", items: pkg(360, 18, 25) },
-  { place: "3rd place", items: pkg(180, 18, 25) },
+const PLACES: { place: string; medal: "gold" | "silver" | "bronze"; n: number; items: Item[] }[] = [
+  { place: "1st place", medal: "gold", n: 1, items: pkg(720, 72, 50) },
+  { place: "2nd place", medal: "silver", n: 2, items: pkg(360, 18, 25) },
+  { place: "3rd place", medal: "bronze", n: 3, items: pkg(180, 18, 25) },
 ];
 const SPECIALS = [
   { by: "Tin Computer", logo: "tincomputer", place: "Tin Computer Growth Plan", n: "Up to 100 teams", detail: "$299 in Growth Plan credits per eligible team." },
@@ -44,8 +44,9 @@ export default function Prizes() {
 
         <div className="places">
           {PLACES.map((p) => (
-            <article key={p.place} className="card prize-card rv">
-              <p className="card-k">Placement · 1 team</p>
+            <article key={p.place} className={`card prize-card place ${p.medal} rv`}>
+              <span className="medal" aria-hidden="true">{p.n}</span>
+              <p className="card-k">{p.medal} · 1 team</p>
               <h3>{p.place}</h3>
               <p className="pv"><span>{usd(p.items.reduce((a, b) => a + b.v, 0))}</span> package value</p>
               <dl className="tiers">
