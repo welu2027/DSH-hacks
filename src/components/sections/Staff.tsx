@@ -18,13 +18,14 @@ export default function Team() {
                   {s.img
                     ? <img className="staff-av" src={s.img} alt="" loading="lazy" />
                     : <span className="staff-av" aria-hidden="true">{initials(s.name)}</span>}
+                  {s.founder && <span className="founder-tag">✦ Founder</span>}
                   <span className="staff-n">{s.name}</span>
                   <span className="staff-r">{s.role}</span>
                   {s.org && <span className="pill">{s.org}</span>}
                 </>
               );
               return (
-                <li key={s.name} className="rv">
+                <li key={s.name} className={s.founder ? "rv founder" : "rv"}>
                   {s.href ? <a className="card staff-card" href={s.href} {...ext}>{body}</a> : <div className="card staff-card">{body}</div>}
                 </li>
               );
