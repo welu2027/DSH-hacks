@@ -49,7 +49,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot-bar">
-          <span>© 2026 DSH Hacks · Online, global · ALT 0 M</span>
+          <span>© 2026 DSH Hacks · Online, global</span>
           <span className="made">Made with <span aria-label="love">♥</span> by students, for everyone, everywhere.</span>
           <Terminal />
         </div>

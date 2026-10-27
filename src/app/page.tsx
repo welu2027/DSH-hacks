@@ -1,6 +1,5 @@
 import PlatesProvider from "@/components/plates/PlatesProvider";
 import World from "@/components/world/World";
-import Rail from "@/components/world/Rail";
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -24,7 +23,6 @@ export default function HomePage() {
   return (
     <PlatesProvider>
       <World />
-      <Rail />
       <div className="page">
         <Nav />
         <main>

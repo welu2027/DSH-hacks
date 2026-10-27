@@ -95,7 +95,6 @@ body { background: var(--blue-900); }
   font-family: var(--mono); text-transform: uppercase; letter-spacing: .1em;
 }
 .eyebrow { margin: 0 0 18px; font-size: 12.5px; font-weight: 500; color: var(--blue-600); }
-.eyebrow .alt { color: var(--ink-muted); }
 .strip { margin: 18px 0 0; font-size: 12px; color: var(--ink-muted); }
 .sec-head { margin: 0 0 clamp(40px, 6vw, 72px); max-width: 880px; }
 .sec-head.split { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(24px, 5vw, 72px); align-items: end; max-width: none; }
@@ -183,12 +182,6 @@ body { background: var(--blue-900); }
 .live-t { margin: 8px 0 16px; font-size: 11.5px; line-height: 1.6; color: var(--ink); }
 .live .btn-row { margin-top: 18px; }
 .cue { position: absolute; left: 50%; bottom: 14px; z-index: 2; transform: translateX(-50%); display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 11px; color: var(--paper); background: rgba(11, 16, 96, .5); white-space: nowrap; }
-/* the descent rail: a waypoint per section and a marker for where you are */
-.rail { position: fixed; right: 18px; top: 22vh; bottom: 22vh; z-index: 40; pointer-events: none; color: color-mix(in srgb, var(--blue-600), var(--lamp) calc(var(--dusk, 0) * 100%)); }
-.rail-line { position: relative; width: 1.5px; height: 100%; background: currentColor; opacity: .9; }
-.rail-stop { position: absolute; left: -3px; width: 7.5px; height: 1.5px; background: currentColor; }
-.rail-you { position: absolute; left: -4.5px; top: calc(var(--g, 0) * 100%); width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 22%, transparent); }
-.rail-here { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); margin: 0; padding: 5px 10px; border-radius: 999px; white-space: nowrap; font: 500 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); background: rgba(255, 255, 255, .78); border: 1px solid var(--line); font-variant-numeric: tabular-nums; }
 
 /* countdown */
 .countdown { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
@@ -478,8 +471,6 @@ a.plaque:hover::after, a.plaque:focus-visible::after { opacity: 0; }
 }
 
 /* ---------- responsive ---------- */
-/* below this the rail has no margin to sit in: keep the marker, drop the label */
-@media (max-width: 1360px) { .rail { right: 6px; } .rail-here { display: none; } }
 @media (max-width: 1240px) {
   .nav-links { display: none; }
   .nav-cta { margin-left: auto; }
