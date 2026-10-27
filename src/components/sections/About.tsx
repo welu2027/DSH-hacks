@@ -1,7 +1,7 @@
 import { SectionHead } from "./shared";
 
 const RECORD: [string, string][] = [
-  ["1,294", "participants"],
+  ["1,291", "participants"],
   ["283", "projects submitted"],
   ["80+", "countries"],
   ["80+", "professional judges"],
@@ -13,8 +13,8 @@ export default function About() {
   return (
     <section id="about" className="section about" aria-labelledby="about-h">
       <div className="wrap">
-        <SectionHead id="about-h" no="01" eyebrow="What is DSH Hacks" meta={["Free", "Online", "Global", "Any skill level"]}>
-          The hackathon series built for <em>what&apos;s next.</em>
+        <SectionHead id="about-h" no="01" eyebrow="What is DSH Hacks" meta={["Human-centered", "Free", "Online", "Global"]}>
+          Technology that starts with <em>people.</em>
         </SectionHead>
         <div className="about-grid">
           <p className="lead rv">
@@ -24,8 +24,13 @@ export default function About() {
           <div className="prose rv">
             {/* TODO: Ryan review */}
             <p>
-              Each rendition takes on a new theme where AI can do real good. V1 took on AI × STEM
-              Education. V2, live now, takes on AI × Healthcare.
+              We believe technology is only as good as the lives it changes. So every project here
+              starts with a person, not a model: find someone with a real problem, understand it,
+              and build something they would actually use.
+            </p>
+            <p>
+              Each rendition takes on a theme where that matters most. V1 asked how AI could help
+              students learn STEM. V2, live now, asks how it can bring care closer to patients.
             </p>
             <p>
               Any skill level is welcome. Work solo or with a team, and lean on AI to make an

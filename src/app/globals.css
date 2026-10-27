@@ -149,10 +149,12 @@ main { position: relative; background: linear-gradient(var(--paper) 8%, var(--mi
 }
 .sky { position: absolute; inset: 0; background: linear-gradient(var(--paper) 10%, var(--mist) 75%); opacity: calc(1 - var(--p, 0) * .85); }
 .ridge { position: absolute; left: 0; bottom: 0; width: 100%; display: block; }
-.ridge.r1 path { fill: var(--ridge-1); }
-.ridge.r2 path { fill: var(--ridge-2); }
-.ridge.r3 path { fill: var(--ridge-3); }
-.ridge.town path { fill: var(--blue-900); }
+.ridge .top { stop-color: var(--top); }
+.ridge .base { stop-color: var(--base); }
+.ridge.r1 { --top: var(--ridge-1); --base: var(--mist-2); }
+.ridge.r2 { --top: var(--ridge-2); --base: var(--ridge-1); }
+.ridge.r3 { --top: var(--ridge-3); --base: var(--ridge-2); }
+.ridge.town { --top: var(--blue-900); --base: var(--blue-900); }
 .particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .mist { position: absolute; left: 0; right: 0; bottom: -1px; height: calc(var(--rh) * .45 + 1px); background: linear-gradient(transparent, var(--mist) 55%, var(--paper) 95%); }
 .hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: clamp(28px, 5vw, 72px); align-items: end; width: 100%; box-sizing: border-box; padding-top: clamp(40px, 9svh, 110px); padding-bottom: calc(var(--rh) * .78); }

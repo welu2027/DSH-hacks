@@ -16,7 +16,14 @@ export default function Hero() {
           key={r.cls} className={`ridge ${r.cls}`} style={{ height: `calc(var(--rh) * ${r.h})` }} data-depth={r.depth || undefined}
           viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="none" aria-hidden="true"
         >
-          <path d={r.d} />
+          {/* aerial haze: solid at the crest, fading into mist at the base */}
+          <defs>
+            <linearGradient id={`haze-${r.cls}`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0.25" className="top" />
+              <stop offset="1" className="base" />
+            </linearGradient>
+          </defs>
+          <path d={r.d} fill={`url(#haze-${r.cls})`} />
         </svg>
       ))}
       <ParticleField />
@@ -27,8 +34,8 @@ export default function Hero() {
           <p className="eyebrow">DeltaForge Hacks × NXT Horizon × STEMise</p>
           <h1 id="hero-h" className="hero-h">Technology, brought <em>down to earth.</em></h1>
           <p className="hero-sub">
-            DSH Hacks is a free, global hackathon series where students build AI around real
-            people&apos;s problems, one theme at a time.
+            DSH Hacks is a free, global hackathon series for human-centered technology. Students
+            start with a real person&apos;s problem, then build the AI that solves it.
           </p>
           <p className="strip">Free · Online · Global · Students 13+ · 80+ countries</p>
         </div>

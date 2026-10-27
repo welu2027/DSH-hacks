@@ -4,7 +4,7 @@ import { SectionHead } from "./shared";
    reaches the viewport (Reveal adds .on). */
 const STOPS: { date: string; v: "DSH" | "V1" | "V2" | "V3"; text: string }[] = [
   { date: "Dec 31, 2025", v: "DSH", text: "DSH Hacks is founded." },
-  { date: "May 20, 2026", v: "V1", text: "The first DSH Hacks opens on AI × STEM education. 1,294 participants join." },
+  { date: "May 20, 2026", v: "V1", text: "The first DSH Hacks opens on AI × STEM education. 1,291 participants join." },
   { date: "Jun 15, 2026", v: "V1", text: "283 projects submitted; 80+ judges from Microsoft, Apple, Amazon, Meta, PayPal and more." },
   { date: "Jun 24, 2026", v: "V2", text: "Registration opens on AI × Healthcare, with $100,000+ in prizes." },
   { date: "Nov 14, 2026", v: "V2", text: "Submissions close at 11:45pm PST." },

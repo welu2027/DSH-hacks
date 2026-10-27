@@ -25,7 +25,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "DSH Hacks — Global student hackathons on AI for good",
   description:
-    "DSH Hacks is a free, global, online hackathon series for students 13+, run by DeltaForge Hacks, NXT Horizon, and STEMise. V1 took on AI × STEM Education; V2, AI × Healthcare, is live now.",
+    "DSH Hacks is a free, global, online hackathon series for students 13+ building human-centered technology, run by DeltaForge Hacks, NXT Horizon, and STEMise. V1 took on AI × STEM Education; V2, AI × Healthcare, is live now.",
   icons: {
     icon: "/favicon.png",
   },

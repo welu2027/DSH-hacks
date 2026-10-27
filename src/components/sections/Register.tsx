@@ -28,8 +28,8 @@ export default function Register() {
       <div className="wrap reg-in">
         <h2 id="reg-h" className="reg-h rv">Your project goes here <em>next.</em></h2>
         <p className="reg-body rv">
-          Register on Devpost, find a team in the Discord, and submit by November 14. Compete for
-          prizes or just come for the workshops; either way you&apos;re in.
+          Pick a person to build for. Register on Devpost, find a team in the Discord, and submit
+          by November 14. Compete for prizes or just come for the workshops; either way you&apos;re in.
         </p>
         <div className="btn-row center rv">
           <a className="btn solid lg" href={LINKS.devpost} {...ext}>Register now</a>

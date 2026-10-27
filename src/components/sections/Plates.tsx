@@ -12,7 +12,7 @@ export default function Plates() {
       <div className="wrap">
         <SectionHead
           id="projects-h" no="04" eyebrow="V1 recap · AI × STEM Education" align="split"
-          meta={["Completed", "Four weeks", "1,294 students", "283 projects"]}
+          meta={["Completed", "Four weeks", "1,291 students", "283 projects"]}
           sub="Every V1 project, with the image from its Devpost submission. Click one to open it. V1's theme was AI × STEM education; these are what students built in four weeks."
         >
           What V1 <em>built.</em>

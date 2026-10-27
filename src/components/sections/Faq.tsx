@@ -5,7 +5,7 @@ import { IconPlus } from "@tabler/icons-react";
 import { SectionHead } from "./shared";
 
 const A: Record<string, string> = {
-  "Who can participate?": "Any student aged 13 or older, from anywhere in the world.",
+  "Who can participate?": "Any student aged 13 or older, from anywhere in the world (Devpost's standard country exceptions apply). Companies and professional organizations can't enter.",
   "Is it free to enter?": "Yes, completely free.",
   "When does it take place?": "Online. Submissions opened June 24 and are due November 14, 2026 at 11:45pm PST. Judging runs November 15–22, and winners are announced November 23.",
   "Can I work solo, or do I need a team?": "Either. Use the Discord to find teammates if you want one.",
