@@ -26,7 +26,7 @@ export default function V2() {
       <div className="wrap">
         <SectionHead
           id="v2-h" no="03" eyebrow="DSH Hacks V2 · AI × Healthcare" align="split"
-          meta={["Live now", "749+ participants", "$100,000+ in prizes", "Closes Nov 14"]}
+          meta={["Live now", "803+ participants", "$100,000+ in prizes", "Closes Nov 14"]}
           sub="Start with a person: a patient, a caregiver, a clinic stretched thin. Find a real healthcare problem they face, then build an AI-powered app, website, or system that tackles it."
         >
           Build AI that makes healthcare <em>reach further.</em>
