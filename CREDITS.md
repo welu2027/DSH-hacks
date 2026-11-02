@@ -1,9 +1,8 @@
 # Credits
 
 ## Type
-- **Instrument Serif**, by Rodrigo Fuenzalida and Jordan Egstad. SIL Open Font License 1.1, via Google Fonts.
+- **Figtree**, by Erik Kennedy. SIL Open Font License 1.1, via Google Fonts. Headlines and body copy; the type direction follows the STEMise site (stemise.org).
 - **JetBrains Mono**, by JetBrains. SIL Open Font License 1.1, via Google Fonts.
-- Body copy uses the visitor's system sans-serif.
 
 ## Illustration: "Technology, brought down to earth"
 Everything is original, drawn in code for DSH Hacks in the blues of the DSH Hacks logo. Nothing is traced or copied from other sites; hack-nation.ai and cluely.com were mood references only.

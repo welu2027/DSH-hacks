@@ -20,3 +20,5 @@ export const STAFF: Staff[] = [
   { name: "Karam Gill", role: "Lead Competition Director", img: "/staff/karam-gill.webp" },
   { name: "Adithya Balakumar", role: "Lead Competition Director", img: "/staff/adithya-balakumar.webp" },
 ];
+
+export const FOUNDERS = STAFF.filter((s) => s.founder);
