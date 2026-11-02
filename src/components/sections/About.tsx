@@ -1,11 +1,12 @@
 import { SectionHead } from "./shared";
 import Globe from "./Globe";
 import { REACH } from "./reach";
+import { FOUNDERS } from "./team";
 
 const RECORD: [string, string][] = [
-  // V1 + V2 from Devpost, 2026-10-29; V2 is still open
-  ["2,094", "participants"],
-  ["388", "projects submitted"],
+  // V1 + V2 from Devpost, 2026-11-02; V2 is still open
+  ["2,220", "participants"],
+  ["406", "projects submitted"],
   ["80+", "countries"],
   ["119", "professional judges"],
   ["$35K+", "V1 prizes awarded"],
@@ -39,6 +40,20 @@ export default function About() {
               Any skill level is welcome. Work solo or with a team, and lean on AI to make an
               ambitious idea buildable. Low-code and no-code projects count.
             </p>
+            {FOUNDERS.length > 0 && (
+              <a className="founded" href="#team">
+                <span className="founded-av" aria-hidden="true">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {FOUNDERS.map((f) => f.img && <img key={f.name} src={f.img} alt="" loading="lazy" />)}
+                </span>
+                <span>
+                  Founded by{" "}
+                  {FOUNDERS.map((f, i) => (
+                    <span key={f.name}>{i > 0 && (i === FOUNDERS.length - 1 ? " & " : ", ")}<b>{f.name}</b></span>
+                  ))}
+                </span>
+              </a>
+            )}
           </div>
         </div>
         <h3 className="band-k">V1 + V2, by the numbers</h3>
@@ -55,7 +70,7 @@ export default function About() {
           <Globe />
           <div className="reach-copy rv">
             <h3 className="reach-h">Built by students in <em>80+ countries.</em></h3>
-            <p className="strip">V1 · 1,291 participants · V2 · 803+ so far</p>
+            <p className="strip">V1 · 1,291 participants · V2 · 929+ so far</p>
             {REACH.length > 0 && (
               <ol className="reach-list">
                 {[...REACH].sort((a, b) => b.participants - a.participants).slice(0, 8).map((p) => (

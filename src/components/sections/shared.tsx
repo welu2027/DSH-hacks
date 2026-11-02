@@ -12,7 +12,7 @@ export const LINKS = {
 
 export const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-/* Section heading: numbered mono eyebrow, a serif title with one italic
+/* Section heading: numbered mono eyebrow, a display title with one marked
    phrase, an optional mono fact strip (`·`-separated) and an intro. */
 type Align = "left" | "split";
 export function SectionHead({ id, no, eyebrow, children, meta, sub, align = "left" }: {
