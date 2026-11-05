@@ -4,9 +4,9 @@ import { REACH } from "./reach";
 import { FOUNDERS } from "./team";
 
 const RECORD: [string, string][] = [
-  // V1 + V2 from Devpost, 2026-11-02; V2 is still open
-  ["2,220", "participants"],
-  ["406", "projects submitted"],
+  // V1 + V2 from Devpost, 2026-11-05; V2 is still open
+  ["2,308", "participants"],
+  ["417", "projects submitted"],
   ["80+", "countries"],
   ["119", "professional judges"],
   ["$35K+", "V1 prizes awarded"],
@@ -70,7 +70,7 @@ export default function About() {
           <Globe />
           <div className="reach-copy rv">
             <h3 className="reach-h">Built by students in <em>80+ countries.</em></h3>
-            <p className="strip">V1 · 1,291 participants · V2 · 929+ so far</p>
+            <p className="strip">V1 · 1,291 participants · V2 · 1,017+ so far</p>
             {REACH.length > 0 && (
               <ol className="reach-list">
                 {[...REACH].sort((a, b) => b.participants - a.participants).slice(0, 8).map((p) => (
