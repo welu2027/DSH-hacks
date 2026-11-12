@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { IconSparkles } from "@tabler/icons-react";
 import { SectionHead } from "./shared";
 
 /* Prizes and criteria from dsh-hacks-v2.devpost.com. All prizes are non-cash
@@ -31,63 +30,86 @@ const CRITERIA = [
   { name: "Presentation", detail: "Does the presentation clearly define and address the problem statement?" },
 ];
 
+const PODIUM = [PLACES[1], PLACES[0], PLACES[2]]; // 2nd, 1st, 3rd
+const total = (items: Item[]) => items.reduce((a, b) => a + b.v, 0);
+
 export default function Prizes() {
   return (
     <section id="prizes" className="section prizes" aria-labelledby="prizes-h">
       <div className="wrap">
         <SectionHead id="prizes-h" no="05" eyebrow="Prizes · V2" meta={["Non-cash", "Sponsor credits, licenses, memberships"]}>
-          Prizes &amp; <em>tracks</em>
+          Prizes &amp; <em>judging</em>
         </SectionHead>
-        <div className="pool-row rv">
-          <p className="pool">$100,000+</p>
-          <p className="pool-sub">in prizes, with more on the way. Watch Devpost and the Discord for announcements.</p>
+
+        <div className="pool-panel rv">
+          <div>
+            <p className="pool">$100,000<em>+</em></p>
+            <p className="pool-sub">in prizes, with more on the way. Watch Devpost and the Discord for announcements.</p>
+          </div>
+          <dl className="pool-facts">
+            <div><dt>Podium</dt><dd>3 packages</dd></div>
+            <div><dt>Special awards</dt><dd>{SPECIALS.length}</dd></div>
+            <div><dt>Format</dt><dd>Credits, licenses &amp; memberships</dd></div>
+          </dl>
         </div>
 
-        <div className="places">
-          {PLACES.map((p) => (
-            <article key={p.place} className={`card prize-card place ${p.medal} rv`}>
-              <span className="medal" aria-hidden="true">{p.n}</span>
-              <p className="card-k">{p.medal} · 1 team</p>
-              <h3>{p.place}</h3>
-              <p className="pv"><span>{usd(p.items.reduce((a, b) => a + b.v, 0))}</span> package value</p>
-              <dl className="tiers">
-                {p.items.map((it) => (
-                  <div key={it.name}><dt>{it.name}</dt><dd>{usd(it.v)}</dd></div>
-                ))}
-              </dl>
-            </article>
+        <h3 className="band-k">The podium</h3>
+        <ol className="podium" aria-label="Podium prizes">
+          {PODIUM.map((p) => (
+            <li key={p.place} className={`step ${p.medal} rv`}>
+              <div className="step-top">
+                <span className="medal" aria-hidden="true">{p.n}</span>
+                <h4>{p.place}</h4>
+                <p className="step-v">{usd(total(p.items))}</p>
+                <p className="step-k">package value · 1 team</p>
+              </div>
+              <div className="step-block" aria-hidden="true"><span>{p.n}</span></div>
+            </li>
           ))}
+        </ol>
+
+        <div className="pkg-wrap rv">
+          <table className="pkg">
+            <caption className="sr-only">What each podium package includes</caption>
+            <thead>
+              <tr><th scope="col">In each package</th>{PLACES.map((p) => <th key={p.place} scope="col">{p.place.replace(" place", "")}</th>)}</tr>
+            </thead>
+            <tbody>
+              {PLACES[0].items.map((it, i) => (
+                <tr key={it.name}><th scope="row">{it.name}</th>{PLACES.map((p) => <td key={p.place}>{usd(p.items[i].v)}</td>)}</tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr><th scope="row">Total</th>{PLACES.map((p) => <td key={p.place}>{usd(total(p.items))}</td>)}</tr>
+            </tfoot>
+          </table>
         </div>
 
-        <h3 className="band-k">Special prizes</h3>
+        <h3 className="band-k">Special awards</h3>
         <div className="specials">
           {SPECIALS.map((s) => (
-            <article key={s.place} className="card prize-card special rv">
-              <span className="special-tag"><IconSparkles size={14} stroke={1.75} aria-hidden="true" /> Special award</span>
-              <span className="sparkles" aria-hidden="true"><i /><i /><i /></span>
-              <div className="presented">
-                <span className={s.dark ? "plaque dark" : "plaque"}><img src={`/sponsors/${s.logo}.png`} alt={s.by} loading="lazy" /></span>
-                <span>Presented by {s.by}</span>
+            <article key={s.place} className="special rv">
+              <span className={s.dark ? "plaque dark" : "plaque"}><img src={`/sponsors/${s.logo}.png`} alt={s.by} loading="lazy" /></span>
+              <div>
+                <p className="special-k">Presented by {s.by}</p>
+                <h4>{s.place}</h4>
+                <p>{s.detail}</p>
+                <span className="special-n">{s.n}</span>
               </div>
-              <h3>{s.place}</h3>
-              <p>{s.detail}</p>
-              <dl className="tiers">
-                <div><dt>Winners</dt><dd>{s.n}</dd></div>
-              </dl>
             </article>
           ))}
         </div>
 
         <h3 className="band-k">Judging criteria</h3>
-        <div className="criteria">
+        <ol className="criteria">
           {CRITERIA.map((c, i) => (
-            <div key={c.name} className="rv">
-              <span className="crit-k">C{i + 1}</span>
+            <li key={c.name} className="rv">
+              <span className="crit-n" aria-hidden="true">0{i + 1}</span>
               <h4>{c.name}</h4>
               <p>{c.detail}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

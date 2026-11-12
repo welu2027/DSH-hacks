@@ -1,5 +1,4 @@
 import Gallery from "@/components/plates/Gallery";
-import Motif from "@/components/art/Motif";
 import { projects } from "@/components/plates/projects";
 import { LINKS, SectionHead, ext } from "./shared";
 
@@ -16,9 +15,6 @@ export default function Plates() {
         >
           What students <em>built.</em>
         </SectionHead>
-        <div className="motif-row" aria-hidden="true">
-          <Motif name="pulse" /><Motif name="cells" /><Motif name="book" /><Motif name="bulb" />
-        </div>
         <Gallery />
         <div className="gal-foot">
           <p>{283 + V2_COUNT} submissions and counting.</p>

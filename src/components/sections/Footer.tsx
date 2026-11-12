@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="foot-grid">
           <div>
             <div className="brand">
-              <img src="/dsh-logo-circle.png" width={34} height={34} alt="" />
+              <img src="/dsh-logo-96.png" width={34} height={34} alt="" />
               <span>DSH Hacks</span>
             </div>
             <p className="mute">DeltaForge Hacks × NXT Horizon × STEMise</p>
