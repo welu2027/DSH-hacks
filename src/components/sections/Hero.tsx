@@ -14,7 +14,7 @@ export default function Hero() {
             DSH Hacks is a free, global hackathon series for human-centered technology. Students
             start with a real person&apos;s problem, then build the AI that solves it.
           </p>
-          <p className="strip">Free · Online · Global · Students 13+ · 80+ countries</p>
+          <p className="strip">Free · Online · Global · Students 13+ · 100 countries</p>
         </div>
 
         <aside className="live" aria-label="DSH Hacks V2, live now">

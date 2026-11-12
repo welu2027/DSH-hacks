@@ -42,7 +42,7 @@ export default function Nav() {
     <header className={`nav${scrolled || open ? " scrolled" : ""}`}>
       <div className="wrap nav-in">
         <a href="#hero" className="brand" aria-label="DSH Hacks, back to top">
-          <img src="/dsh-logo-circle.png" width={34} height={34} alt="" />
+          <img src="/dsh-logo-96.png" width={34} height={34} alt="" />
           <span>DSH Hacks</span>
         </a>
         <nav className="nav-links" aria-label="Sections">

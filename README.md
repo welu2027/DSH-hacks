@@ -14,7 +14,7 @@ Every DSH Hacks project starts with a person, not a model. Participants find som
 
 DSH Hacks is run by three youth-led organizations: DeltaForge Hacks, NXT Horizon, and STEMise. It is free, online, and open to students 13 and older anywhere in the world.
 
-> **V1 + V2 so far:** 2,308 participants, 417 projects, 80+ countries, 119 professional judges, and $35K+ in V1 prizes. V2 has $100,000+ in prizes. Numbers are from Devpost as of November 5, 2026.
+> **V1 + V2 so far:** 2,450+ participants, 474 projects, 100 countries, 129 professional judges, and $35K+ in V1 prizes. V2 has $100,000+ in prizes. Numbers are from Devpost as of November 12, 2026.
 
 ## What's on the site
 
