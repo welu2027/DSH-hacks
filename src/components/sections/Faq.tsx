@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { IconPlus } from "@tabler/icons-react";
+import { PiPlusBold } from "react-icons/pi";
 import { SectionHead } from "./shared";
 
 const A: Record<string, string> = {
@@ -33,7 +33,7 @@ function Item({ q, id }: { q: string; id: string }) {
       <h4>
         <button type="button" aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)}>
           <span>{q}</span>
-          <IconPlus className="acc-i" size={20} stroke={1.5} aria-hidden="true" />
+          <PiPlusBold className="acc-i" size={20} aria-hidden="true" />
         </button>
       </h4>
       <div id={id} role="region" className="acc-body" hidden={!open}>
@@ -47,7 +47,7 @@ export default function Faq() {
   return (
     <section id="faq" className="section faq" aria-labelledby="faq-h">
       <div className="wrap">
-        <SectionHead id="faq-h" no="10" eyebrow="FAQ" meta={["12 questions", "4 groups"]}>Questions, <em>answered.</em></SectionHead>
+        <SectionHead id="faq-h" no="10" eyebrow="FAQ">Questions, <em>answered.</em></SectionHead>
         <div className="faq-groups">
           {GROUPS.map(([g, qs], gi) => (
             <div key={g} className="faq-group rv">

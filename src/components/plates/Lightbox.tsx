@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { Project } from "./projects";
-import { PlateFrame, plateNo } from "./Plate";
+import { PlateFrame } from "./Plate";
 
 type Props = {
   view: { list: Project[]; index: number } | null;
@@ -36,7 +36,7 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
     <dialog
       ref={dlg}
       className="lightbox"
-      aria-label={p ? `Project ${plateNo(p.no)}, ${p.t}` : "Project"}
+      aria-label={p ? `Project: ${p.t}` : "Project"}
       onClose={onClose}
       onKeyDown={onKey}
       onClick={(e) => { if (e.target === dlg.current) dlg.current?.close(); }}
@@ -48,7 +48,7 @@ export default function Lightbox({ view, onIndex, onClose }: Props) {
           </figure>
           <div>
             <div className="lb-top">
-              <span>Project {plateNo(p.no)}</span>
+              <span>{p.v} · {p.track}</span>
               <span>{view.index + 1} / {view.list.length}</span>
             </div>
             <h2 className="lb-title">{p.t}</h2>

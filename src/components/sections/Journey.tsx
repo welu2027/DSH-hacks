@@ -16,7 +16,7 @@ export default function Journey() {
   return (
     <section id="journey" className="section journey" aria-labelledby="journey-h">
       <div className="wrap split-grid">
-        <SectionHead id="journey-h" no="02" eyebrow="The journey" meta={["Founded 2025", "2 renditions", "V3 TBA"]}>
+        <SectionHead id="journey-h" no="02" eyebrow="The journey">
           Our <em>journey</em>
         </SectionHead>
         <ol className="stops rv">

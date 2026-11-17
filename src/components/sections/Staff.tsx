@@ -4,10 +4,11 @@ import { FOUNDERS, STAFF, type Staff } from "./team";
 
 const initials = (name: string) => name.split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
 
-/* a portrait card: photo (or initials) on top, name and role below */
+/* an ID badge: lanyard slot and pass header, photo (or initials), name and role */
 function card(s: Staff) {
   const body = (
     <>
+      <span className="badge-k">DSH Hacks · {s.founder ? "Founder" : "Staff"}</span>
       <span className="person-photo">
         {s.img ? <img src={s.img} alt="" loading="lazy" /> : <span aria-hidden="true">{initials(s.name)}</span>}
       </span>
@@ -20,20 +21,21 @@ function card(s: Staff) {
   );
   return (
     <li key={s.name} className="rv">
-      {s.href ? <a className="person" href={s.href} {...ext}>{body}</a> : <div className="person">{body}</div>}
+      {s.href ? <a className={s.founder ? "person founder" : "person"} href={s.href} {...ext}>{body}</a> : <div className={s.founder ? "person founder" : "person"}>{body}</div>}
     </li>
   );
 }
 
 /* The organizing team, from team.ts: founders get their own row up top.
    Empty list → placeholder slots. */
-/* The three youth-led orgs that co-host DSH Hacks. `mark` is the monogram
-   tile until real logos land in /public (set `logo` to use one). */
+/* The three youth-led orgs that co-host DSH Hacks. Logos in /public/orgs:
+   DeltaForge from stemise.org/about/partners, the others from their sites.
+   `mark` is the fallback monogram when there's no `logo`. */
 type Org = { name: string; mark: string; blurb: string; href?: string; logo?: string };
 const ORGS: Org[] = [
-  { name: "DeltaForge Hacks", mark: "DF", blurb: "Youth-led hackathon organizers." },
-  { name: "NXT Horizon", mark: "NH", blurb: "Youth-led student organization." },
-  { name: "STEMise", mark: "S", blurb: "Youth-led STEM education through hands-on kits and workshops.", href: "https://stemise.org" },
+  { name: "DeltaForge Hacks", mark: "DF", blurb: "Youth-led hackathon organizers.", logo: "/orgs/deltaforge.webp" },
+  { name: "NXT Horizon", mark: "NH", blurb: "Youth-led student organization.", href: "https://nxthorizon.org/", logo: "/orgs/nxthorizon.png" },
+  { name: "STEMise", mark: "S", blurb: "Youth-led STEM education through hands-on kits and workshops.", href: "https://www.stemise.org/", logo: "/orgs/stemise.png" },
 ];
 
 function org(o: Org) {
@@ -58,17 +60,17 @@ export default function Team() {
     <div id="team" className="team">
       <h3 className="band-k">Organizers</h3>
       <p className="team-h">Three student orgs, <em>one hackathon.</em></p>
-      <p className="sec-note left">DSH Hacks is co-hosted by DeltaForge Hacks, NXT Horizon, and STEMise.</p>
       <ul className="orgs" aria-label="Organizing organizations">{ORGS.map(org)}</ul>
       <h3 className="band-k">Meet the team</h3>
       <p className="team-h">Run by students, <em>for students.</em></p>
-      <p className="sec-note left">The students behind DSH Hacks.</p>
         {STAFF.length ? (
           <>
             <p className="team-k">Founders</p>
             <ul className="founders" aria-label="Founders">{FOUNDERS.map(card)}</ul>
             <p className="team-k">Competition directors</p>
-            <ul className="staff-grid">{STAFF.filter((s) => !s.founder).map(card)}</ul>
+            <ul className="staff-grid">{STAFF.filter((s) => !s.founder && s.role !== "Hackathon Staff").map(card)}</ul>
+            <p className="team-k">Hackathon staff</p>
+            <ul className="staff-grid">{STAFF.filter((s) => s.role === "Hackathon Staff").map(card)}</ul>
           </>
         ) : (
           <ul className="staff-grid" aria-label="Staff profiles coming soon">

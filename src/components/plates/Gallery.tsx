@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { projects, TRACKS, type Project } from "./projects";
-import Plate, { PlateFrame, plateLabel, plateNo } from "./Plate";
+import Plate, { PlateFrame, plateLabel } from "./Plate";
 import { useOpenPlate } from "./PlatesProvider";
 
 type Filter = "all" | "V2" | "V1" | "winners" | "featured" | (typeof TRACKS)[number];
@@ -43,7 +43,7 @@ export default function Gallery() {
     <div>
       <div className="gal-bar">
         <div className="btn-row" role="group" aria-label="Filter projects">
-          {FILTERS.map((f) => (
+          {FILTERS.filter((f) => f.id === "all" || projects.some(f.test)).map((f) => (
             <button key={f.id} type="button" className="chip" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
               {f.label}<span className="k">{projects.filter(f.test).length}</span>
             </button>
@@ -83,7 +83,6 @@ export default function Gallery() {
           {shown.slice(0, limit).map((p, i) => (
             <li key={p.no}>
               <button type="button" className="plate-btn" onClick={() => open(shown, i)} aria-label={plateLabel(p)}>
-                <span className="no">{plateNo(p.no)}</span>
                 <PlateFrame project={p} />
                 <span className="t">{p.t}</span>
                 <span className="d">{p.d}</span>

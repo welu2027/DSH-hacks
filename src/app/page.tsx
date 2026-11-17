@@ -1,5 +1,4 @@
 import PlatesProvider from "@/components/plates/PlatesProvider";
-import World from "@/components/world/World";
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -16,18 +15,15 @@ import ComingSoon from "@/components/sections/ComingSoon";
 import Register from "@/components/sections/Register";
 import Footer from "@/components/sections/Footer";
 
-/* One descent through one world: the summit (hero), down through the cloud
-   layer (sections 01–11), out below it at dusk onto the valley floor (final
-   CTA), then the ground (footer). */
+/* The field station: the hero desk, the sections on grid paper (01–11),
+   then the navy contour map for the final CTA and footer. */
 export default function HomePage() {
   return (
     <PlatesProvider>
-      <World />
       <div className="page">
         <Nav />
         <main>
           <Hero />
-          {/* the cloud layer: a mist veil over the world while you read */}
           <div className="clouds">
           <About />
           <Journey />

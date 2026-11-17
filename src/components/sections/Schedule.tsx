@@ -6,10 +6,10 @@ import { SectionHead } from "./shared";
 /* Dates from dsh-hacks-v2.devpost.com/details/dates. `from`/`to` mark when a
    stage is "Now"; Workshops run throughout, so they never take the pill. */
 const STEPS: { when: string; t: string; d: string; from?: string; to?: string }[] = [
-  { when: "Jun 24 · 09:00 PDT", t: "Registration open", d: "Submissions opened June 24. Sign up free on Devpost and join the Discord to find teammates." },
-  { when: "Throughout", t: "Workshops", d: "Talks from industry professionals go up on the DSH Hacks YouTube channel throughout the event." },
-  { when: "Jun 24 → Nov 14", t: "Hacking period", d: "Build your AI × Healthcare project, solo or with a team. Projects must be original and built during the hackathon.", from: "2026-06-24T09:00:00-07:00", to: "2026-11-14T23:45:00-08:00" },
-  { when: "Nov 14 · 23:45 PST", t: "Submission deadline", d: "November 14, 2026 at 11:45pm PST. Submit a prototype, demo video, one-page description, and code on Devpost." },
+  { when: "Jun 24 · 09:00 PDT", t: "Registration opened", d: "Submissions opened June 24, free on Devpost. 1,278 students from 87 countries signed up." },
+  { when: "Throughout", t: "Workshops", d: "Talks from industry professionals, all still free to watch on the DSH Hacks YouTube channel." },
+  { when: "Jun 24 → Nov 14", t: "Hacking period", d: "Students built original AI × Healthcare projects, solo or in teams.", from: "2026-06-24T09:00:00-07:00", to: "2026-11-14T23:45:00-08:00" },
+  { when: "Nov 14 · 23:45 PST", t: "Submissions closed", d: "November 14, 2026 at 11:45pm PST, with 285 projects submitted on Devpost." },
   { when: "Nov 15–22 · Nov 23", t: "Judging and winners", d: "Judges score projects November 15–22 on idea, implementation, design, and presentation. Winners are announced on Devpost November 23.", from: "2026-11-14T23:45:00-08:00", to: "2026-11-24T00:00:00-08:00" },
 ];
 
@@ -23,8 +23,8 @@ export default function Schedule() {
   return (
     <section id="timeline" className="section schedule" aria-labelledby="schedule-h">
       <div className="wrap split-grid">
-        <SectionHead id="schedule-h" no="06" eyebrow="V2 timeline" meta={["Jun 24 → Nov 23", "All times Pacific"]}>
-          Five stages, <em>one deadline.</em>
+        <SectionHead id="schedule-h" no="06" eyebrow="V2 timeline" meta={["All times Pacific"]}>
+          Five stages, <em>285 projects.</em>
         </SectionHead>
         <ol className="timeline">
           {STEPS.map((s) => (

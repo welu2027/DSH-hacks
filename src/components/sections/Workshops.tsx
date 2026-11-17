@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { IconBrandYoutube, IconPlayerPlayFilled } from "@tabler/icons-react";
+import { PiYoutubeLogoDuotone, PiPlayFill } from "react-icons/pi";
 import { LINKS, SectionHead, ext } from "./shared";
 
 const TALKS = [
@@ -16,29 +16,27 @@ export default function Workshops() {
     <section id="workshops" className="section workshops" aria-labelledby="workshops-h">
       <div className="wrap">
         <SectionHead
-          id="workshops-h" no="07" eyebrow="Workshops" align="split" meta={["6 talks", "Free on YouTube"]}
-          sub="Recorded talks on AI, product thinking, data, and more."
+          id="workshops-h" no="07" eyebrow="Workshops" meta={["6 talks", "Free on YouTube"]}
         >
           Learn from people who <em>ship.</em>
         </SectionHead>
         <ol className="talks">
           {TALKS.map((t, i) => (
             <li key={t.id} className="rv">
-              <a className={`talk tint-${i % 6}`} href={`https://www.youtube.com/watch?v=${t.id}`} {...ext}>
-                {/* thumbnail from YouTube (public/workshops), washed in this card's colour */}
+              <a className="talk" href={`https://www.youtube.com/watch?v=${t.id}`} {...ext} aria-label={`${t.topic}, ${t.speaker}. Watch on YouTube`}>
+                {/* a polaroid: the YouTube thumbnail (public/workshops) in blue duotone */}
                 <span className="thumb">
                   <img src={`/workshops/${t.id}.jpg`} alt="" loading="lazy" width={480} height={360} />
                   <span className="ws">WS-{String(i + 1).padStart(2, "0")}</span>
-                  <span className="play" aria-hidden="true"><IconPlayerPlayFilled size={22} /></span>
+                  <span className="play" aria-hidden="true"><PiPlayFill size={22} /></span>
                 </span>
                 <span className="t">{t.topic}</span>
                 <span className="s">{t.speaker}</span>
-                <span className="w">Watch on YouTube ↗</span>
               </a>
             </li>
           ))}
         </ol>
-        <a className="btn" href={LINKS.youtube} {...ext}><IconBrandYoutube size={18} stroke={1.5} /> Subscribe on YouTube</a>
+        <a className="btn" href={LINKS.youtube} {...ext}><PiYoutubeLogoDuotone size={18} /> Subscribe on YouTube</a>
       </div>
     </section>
   );
