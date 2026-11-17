@@ -50,7 +50,7 @@ export default function Sponsors() {
   return (
     <section id="sponsors" className="section sponsors" aria-labelledby="sponsors-h">
       <div className="wrap">
-        <SectionHead id="sponsors-h" no="08" eyebrow="Sponsors" meta={[`${V2.length + V1.length} sponsors`, "V1 + V2"]}>Backed by people who <em>build.</em></SectionHead>
+        <SectionHead id="sponsors-h" no="08" eyebrow="Sponsors" meta={[`${V2.length + V1.length} sponsors`]}>Backed by people who <em>build.</em></SectionHead>
         <h3 className="band-k">V2 · AI × Healthcare</h3>
         <Plaques list={V2} />
         <h3 className="band-k">V1 · AI × STEM Education</h3>

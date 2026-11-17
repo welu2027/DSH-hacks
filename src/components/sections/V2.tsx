@@ -26,7 +26,7 @@ export default function V2() {
       <div className="wrap">
         <SectionHead
           id="v2-h" no="03" eyebrow="DSH Hacks V2 · AI × Healthcare" align="split"
-          meta={["Live now", "1,186+ participants", "$100,000+ in prizes", "Closes Nov 14"]}
+          meta={["1,278 participants", "285 projects", "87 countries", "$100,000+ in prizes"]}
           sub="Start with a person: a patient, a caregiver, a clinic stretched thin. Find a real healthcare problem they face, then build an AI-powered app, website, or system that tackles it."
         >
           Build AI that makes healthcare <em>reach further.</em>
@@ -56,7 +56,7 @@ export default function V2() {
         </div>
 
         <div className="btn-row rv">
-          <a className="btn solid lg" href={LINKS.devpost} {...ext}>Register on Devpost</a>
+          <a className="btn solid lg" href={LINKS.gallery} {...ext}>View V2 projects</a>
           <a className="btn lg" href={LINKS.discord} {...ext}>Join Discord</a>
           <a className="tlink" href={LINKS.flyer} {...ext}>Flyer (PDF)</a>
           <a className="tlink" href={LINKS.rules} {...ext}>Rules</a>

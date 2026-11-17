@@ -1,6 +1,7 @@
 export const LINKS = {
   devpost: "https://dsh-hacks-v2.devpost.com/",
   rules: "https://dsh-hacks-v2.devpost.com/rules",
+  gallery: "https://dsh-hacks-v2.devpost.com/project-gallery",
   discord: "https://discord.gg/3HgSzbYPx5",
   youtube: "https://www.youtube.com/@DSHHacks",
   instagram: "https://www.instagram.com/dshhacksv1/",

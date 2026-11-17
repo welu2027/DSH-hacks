@@ -30,60 +30,41 @@ const CRITERIA = [
   { name: "Presentation", detail: "Does the presentation clearly define and address the problem statement?" },
 ];
 
-const PODIUM = [PLACES[1], PLACES[0], PLACES[2]]; // 2nd, 1st, 3rd
 const total = (items: Item[]) => items.reduce((a, b) => a + b.v, 0);
 
 export default function Prizes() {
   return (
     <section id="prizes" className="section prizes" aria-labelledby="prizes-h">
       <div className="wrap">
-        <SectionHead id="prizes-h" no="05" eyebrow="Prizes · V2" meta={["Non-cash", "Sponsor credits, licenses, memberships"]}>
+        <SectionHead id="prizes-h" no="05" eyebrow="Prizes · V2" meta={["Credits, licenses & memberships"]}>
           Prizes &amp; <em>judging</em>
         </SectionHead>
 
         <div className="pool-panel rv">
           <div>
             <p className="pool">$100,000<em>+</em></p>
-            <p className="pool-sub">in prizes, with more on the way. Watch Devpost and the Discord for announcements.</p>
+            <p className="pool-sub">in prizes</p>
           </div>
           <dl className="pool-facts">
-            <div><dt>Podium</dt><dd>3 packages</dd></div>
+            <div><dt>Podium</dt><dd>3 teams</dd></div>
             <div><dt>Special awards</dt><dd>{SPECIALS.length}</dd></div>
-            <div><dt>Format</dt><dd>Credits, licenses &amp; memberships</dd></div>
           </dl>
         </div>
 
-        <h3 className="band-k">The podium</h3>
-        <ol className="podium" aria-label="Podium prizes">
-          {PODIUM.map((p) => (
-            <li key={p.place} className={`step ${p.medal} rv`}>
-              <div className="step-top">
-                <span className="medal" aria-hidden="true">{p.n}</span>
-                <h4>{p.place}</h4>
-                <p className="step-v">{usd(total(p.items))}</p>
-                <p className="step-k">package value · 1 team</p>
+        {/* one ticket per place: the stub carries the rank, the body itemizes the package */}
+        <ol className="tickets" aria-label="Podium prizes">
+          {PLACES.map((p) => (
+            <li key={p.place} className={`ticket ${p.medal} rv`}>
+              <div className="tk-stub">
+                <span className="tk-rank">{p.place.replace(" place", "")}</span>
+                <span className="tk-v">{usd(total(p.items))}</span>
               </div>
-              <div className="step-block" aria-hidden="true"><span>{p.n}</span></div>
+              <ul className="tk-items">
+                {p.items.map((it) => <li key={it.name}><span>{it.name}</span><span>{usd(it.v)}</span></li>)}
+              </ul>
             </li>
           ))}
         </ol>
-
-        <div className="pkg-wrap rv">
-          <table className="pkg">
-            <caption className="sr-only">What each podium package includes</caption>
-            <thead>
-              <tr><th scope="col">In each package</th>{PLACES.map((p) => <th key={p.place} scope="col">{p.place.replace(" place", "")}</th>)}</tr>
-            </thead>
-            <tbody>
-              {PLACES[0].items.map((it, i) => (
-                <tr key={it.name}><th scope="row">{it.name}</th>{PLACES.map((p) => <td key={p.place}>{usd(p.items[i].v)}</td>)}</tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr><th scope="row">Total</th>{PLACES.map((p) => <td key={p.place}>{usd(total(p.items))}</td>)}</tr>
-            </tfoot>
-          </table>
-        </div>
 
         <h3 className="band-k">Special awards</h3>
         <div className="specials">
@@ -101,9 +82,9 @@ export default function Prizes() {
         </div>
 
         <h3 className="band-k">Judging criteria</h3>
-        <ol className="criteria">
+        <ol className="sheet rv">
           {CRITERIA.map((c, i) => (
-            <li key={c.name} className="rv">
+            <li key={c.name}>
               <span className="crit-n" aria-hidden="true">0{i + 1}</span>
               <h4>{c.name}</h4>
               <p>{c.detail}</p>

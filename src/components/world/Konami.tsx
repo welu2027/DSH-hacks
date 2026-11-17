@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-/* ↑↑↓↓←→←→BA anywhere dithers every serif heading for five seconds. */
+/* ↑↑↓↓←→←→BA anywhere dithers every display heading for five seconds. */
 const CODE = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
 
 export default function Konami() {

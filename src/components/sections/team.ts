@@ -19,6 +19,10 @@ export const STAFF: Staff[] = [
   { name: "Abhiram Jetty", role: "Co-Founder · Lead Competition Director", img: "/staff/abhiram-jetty.jpg", href: "https://www.linkedin.com/in/abhiramjetty/", founder: true },
   { name: "Karam Gill", role: "Lead Competition Director", img: "/staff/karam-gill.webp" },
   { name: "Adithya Balakumar", role: "Lead Competition Director", img: "/staff/adithya-balakumar.webp" },
+  { name: "Christopher Huang", role: "Hackathon Staff", img: null },
+  { name: "Jayvant Rajesh", role: "Hackathon Staff", img: null },
+  { name: "Spursh Deshpande", role: "Hackathon Staff", img: null },
+  { name: "Chloe Jin", role: "Hackathon Staff", img: null },
 ];
 
 export const FOUNDERS = STAFF.filter((s) => s.founder);

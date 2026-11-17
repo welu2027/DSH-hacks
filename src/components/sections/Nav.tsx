@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import { PiListDuotone, PiXDuotone } from "react-icons/pi";
 import { LINKS, ext } from "./shared";
 
 const LINKS_NAV: [string, string][] = [
@@ -50,12 +50,12 @@ export default function Nav() {
             <a key={id} href={`#${id}`} aria-current={active === id ? "true" : undefined}>{t}</a>
           ))}
         </nav>
-        <a className="btn solid sm nav-cta" href={LINKS.devpost} {...ext}>Register for V2</a>
+        <a className="btn solid sm nav-cta" href={LINKS.gallery} {...ext}>View V2 projects</a>
         <button
           type="button" className="nav-burger" aria-expanded={open} aria-controls="nav-sheet"
           aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}
         >
-          {open ? <IconX size={22} stroke={1.5} /> : <IconMenu2 size={22} stroke={1.5} />}
+          {open ? <PiXDuotone size={22} /> : <PiListDuotone size={22} />}
         </button>
       </div>
       {open && (
@@ -63,7 +63,7 @@ export default function Nav() {
           {LINKS_NAV.map(([id, t]) => (
             <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{t}</a>
           ))}
-          <a className="btn solid" href={LINKS.devpost} {...ext}>Register for V2</a>
+          <a className="btn solid" href={LINKS.gallery} {...ext}>View V2 projects</a>
         </nav>
       )}
     </header>

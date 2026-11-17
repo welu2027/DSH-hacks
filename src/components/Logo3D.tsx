@@ -21,7 +21,7 @@ export default function Logo3D({ className = "" }: { className?: string }) {
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+      renderer.setPixelRatio(Math.min(1.5, window.devicePixelRatio)); // 2× cost more than it showed on a 300px coin
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       el.appendChild(renderer.domElement);
 

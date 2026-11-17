@@ -28,7 +28,7 @@ export default function People() {
   return (
     <section id="people" className="section people" aria-labelledby="people-h">
       <div className="wrap">
-        <SectionHead id="people-h" no="09" eyebrow="People" meta={["Judges", "Organizers"]}>Judges &amp; <em>team</em></SectionHead>
+        <SectionHead id="people-h" no="09" eyebrow="People">Judges &amp; <em>team</em></SectionHead>
         <h3 className="band-k">Judges from</h3>
       </div>
       <div className="logo-marquee">
@@ -40,11 +40,9 @@ export default function People() {
       </div>
       <div className="wrap">
         <h3 className="band-k" id="judges-roll">Judges</h3>
-        <p className="sec-note left">The people scoring your project, and the ones who scored V1.</p>
       </div>
       <JudgesRoll />
       <div className="wrap">
-        <p className="sec-note">Interested in judging? Same channels: Discord, or the hackathon manager on Devpost.</p>
         <Team />
       </div>
     </section>
